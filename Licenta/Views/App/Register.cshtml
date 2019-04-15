@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+}
+<form id="register" name="Register" action="Register">
+    <p>Please fill in this form to create an account.</p>
+    @*<hr>*@
+    <div>
+        <label for="fname"><b>First name</b></label>
+        <input type="text" placeholder="Enter first name" name="fname" required>
+    </div>
+    <br />
+    <div>
+        <label for="lname"><b>Last name</b></label>
+        <input type="text" placeholder="Enter last name" name="lname" required>
+    </div>
+    <br />
+    <div>
+        <label for="email"><b>Email</b></label>
+        <input type="email" placeholder="Enter Email" name="email" required>
+    </div>
+    <br />
+    <div>
+        <label for="initial"><b>Father's initial</b></label>
+        <input type="text" placeholder="Enter father's initial" name="initial" required>
+    </div>
+    <br />
+    <div>
+        <label for="faculty"><b>Faculty</b></label>
+        <select name="faculty" id="faculty">
+            <option value="1">CSIE</option>
+            <option value="2">FABBV</option>
+        </select>
+    </div>
+    <br />
+    <div>
+        <label for="specialization"><b>Specialization</b></label>
+        <select name="specialization" id="specialization">
+            <option value="1">Informatica Economica</option>
+            <option value="2">Cibernetica</option>
+            <option value="3">Statistica</option>
+        </select>
+    </div>
+    <br />
+    <div>
+        <label for="lang"><b>Language of study</b></label>
+        <select name="lang" id="lang">
+            <option value="1">Romanian</option>
+            <option value="2">English</option>
+        </select>
+    </div>
+    <br />
+    <div>
+        <label for="study_program"><b>Study program</b></label>
+        <select name="study_program" id="study_program">
+            <option value="1">License</option>
+            <option value="2">Master</option>
+        </select>
+    </div>
+    <br />
+    <div>
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+    </div>
+    <br />
+    <div>
+        <label for="psw-repeat"><b>Repeat Password</b></label>
+        <input type="password" placeholder="Confirm Password" name="psw-confirm" required>
+    </div>
+    <br />
+    @*<hr>*@
+    @*<p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>*@
+    <button type="submit" class="registerbtn">Register</button>
+    <div class="container signin">
+        <p>Already have an account? <a href="/app/login">Sign in</a>.</p>
+    </div>
+</form>
+
