@@ -24,6 +24,21 @@ namespace Licenta.Controllers
         {
             return View();
         }
+
+        public IActionResult Welcome()
+        {
+            return View();
+        }
+
+        public IActionResult HomePageStudent()
+        {
+            return View();
+        }
+
+        public IActionResult HomePageAdmin()
+        {
+            return View();
+        }
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         //public IActionResult Error()
         //{

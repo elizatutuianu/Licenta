@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Register";
+    ViewBag.Title = "Register";
 }
 <form id="register" name="Register" action="Register">
     <p>Please fill in this form to create an account.</p>
@@ -27,7 +27,7 @@
     <br />
     <div>
         <label for="faculty"><b>Faculty</b></label>
-        <select name="faculty" id="faculty">
+        <select name="faculty" id="faculty" required>
             <option value="1">CSIE</option>
             <option value="2">FABBV</option>
         </select>
@@ -35,7 +35,7 @@
     <br />
     <div>
         <label for="specialization"><b>Specialization</b></label>
-        <select name="specialization" id="specialization">
+        <select name="specialization" id="specialization" required>
             <option value="1">Informatica Economica</option>
             <option value="2">Cibernetica</option>
             <option value="3">Statistica</option>
@@ -44,7 +44,7 @@
     <br />
     <div>
         <label for="lang"><b>Language of study</b></label>
-        <select name="lang" id="lang">
+        <select name="lang" id="lang" required>
             <option value="1">Romanian</option>
             <option value="2">English</option>
         </select>
@@ -52,7 +52,7 @@
     <br />
     <div>
         <label for="study_program"><b>Study program</b></label>
-        <select name="study_program" id="study_program">
+        <select name="study_program" id="study_program" required>
             <option value="1">License</option>
             <option value="2">Master</option>
         </select>
