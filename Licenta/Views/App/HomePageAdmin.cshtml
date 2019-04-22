@@ -1,4 +1,91 @@
 ﻿@{
     ViewBag.Title = "HomePageAdmin";
 }
+@*@{
+        var db = Database.Open("SmallBakery");
+        var query = "SELECT * FROM Product ORDER BY Name";
+        var data = db.Query(query);
+        var grid = new WebGrid(data);
+    }*@
+<script lang="text/javascript">
+    function showHideForm() {
+        var x = document.getElementsByClassName("formAdmin");
+        if (x[0].style.display === "none")
+            x[0].style.display = "block";
+        else
+            if (x[0].style.display === "block")
+                x[0].style.display = "none";
+    }
+    function showFormDD() {
+        var x = document.getElementById("formDD");
+        if (x.style.display === "none")
+            x.style.display = "block";
+    }
+</script>
 
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto auto auto auto auto;
+        padding: 10px;
+    }
+
+    .grid-item {
+        text-align: center;
+    }
+</style>
+
+<button type="button" id="btnStart" onclick="showHideForm()">Start</button>
+<button type="button" id="btnStop" onclick="showHideForm()">Stop</button>
+
+<form class="formAdmin" id="formAddDorm" style="display:none">
+    <h2>
+        Add dorm:
+    </h2>
+    <div class="grid-container">
+        <div class="grid-item"><input type="text" placeholder="Name" name="dormName" required></div>
+        <div class="grid-item"><input type="number" placeholder="Comfort" name="dormComfort" required></div>
+        <div class="grid-item"><input type="number" placeholder="Room's number" name="dormNoRooms" required></div>
+        <div class="grid-item"><input type="number" placeholder="Beds per room" name="dormBeds" required></div>
+        <div class="grid-item">
+            <select name="dormGender" required>
+                <option value="G">Only for girls</option>
+                <option value="B">Only for boys</option>
+                <option value="M">Mixed</option>
+            </select>
+        </div>
+        <div class="grid-item">
+            <select name="dormRoForeigners" required>
+                <option value="Ro">For romanian students</option>
+                <option value="F">For foreign students</option>
+            </select>
+        </div>
+        <button type="button" id="btnAddDorm" onclick="showFormDD()">ADD</button>
+    </div>
+</form>
+@*get table from DB*@
+@*<form id="viewDormsFromDB">
+
+            <h2>List of dorms</h2>
+                <h1>Small Bakery Products</h1>
+                <div id="grid">
+                    @grid.GetHtml()
+                </div>
+    </form>*@
+<form class="formAdmin" id="formDD" style="display:none">
+    <h2>
+        Set deadlines:
+    </h2>
+    <h3>
+        Students have to register until:
+        <input type="date" />
+        <button type="button" id="btnAddDDStudents">Add deadline</button>
+    </h3>
+    <h3>
+        Process will end:
+        <input type="date" />
+        <button type="button" id="btnAddFinalDD">Add deadline</button>
+    </h3>
+</form>
+
+<button type="button" id="btnSubmitStart">Submit</button>

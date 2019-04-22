@@ -1,28 +1,248 @@
 ﻿@{
     ViewBag.Title = "HomePageStudent";
 }
+
+<script lang="text/javascript">
+    function showElement(clicked_id) {
+        var x;
+        if (clicked_id === "btnAddPref") {
+            x = document.getElementsByClassName("formStudentPref");
+            if (x[0].style.display === "none")
+                x[0].style.display = "block";
+            else
+                if (x[0].style.display === "block")
+                    x[0].style.display = "none";
+        }
+        if (clicked_id === "btnShowDormPref") {
+            x = document.getElementById("dormPref");
+            if (x.style.display === "none")
+                x.style.display = "block";
+        }
+        if (clicked_id === "btnShowRoommatePref") {
+            x = document.getElementById("roommatesPref");
+            if (x.style.display === "none")
+                x.style.display = "block";
+        }
+        else if (clicked_id === "btnAdd1PrefRoom") {
+            x = document.getElementById("room1Pref");
+            if (x.style.display === "none")
+                x.style.display = "block";
+        }
+
+        else if (clicked_id === "btnAdd2DormPref") {
+            x = document.getElementById("2DormPref");
+            if (x.style.display === "none")
+                x.style.display = "block";
+        }
+        else if (clicked_id === "btnAdd2PrefRoom") {
+            x = document.getElementById("room2Pref");
+            if (x.style.display === "none")
+                x.style.display = "block";
+        }
+
+        else if (clicked_id === "btnAdd3DormPref") {
+            x = document.getElementById("3DormPref");
+            if (x.style.display === "none")
+                x.style.display = "block";
+        }
+        else if (clicked_id === "btnAdd3PrefRoom") {
+            x = document.getElementById("room3Pref");
+            if (x.style.display === "none")
+                x.style.display = "block";
+        }
+
+        else if (clicked_id === "btnAdd4DormPref") {
+            x = document.getElementById("4DormPref");
+            if (x.style.display === "none")
+                x.style.display = "block";
+        }
+        else if (clicked_id === "btnAdd4PrefRoom") {
+            x = document.getElementById("room4Pref");
+            if (x.style.display === "none")
+                x.style.display = "block";
+        }
+
+        else if (clicked_id === "btnAdd5DormPref") {
+            x = document.getElementById("5DormPref");
+            if (x.style.display === "none")
+                x.style.display = "block";
+        }
+        else if (clicked_id === "btnAdd5PrefRoom") {
+            x = document.getElementById("room5Pref");
+            if (x.style.display === "none")
+                x.style.display = "block";
+        }
+    }
+    
+</script>
+
 <div>
     <h1>Your data:</h1>
-    <h2>
-        <b>First name: </b><input type="text" value=" " name="fname" readonly>
+        First name: <input type="text" value=" " name="fname" readonly>
         <br />
-        <b>Last name: </b><input type="text" value=" " name="lname" readonly>
+        Last name: <input type="text" value=" " name="lname" readonly>
         <br />
-        <b>Email: </b><input type="email" value=" " name="email" readonly>
+        Email: <input type="email" value=" " name="email" readonly>
         <br />
-        <b>Father's initial: </b><input type="text" value=" " name="initial" readonly>
+        Father's initial: <input type="text" value=" " name="initial" readonly>
         <br />
-        <b>Faculty: </b><input type="text" value=" " name="faculty" readonly>
+        Faculty: <input type="text" value=" " name="faculty" readonly>
         <br />
-        <b>Specialization: </b><input type="text" value=" " name="specialization" readonly>
+        Specialization: <input type="text" value=" " name="specialization" readonly>
         <br />
-        <b>Language of study: </b><input type="text" value=" " name="lang" readonly>
+        Language of study: <input type="text" value=" " name="lang" readonly>
         <br />
-        <b>Study program: </b><input type="text" value=" " name="study_program" readonly>
-    </h2>
+        Study program:<input type="text" value=" " name="study_program" readonly>
     <ul style="list-style-type:none;" class="btnsHome">
         <li><button type="button" id="btnSend"><img src="~/img/send.png" /></button></li>
-        <li><button type="button" id="btnAddPref"><img src="~/img/add.png" /></button></li>
+        <li><button type="button" id="btnAddPref" onclick="showElement(this.id)"><img src="~/img/add.png" /></button></li>
         <li><button type="button" id="btnVizRepartizare"><img src="~/img/files.png" /></button></li>
     </ul>
 </div>
+
+<form class="formStudentPref" style="display:none">
+    <h2>Your preferences:</h2>
+    <button type="button" id="btnShowDormPref" onclick="showElement(this.id)">Add dorm preferred</button>
+    <button type="button" id="btnShowRoommatePref" onclick="showElement(this.id)">Add roommate preferred</button>
+
+    <div id="dormPref" style="display:none">
+        <h3>
+            *Optional: Add dorms with/without rooms preferred:
+        </h3>
+        <div>
+            <label for="dorm">First dorm preferred:</label>
+            <select name="1dorm" id="1dorm" required>
+                <option value="Moxa">Moxa D</option>
+                <option value="BelvedereNou">Belvedere Nou (A6-A8)</option>
+                <option value="Tei">Tei C1</option>
+                <option value="BelvedereVechi">Belvedere Vechi (A1-A4)</option>
+                <option value="Agronomie">Agronomie (C1, C2)</option>
+            </select>
+            <button type="button" id="btnAdd1PrefRoom" onclick="showElement(this.id)">Add room preferred</button>
+            <input id="room1Pref" type="number" placeholder="Enter room preferred" name="room1Pref" style="display:none">
+            <button type="button" id="btnAdd2DormPref" onclick="showElement(this.id)">Add another dorm preferred</button>
+        </div>
+        <br />
+        <div id="2DormPref" style="display:none">
+            <label for="dorm">Second dorm preferred:</label>
+            <select name="2dorm" id="2dorm" required>
+                <option value="Moxa">Moxa D</option>
+                <option value="BelvedereNou">Belvedere Nou (A6-A8)</option>
+                <option value="Tei">Tei C1</option>
+                <option value="BelvedereVechi">Belvedere Vechi (A1-A4)</option>
+                <option value="Agronomie">Agronomie (C1, C2)</option>
+            </select>
+            <button type="button" id="btnAdd2PrefRoom" onclick="showElement(this.id)">Add room preferred</button>
+            <input id="room2Pref" type="number" placeholder="Enter room preferred" name="room2Pref" style="display:none">
+            <button type="button" id="btnAdd3DormPref" onclick="showElement(this.id)">Add another dorm preferred</button>
+        </div>
+        <br />
+        <div id="3DormPref" style="display:none">
+            <label for="dorm">Third dorm preferred:</label>
+            <select name="3dorm" id="3dorm" required>
+                <option value="Moxa">Moxa D</option>
+                <option value="BelvedereNou">Belvedere Nou (A6-A8)</option>
+                <option value="Tei">Tei C1</option>
+                <option value="BelvedereVechi">Belvedere Vechi (A1-A4)</option>
+                <option value="Agronomie">Agronomie (C1, C2)</option>
+            </select>
+            <button type="button" id="btnAdd3PrefRoom" onclick="showElement(this.id)">Add room preferred</button>
+            <input id="room3Pref" type="number" placeholder="Enter room preferred" name="room3Pref" style="display:none">
+            <button type="button" id="btnAdd4DormPref" onclick="showElement(this.id)">Add another dorm preferred</button>
+        </div>
+        <br />
+        <div id="4DormPref" style="display:none">
+            <label for="dorm">Fourth dorm preferred:</label>
+            <select name="4dorm" id="4dorm" required>
+                <option value="Moxa">Moxa D</option>
+                <option value="BelvedereNou">Belvedere Nou (A6-A8)</option>
+                <option value="Tei">Tei C1</option>
+                <option value="BelvedereVechi">Belvedere Vechi (A1-A4)</option>
+                <option value="Agronomie">Agronomie (C1, C2)</option>
+            </select>
+            <button type="button" id="btnAdd4PrefRoom" onclick="showElement(this.id)">Add room preferred</button>
+            <input id="room4Pref" type="number" placeholder="Enter room preferred" name="room4Pref" style="display:none">
+            <button type="button" id="btnAdd5DormPref" onclick="showElement(this.id)">Add another dorm preferred</button>
+        </div>
+        <br />
+        <div id="5DormPref" style="display:none">
+            <label for="dorm">Fifth dorm preferred:</label>
+            <select name="5dorm" id="4dorm" required>
+                <option value="Moxa">Moxa D</option>
+                <option value="BelvedereNou">Belvedere Nou (A6-A8)</option>
+                <option value="Tei">Tei C1</option>
+                <option value="BelvedereVechi">Belvedere Vechi (A1-A4)</option>
+                <option value="Agronomie">Agronomie (C1, C2)</option>
+            </select>
+            <button type="button" id="btnAdd5PrefRoom" onclick="showElement(this.id)">Add room preferred</button>
+            <input id="room5Pref" type="number" placeholder="Enter room preferred" name="room5Pref" style="display:none">
+            <p>You can't add another dorm preferred</p>
+        </div>
+    </div>
+
+    <div id="roommatesPref" style="display:none">
+        <h3>
+            *Optional: Add roommate/s:
+        </h3>
+        <p>You are allowed to add up to 4 roommates of your choice. Also, you need to specify the last included comfort (from 1 to 5) that you are willing to give up on in order to be accommodated with your roommates of choice.</p>
+        <p>Example: Set comfort 2. You are allocated in a dorm of comfort 1, one of your roommates of choice is allocated in a dorm of comfort 3, and the rest of them are allocated to a dorm of comfort 2. You will stay with the others in a dorm of comfort 2, and he will be allocated in a different dorm (of comfort 3).</p>
+        <div>
+            <label for="fname"><b>First name</b></label>
+            <input type="text" placeholder="Enter first name" name="fname" required>
+        </div>
+        <br />
+        <div>
+            <label for="lname"><b>Last name</b></label>
+            <input type="text" placeholder="Enter last name" name="lname" required>
+        </div>
+        <br />
+        <div>
+            <label for="initial"><b>Father's initial</b></label>
+            <input type="text" placeholder="Enter father's initial" name="initial" required>
+        </div>
+        <br />
+        <div>
+            <label for="study_program"><b>Study program</b></label>
+            <select name="study_program" id="study_program" required>
+                <option value="L">License</option>
+                <option value="M">Master</option>
+            </select>
+        </div>
+        <br />
+        <div>
+            <label for="study_year"><b>Study year:</b></label>
+            <select name="study_year" id="study_year" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <br />
+        <div>
+            <label for="lang"><b>Language of study</b></label>
+            <select name="lang" id="lang" required>
+                <option value="Ro">Romanian</option>
+                <option value="En">English</option>
+            </select>
+        </div>
+        <br />
+        <div>
+            <label for="faculty"><b>Faculty</b></label>
+            <select name="faculty" id="faculty" required>
+                <option value="1">CSIE</option>
+                <option value="2">FABBV</option>
+            </select>
+        </div>
+        <br />
+        <div>
+            <label for="specialization"><b>Specialization</b></label>
+            <select name="specialization" id="specialization" required>
+                <option value="1">Informatica Economica</option>
+                <option value="2">Cibernetica</option>
+                <option value="3">Statistica</option>
+            </select>
+        </div>
+        <br />
+        <button type="button" id="btnAddRoommate" onclick="showElement(this.id)">Add roommate preferred</button>
+    </div>
+</form>
