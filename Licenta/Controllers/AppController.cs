@@ -15,7 +15,14 @@ namespace Licenta.Controllers
             return View();
         }
 
+        [HttpGet("register")]
         public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost("register")]
+        public IActionResult Register(Student student)
         {
             return View();
         }
