@@ -24,6 +24,10 @@ namespace Licenta.Controllers
         [HttpPost("register")]
         public IActionResult Register(Student student)
         {
+            if(ModelState.IsValid)
+            {
+
+            }
             return View();
         }
 

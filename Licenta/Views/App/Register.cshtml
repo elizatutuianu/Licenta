@@ -2,78 +2,95 @@
 @{
     ViewBag.Title = "Register";
 }
-<form method="post" id="register" name="Register" action="Register">
+@section Scripts{
+<script src="~/node_modules/jquery-validation/jquery.validate.min.js"></script>
+<script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+}
+<form method="post" id="register" action="Register">
+    <h1>@ViewBag.Title</h1>
     <p>Please fill in this form to create an account.</p>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div>
         <label asp-for="FirstName"><b>First name</b></label>
-        <input asp-for="FirstName" placeholder="Enter first name" required>
+        <input asp-for="FirstName" placeholder="Enter first name">
+        <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
     <br />
     <div>
         <label asp-for="LastName"><b>Last name</b></label>
-        <input asp-for="LastName" placeholder="Enter last name" required>
+        <input asp-for="LastName" placeholder="Enter last name">
+        <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
     <br />
     <div>
         <label asp-for="Email"><b>Email</b></label>
-        <input asp-for="Email" placeholder="Enter Email" required>
+        <input asp-for="Email" placeholder="Enter Email">
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <br />
     <div>
         <label asp-for="Initial"><b>Father's initial</b></label>
-        <input asp-for="Initial" placeholder="Enter father's initial" required>
+        <input asp-for="Initial" placeholder="Enter father's initial">
+        <span asp-validation-for="Initial" class="text-danger"></span>
     </div>
     <br />
     <div>
         <label asp-for="StudyProgram"><b>Study program</b></label>
-        <select asp-for="StudyProgram" id="study_program" required>
+        <select asp-for="StudyProgram" id="study_program">
             <option value="License">License</option>
             <option value="Master">Master</option>
         </select>
+        <span asp-validation-for="StudyProgram" class="text-danger"></span>
     </div>
     <br />
     <div>
         <label asp-for="Year"><b>Year of study</b></label>
-        <select asp-for="Year" id="year" required>
+        <select asp-for="Year" id="year">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
         </select>
+        <span asp-validation-for="Year" class="text-danger"></span>
     </div>
     <br />
     <div>
         <label asp-for="IsRoLanguage"><b>Language of study</b></label>
-        <select asp-for="IsRoLanguage" id="lang" required>
-            <option value="1">Romanian</option>
-            <option value="0">English</option>
+        <select asp-for="IsRoLanguage" id="lang">
+            <option value="true">Romanian</option>
+            <option value="false">English</option>
         </select>
+        <span asp-validation-for="IsRoLanguage" class="text-danger"></span>
     </div>
     <br />
     <div>
         <label asp-for="Faculty"><b>Faculty</b></label>
-        <select asp-for="Faculty" id="faculty" required>
+        <select asp-for="Faculty" id="faculty">
             <option value="1">CSIE</option>
             <option value="2">FABBV</option>
         </select>
+        <span asp-validation-for="Faculty" class="text-danger"></span>
     </div>
     <br />
     <div>
         <label asp-for="Specialization"><b>Specialization</b></label>
-        <select asp-for="Specialization" id="specialization" required>
+        <select asp-for="Specialization" id="specialization">
             <option value="1">Informatica Economica</option>
             <option value="2">Cibernetica</option>
             <option value="3">Statistica</option>
         </select>
+        <span asp-validation-for="Specialization" class="text-danger"></span>
     </div>
     <br />
     <div>
         <label asp-for="Password"><b>Password</b></label>
-        <input asp-for="Password" placeholder="Enter Password" name="psw" required>
+        <input asp-for="Password" placeholder="Enter Password" name="psw">
+        <span asp-validation-for="Password" class="text-danger"></span>
     </div>
     <br />
     <div>
         <label asp-for="ConfirmPassword"><b>Repeat Password</b></label>
-        <input asp-for="ConfirmPassword" placeholder="Confirm Password" name="psw-confirm" required>
+        <input asp-for="ConfirmPassword" placeholder="Confirm Password" name="psw-confirm">
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
     <br />
     <button type="submit" class="registerbtn">Register</button>
