@@ -3,6 +3,8 @@
 }
 
 <script lang="text/javascript">
+    var action = 1;
+
     function showElement(clicked_id) {
         var x;
         if (clicked_id === "btnAddPref") {
@@ -73,28 +75,43 @@
                 x.style.display = "block";
         }
     }
-    
+    function disableButton() {
+        if (action == 1) {
+            //SEND DATA TO DB
+            //IDEA: DIALOG: ARE YOU SURE YOU WANT TO SEND YOUR REQUEST? Y N
+            action = 2;
+        }
+        else {
+            document.getElementById("divRequestSent").style.display = "block"
+            setTimeout(function () {
+                document.getElementById("divRequestSent").style.display = "none";
+            }, 1000);
+        }
+    }
 </script>
 
 <div>
     <h1>Your data:</h1>
-        First name: <input type="text" value=" " name="fname" readonly>
-        <br />
-        Last name: <input type="text" value=" " name="lname" readonly>
-        <br />
-        Email: <input type="email" value=" " name="email" readonly>
-        <br />
-        Father's initial: <input type="text" value=" " name="initial" readonly>
-        <br />
-        Faculty: <input type="text" value=" " name="faculty" readonly>
-        <br />
-        Specialization: <input type="text" value=" " name="specialization" readonly>
-        <br />
-        Language of study: <input type="text" value=" " name="lang" readonly>
-        <br />
-        Study program:<input type="text" value=" " name="study_program" readonly>
+    First name: <input type="text" value=" " name="fname" readonly>
+    <br />
+    Last name: <input type="text" value=" " name="lname" readonly>
+    <br />
+    Email: <input type="email" value=" " name="email" readonly>
+    <br />
+    Father's initial: <input type="text" value=" " name="initial" readonly>
+    <br />
+    Faculty: <input type="text" value=" " name="faculty" readonly>
+    <br />
+    Specialization: <input type="text" value=" " name="specialization" readonly>
+    <br />
+    Language of study: <input type="text" value=" " name="lang" readonly>
+    <br />
+    Study program:<input type="text" value=" " name="study_program" readonly>
     <ul style="list-style-type:none;" class="btnsHome">
-        <li><button type="button" id="btnSend"><img src="~/img/send.png" /></button></li>
+        <li>
+            <button type="button" id="btnSend" onclick="disableButton()"><img src="~/img/send.png" /></button>
+            <div id="divRequestSent" style="display:none"><i>You already sent you request</i></div>
+        </li>
         <li><button type="button" id="btnAddPref" onclick="showElement(this.id)"><img src="~/img/add.png" /></button></li>
         <li><button type="button" id="btnVizRepartizare"><img src="~/img/files.png" /></button></li>
     </ul>
@@ -191,7 +208,8 @@
             <input type="number" placeholder="Enter last comfort accepted" name="lastComfort" required>
         </div>
         <br />
-        <div>
+
+        @*<div>
             <label for="fname"><b>First name</b></label>
             <input type="text" placeholder="Enter first name" name="fname" required>
         </div>
@@ -246,7 +264,9 @@
                 <option value="2">Cibernetica</option>
                 <option value="3">Statistica</option>
             </select>
-        </div>
+        </div>*@
+
+        <partial name="NewStudentForm"/>        
         <br />
         <button type="button" id="btnAddRoommate" onclick="showElement(this.id)">Add roommate preferred</button>
     </div>
