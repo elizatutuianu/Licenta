@@ -23,7 +23,7 @@ namespace Licenta.Models
 
         private bool isFemale; //false if it is Male
         private bool isSocialCase;
-        private bool isRomanian;
+        private string languageOfStudy;
         private bool isMedicalCase;
         private float media;
         #endregion
@@ -52,7 +52,7 @@ namespace Licenta.Models
         public string Specialization { get => specialization; set => specialization = value; }
 
         [Required(ErrorMessage = "You need to fill this space")]
-        public bool IsRoLanguage { get => isRoLanguage; set => isRoLanguage = value; }
+        public string LanguageOfStudy { get => languageOfStudy; set => languageOfStudy = value; }
 
         [Required(ErrorMessage = "You need to fill this space")]
         public string StudyProgram { get => studyProgram; set => studyProgram = value; }

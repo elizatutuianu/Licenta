@@ -54,19 +54,31 @@
     </div>
     <br />
     <div>
-        <label asp-for="IsRoLanguage"><b>Language of study</b></label>
-        <select asp-for="IsRoLanguage" id="lang">
-            <option value="true">Romanian</option>
-            <option value="false">English</option>
+        <label asp-for="LanguageOfStudy"><b>Language of study</b></label>
+        <select asp-for="LanguageOfStudy" id="lang">
+            <option value="ro">Romanian</option>
+            <option value="en">English</option>
+            <option value="fr">French</option>
+            <option value="gr">German</option>
         </select>
-        <span asp-validation-for="IsRoLanguage" class="text-danger"></span>
+        <span asp-validation-for="LanguageOfStudy" class="text-danger"></span>
     </div>
     <br />
     <div>
         <label asp-for="Faculty"><b>Faculty</b></label>
         <select asp-for="Faculty" id="faculty">
-            <option value="1">CSIE</option>
-            <option value="2">FABBV</option>
+            <option value="FABIZ">Faculty of Business Administration in foreign languages</option>@*Specializarile sunt de fapt limbile (fr, en , germana)*@
+            <option value="FAMP">Faculty of Administration and Public Management</option>
+            <option value="BBS">Bucharest Business School</option>@*Doar master*@
+            <option value="BT">Faculty of Business and Tourism</option>
+            <option value="CSIE">Facultaty of Cybernetics, Statistics and Economic Informatics</option>
+            <option value="CIG">Faculty of Accounting and Management Information Systems</option>
+            <option value="ETA">Faculty of Economics, Theoretical and Applied</option>
+            <option value="EAM">Faculty of Agrifood and Environmental Economics</option>
+            <option value="FABBV">Faculty of Finance and Banking</option>
+            <option value="Management">Faculty of Management</option>
+            <option value="Marketing">Faculty of Marketing</option>
+            <option value="REI">Faculty of International Business and Economics</option>
         </select>
         <span asp-validation-for="Faculty" class="text-danger"></span>
     </div>
@@ -74,9 +86,145 @@
     <div>
         <label asp-for="Specialization"><b>Specialization</b></label>
         <select asp-for="Specialization" id="specialization">
-            <option value="1">Informatica Economica</option>
-            <option value="2">Cibernetica</option>
-            <option value="3">Statistica</option>
+            @*Master FABIZ*@
+            <option value="Antreprenoriat si administrarea afacerilor in domeniul energiei">Entrepreneurship and Business Administration in Energy</option>
+            <option value="Administrarea Afacerilor">Business Administration</option>
+            <option value="Antreprenoriat si Administrarea Afacerilor">Entrepreneurship and Business Administration</option>
+            <option value="Cercetare in afaceri">Business Research</option>
+            <option value="MBA romano-german" Management antreprenorial">Management and Entrepreneurship MBA</option>
+
+            @*Licenta FAMP*@
+            <option value="Administratie publica">Public administration</option>
+            <option value="Resurse umane">Human resources</option>
+            @*Master*@
+            <option value="Administratie publica si integrare europeana">Public administration and european integration</option>
+            <option value="Administratie si management public">Administration and public management</option>
+            <option value="Managementul resurselor umane in sectorul public">Human resources management in public sector</option>
+
+            @*Master BBS*@
+            <option value="MBA Romano-Francez INDE IFR">Romanian-French INDE MBA</option>
+            <option value="Dezvoltarea economica a intreprinderii">Economic development of the company</option>
+            <option value="MBA Romano-Canadian">MBA Romanian-Canadian</option>
+            <option value="MBA Romano-Francez INDE">Romanian-French INDE MBA</option>
+            <option value="MBA romano-german <<Management antreprenorial>>">Management and Entrepreneurship MBA</option>
+
+            @*Licenta BT*@
+            <option value="Administrarea afacerilor in comert, turism, servicii, merceologie si managementul calitatii">Business Administration on Commerce, Tourism, Services, Commodity Science and Quality Management</option>
+            <option value="Administrarea afacerilor in comert, turism, servicii, merceologie si managementul calitatii">Business Administration on Commerce, Tourism, Services, Commodity Science and Quality Management</option>
+            @*Master*@
+            <option value="Administrarea afacerilor comerciale">Business Administration on Commerce</option>
+            <option value="Administrarea afacerilor in turism">Business Administration in Tourism</option>
+            <option value="Business">Business</option>
+            <option value="Excelenta in business si servicii">Excellence in Business and Services</option>
+            <option value="Geopolitica si afaceri">Geopolitics and Business</option>
+            <option value="Management si marketing in turism">Management and Marketing in Tourism</option>
+            <option value="Managementul calitatii">Quality Management</option>
+            <option value="Managementul calitatii, expertize si protectia consumatorului">Quality Management, Expertises and Consumer's Protection</option>
+
+            @*Licenta CSIE*@
+            <option value="Informatica economica">Economic Informatics</option>
+            <option value="Cibernetica economica">Economic Cybernetics</option>
+            <option value="Statistica si previziune economica">Economic Statistics and Previsions</option>
+            @*Master*@
+            <option value="Analiza afacerilor si controlul performantei intreprinderii">Business Analysis and Enterprise Performance Control</option>
+            <option value="Baze de date - suport pentru afaceri">Data Bases - Support for Business</option>
+            <option value="Cibernetica si economie cantitativa">Cybernetics and Quantitative Economics</option>
+            <option value="E-Business">E-Business</option>
+            <option value="Managementul informatizat al proiectelor">Computerized Project Management</option>
+            <option value="Securitatea informatica">IT&C Security</option>
+            <option value="Sisteme informatice pentru managementul resurselor si proceselor economice">Informatics Systems for the Management of Economic Resources</option>
+            <option value="Statistica">Statistics</option>
+
+            @*Licenta CIG*@
+            <option value="Contabilitate si informatica de gestiune">Accounting and management information systems</option>
+            @*Master*@
+            <option value="Analiza financiara si evaluare">Financial analysis and valuation</option>
+            <option value="Audit financiar si consiliere">Financial audit and counseling</option>
+            <option value="Business Services">Business Services</option>
+            <option value="Concepte si practici de audit la nivel national si international">Auditing concepts and practices at national and international levels</option>
+            <option value="Contabilitate internationala">International accounting</option>
+            <option value="Contabilitate si audit in institutii bancare si financiare">Accounting and auditing in financial and banking institutions</option>
+            <option value="Contabilitate, audit si informatica de gestiune">Accounting, auditing and management information systems</option>
+            <option value="Contabilitate, control si expertizs">Accounting, controlling and expertise</option>
+            <option value="Contabilitatea afacerilor">Business Accounting</option>
+            <option value="Contabilitatea si fiscalitatea entitatilor economice">Accounting and taxation of economic entities</option>
+            <option value="Criminologie economico-financiara">Economic Financial Criminology</option>
+            <option value="Drept antreprenorial">Entrepreneurial Law</option>
+            <option value="Economia proprietatilor imobiliare">Real estate economics</option>
+            <option value="Tehnici contabile si financiare de gestiune a afacerilor">Accounting and finance techniques for business management</option>
+
+            @*Licenta ETA*@
+            <option value="Economie si comunicare economica in afaceri">Economics and Economic Communication in Business</option>
+            @*Master*@
+            <option value="Analize si strategii economice">Analyses and economic strategies</option>
+            <option value="Comunicare in Afaceri">Business Comunication</option>
+            <option value="Economia si conducerea organizatiilor educationale">Economics and management of educational organizations</option>
+            <option value="Economie Europeana">European Economics</option>
+
+            @*Licenta EAM*@
+            <option value="Economie agroalimentara si a mediului">AgroFood and Environmental Economics</option>
+            @*Master*@
+            <option value="Economia si administrarea afacerilor agroalimentare">Economics and administration of agro-food businesses</option>
+            <option value="Economie ecologica">Ecological economics</option>
+            <option value="Managementul proiectelor de dezvoltare rurala si regionala">Management of rural and regional development projects</option>
+
+            @*Licenta FABBV*@
+            <option value="Finante si banci">Finance and banking</option>
+            @*Master*@
+            <option value="Banci si asigurari">Banking and insurance</option>
+            <option value="Banci si politici monetare">Banking and Monetary Policies</option>
+            <option value="Cercetari avansate in finante">Advanced research in finance</option>
+            <option value="Finante aplicate">Master of Applied Finance</option>
+            <option value="Finante corporative">Corporate Finance</option>
+            <option value="Finante si banci - DOFIN">Finance and Banking - DOFIN</option>
+            <option value="Fiscalitate">Taxation</option>
+            <option value="Management financiar si investitii">Financial management and investment</option>
+            <option value="Managementul riscului si asigurari">Risc management and insurance</option>
+            <option value="Managementul sistemelor bancare">Banking systems management</option>
+            <option value="Tehnici actuariale">Actuarial techniques</option>
+
+            @*Licenta Man*@
+            <option value="Management">Management</option>
+            @*Master*@
+            <option value="Consultanta in management si dezvoltarea afacerilor">Management consulting and business development</option>
+            <option value="Management">Management</option>
+            <option value="Management si marketing international">Management and international marketing</option>
+            <option value="Managementul afacerilor">Business management</option>
+            <option value="Managementul afacerilor mici si mijlocii">Small and Medium Enterprises Management</option>
+            <option value="Managementul afacerilor prin proiecte">Business project management</option>
+            <option value="Managementul proiectelor">Project management</option>
+            <option value="Managementul resurselor umane">Human resources management</option>
+            <option value="Managementul serviciilor de sanatate">Healthcare services management</option>
+
+            @*Licenta Mark*@
+            <option value="Marketing">Marketing</option>
+            <option value="Cercetare fundamentala de marketing">Fundamental Research in Marketing</option>
+            <option value="Cercetari de marketing">Marketing Research</option>
+            <option value="Managementul marketingului">Marketing Management</option>
+            <option value="Managementul relatiilor cu clientii">Customer Relationship Management</option>
+            <option value="Marketing international">International Marketing</option>
+            <option value="Marketing online">Online Marketing</option>
+            <option value="Marketing si comunicare in afaceri">Marketing and Business Communications</option>
+            <option value="Marketing si management in servicii publice">Marketing and Management for Public Services</option>
+            <option value="Marketing strategic">Strategic Marketing</option>
+            <option value="Relatii publice in marketing">Public Relations in Marketing</option>
+
+            @*Licenta REI*@
+            <option value="Economie si afaceri internationale">International Business and Economics</option>
+            <option value="Limbi moderne aplicate">Applied Modern Languages</option>
+            @*Master*@
+            <option value="Afaceri internationale">International Business</option>
+            <option value="Comert exterior">Foreign trade</option>
+            <option value="Competitivitate si sustenabilitate in mediul de afaceri global">Competitivity and sustenability in global business environment</option>
+            <option value="Comunicare de afaceri in limba engleza">Business Communication in English</option>
+            <option value="Comunicare in limba engleza pentru predare si cercetare economica">English Language Education and Research Communication for Business and Economics</option>
+            <option value="Diplomatie in Economia Internationala">Diplomacy in International Economy</option>
+            <option value="Economie internationala si afaceri europene">International Economics and European Affair</option>
+            <option value="Economie si afaceri internationale">International Business and Economics</option>
+            <option value="Logistica internationala">International Logistics</option>
+            <option value="Managementul Afacerilor Internationale">Management of International Business</option>
+            <option value="Managementul proiectelor internationale">Management of International Projects</option>
+            <option value="Managementul riscului financiar international">Management of International Financial Risk</option>
         </select>
         <span asp-validation-for="Specialization" class="text-danger"></span>
     </div>
