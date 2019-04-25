@@ -15,7 +15,7 @@ namespace Licenta.Models
         private string initial;
         private string faculty;
         private string specialization;
-        private bool isRoLanguage;
+        private bool isRomanian;
         private string studyProgram;
         private string year;
         private string password;
