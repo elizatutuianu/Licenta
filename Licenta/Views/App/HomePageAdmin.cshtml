@@ -1,5 +1,10 @@
-﻿@{
+﻿@model Camin
+@{
     ViewBag.Title = "HomePageAdmin";
+}
+@section Scripts{
+    <script src="~/node_modules/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
 }
 @*@{
         var db = Database.Open("SmallBakery");
@@ -38,29 +43,37 @@
 <button type="button" id="btnStart" onclick="showHideForm()">Start</button>
 <button type="button" id="btnStop" onclick="showHideForm()">Stop</button>
 
-<form class="formAdmin" id="formAddDorm" style="display:none">
+<form method="post" class="formAdmin" id="formAddDorm" style="display:none">
     <h2>
         Add dorm:
     </h2>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <span asp-validation-for="DormName" class="text-danger"></span>
+    <span asp-validation-for="DormComfort" class="text-danger"></span>
+    <span asp-validation-for="DormNoRooms" class="text-danger"></span>
+    <span asp-validation-for="DormBedsInRoom" class="text-danger"></span>
+    <span asp-validation-for="DormGender" class="text-danger"></span>
+    <span asp-validation-for="IsDormForRomanians" class="text-danger"></span>
+
     <div class="grid-container">
-        <div class="grid-item"><input type="text" placeholder="Name" name="dormName" required></div>
-        <div class="grid-item"><input type="number" placeholder="Comfort" name="dormComfort" required></div>
-        <div class="grid-item"><input type="number" placeholder="Room's number" name="dormNoRooms" required></div>
-        <div class="grid-item"><input type="number" placeholder="Beds per room" name="dormBeds" required></div>
+        <div class="grid-item"><input asp-for="DormName" placeholder="Name of dorm"></div>
+        <div class="grid-item"><input asp-for="DormComfort" placeholder="Comfort"></div>
+        <div class="grid-item"><input asp-for="DormNoRooms" placeholder="Room's number"></div>
+        <div class="grid-item"><input asp-for="DormBedsInRoom" placeholder="Beds per room"></div>
         <div class="grid-item">
-            <select name="dormGender" required>
+            <select asp-for="DormGender">
                 <option value="G">Only for girls</option>
                 <option value="B">Only for boys</option>
                 <option value="M">Mixed</option>
             </select>
         </div>
         <div class="grid-item">
-            <select name="dormRoForeigners" required>
-                <option value="Ro">For romanian students</option>
-                <option value="F">For foreign students</option>
+            <select asp-for="IsDormForRomanians">
+                <option value="1">For romanian students</option>
+                <option value="0">For foreign students</option>
             </select>
         </div>
-        <button type="button" id="btnAddDorm" onclick="showFormDD()">ADD</button>
+        <button type="submit" id="btnAddDorm" onclick="showFormDD()">ADD</button>
     </div>
 </form>
 @*get table from DB*@

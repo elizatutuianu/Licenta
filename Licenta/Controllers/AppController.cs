@@ -46,8 +46,19 @@ namespace Licenta.Controllers
             return View();
         }
 
+        [HttpGet("/app/homepageadmin")]
         public IActionResult HomePageAdmin()
         {
+            return View();
+        }
+
+        [HttpPost("/app/homepageadmin")]
+        public IActionResult HomePageAdmin(Camin camin)
+        {
+            if(ModelState.IsValid)
+            {
+
+            }
             return View();
         }
     }
