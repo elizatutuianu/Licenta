@@ -208,66 +208,9 @@
             <input type="number" placeholder="Enter last comfort accepted" name="lastComfort" required>
         </div>
         <br />
-
-        @*<div>
-            <label for="fname"><b>First name</b></label>
-            <input type="text" placeholder="Enter first name" name="fname" required>
-        </div>
-        <br />
-        <div>
-            <label for="lname"><b>Last name</b></label>
-            <input type="text" placeholder="Enter last name" name="lname" required>
-        </div>
-        <br />
-        <div>
-            <label for="initial"><b>Father's initial</b></label>
-            <input type="text" placeholder="Enter father's initial" name="initial" required>
-        </div>
-        <br />
-        <div>
-            <label for="study_program"><b>Study program</b></label>
-            <select name="study_program" id="study_program" required>
-                <option value="L">License</option>
-                <option value="M">Master</option>
-            </select>
-        </div>
-        <br />
-        <div>
-            <label for="study_year"><b>Study year:</b></label>
-            <select name="study_year" id="study_year" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-        </div>
-        <br />
-        <div>
-            <label for="lang"><b>Language of study</b></label>
-            <select name="lang" id="lang" required>
-                <option value="Ro">Romanian</option>
-                <option value="En">English</option>
-            </select>
-        </div>
-        <br />
-        <div>
-            <label for="faculty"><b>Faculty</b></label>
-            <select name="faculty" id="faculty" required>
-                <option value="1">CSIE</option>
-                <option value="2">FABBV</option>
-            </select>
-        </div>
-        <br />
-        <div>
-            <label for="specialization"><b>Specialization</b></label>
-            <select name="specialization" id="specialization" required>
-                <option value="1">Informatica Economica</option>
-                <option value="2">Cibernetica</option>
-                <option value="3">Statistica</option>
-            </select>
-        </div>*@
-
-        <partial name="NewStudentForm"/>        
+        <partial name="NewStudentForm" />
         <br />
         <button type="button" id="btnAddRoommate" onclick="showElement(this.id)">Add roommate preferred</button>
     </div>
 </form>
+<button type="button" id="btnLogOut"><img src="~/img/logout.png" /></button>
