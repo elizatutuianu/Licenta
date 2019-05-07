@@ -7,6 +7,12 @@ namespace Licenta.Models
 {
     public class ResourcesStrings
     {
-        public const string register_em_required = "You need to fill this space";
+        //Student
+        public const string REQUIRED = "{0} required";
+        public const string INVALID = "Invalid {0}";
+        public const string PASSWORD_SIZE = "Password must have at least 6 characters";
+        public const string CONFIRM_PASSWORD_UNMATCH = "Password does not match";
+        public const string PASSWORD_FORMAT = "Password needs at least 1 upper case letter, 1 lower case letter and 1 digit";
+
     }
 }

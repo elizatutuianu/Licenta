@@ -57,9 +57,9 @@
 
     <div class="grid-container">
         <div class="grid-item"><input asp-for="DormName" placeholder="Name of dorm"></div>
-        <div class="grid-item"><input asp-for="DormComfort" placeholder="Comfort"></div>
-        <div class="grid-item"><input asp-for="DormNoRooms" placeholder="Room's number"></div>
-        <div class="grid-item"><input asp-for="DormBedsInRoom" placeholder="Beds per room"></div>
+        <div class="grid-item"><input asp-for="DormComfort" min="1" max="5" placeholder="Comfort"></div>
+        <div class="grid-item"><input asp-for="DormNoRooms" min="10" placeholder="Room's number"></div>
+        <div class="grid-item"><input asp-for="DormBedsInRoom" min="1" max="5" placeholder="Beds per room"></div>
         <div class="grid-item">
             <select asp-for="DormGender">
                 <option value="G">Only for girls</option>
