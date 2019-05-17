@@ -5,31 +5,36 @@
 
 
 
-    <form method="post" id="register" action="Register">
-        <h1>@ViewBag.Title</h1>
-        <p>Please fill in this form to create an account.</p>
-        <partial name="NewStudentForm" />
-        <div>
-            <label asp-for="Email"><b>Email</b></label>
-            <input asp-for="Email" placeholder="Enter Email">
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-        <br />
-        <div>
-            <label asp-for="Password"><b>Password</b></label>
-            <input asp-for="Password" placeholder="Enter Password">
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-        <br />
-        <div>
-            <label asp-for="ConfirmPassword"><b>Repeat Password</b></label>
-            <input asp-for="ConfirmPassword" placeholder="Confirm Password">
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-        </div>
-        <br />
-        <button type="submit" class="registerbtn">Register</button>
-        <div class="container signin">
-            <p>Already have an account? <a asp-controller="App" asp-action="Login">Sign in</a>.</p>
-        </div>
-    </form>
+<form method="post" id="register" action="Register">
+    <h1>@ViewBag.Title</h1>
+    <p>Please fill in this form to create an account.</p>
+    <div>
+        <label asp-for="Email"><b>Email</b></label>
+        <input asp-for="Email" placeholder="Enter Email">
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <br />
+    <div>
+        <label asp-for="Cnp"><b>CNP</b></label>
+        <input asp-for="Cnp" placeholder="Enter CNP">
+        <span asp-validation-for="Cnp" class="text-danger"></span>
+    </div>
+    <br />
+    <div>
+        <label asp-for="Password"><b>Password</b></label>
+        <input asp-for="Password" placeholder="Enter Password">
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <br />
+    <div>
+        <label asp-for="ConfirmPassword"><b>Repeat Password</b></label>
+        <input asp-for="ConfirmPassword" placeholder="Confirm Password">
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+    <br />
+    <button type="submit" class="registerbtn">Register</button>
+    <div class="container signin">
+        <p>Already have an account? <a asp-controller="App" asp-action="Login">Sign in</a>.</p>
+    </div>
+</form>
 
