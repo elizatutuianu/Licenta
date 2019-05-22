@@ -20,8 +20,8 @@ namespace Licenta.Models
         private DateTime birthDate;
         private string sex;
         private string country;
-        private string faculty;
-        private string specialization;
+        private Faculty faculty;
+        private Specialization specialization;
         private string studyProgram; //licenta_z, master_z,licenta_if,  master_if
         private string year;
         private string taxa_buget;
@@ -41,6 +41,8 @@ namespace Licenta.Models
         private string address;
         private string civilStatus;
         //private string brothersInASE; //optional
+
+        private AccomodationRequest accomodationRequest;
 
         #endregion
 
@@ -69,33 +71,20 @@ namespace Licenta.Models
         public string ConfirmPassword { get => confirmPassword; set => confirmPassword = value; }
 
         //HOME PAGE STUDENT
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
-        [MinLength(3, ErrorMessage = ResourcesStrings.INVALID)]
         public string FirstName { get => firstName; set => firstName = value; }
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
-        [MinLength(3, ErrorMessage = ResourcesStrings.INVALID)]
         public string LastName { get => lastName; set => lastName = value; }
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
-        [StringLength(1, ErrorMessage = ResourcesStrings.INVALID)]
         public string Initial { get => initial; set => initial = value; }
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
-        public string Faculty { get => faculty; set => faculty = value; }
+        public Faculty Faculty { get => faculty; set => faculty = value; }
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
-        public string Specialization { get => specialization; set => specialization = value; }
+        public Specialization Specialization { get => specialization; set => specialization = value; }
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
-        public string LanguageOfStudy { get => languageOfStudy; set => languageOfStudy = value; }
+        public string LanguageOfStudy { get => Specialization.SpecLanguageOfStudy; }
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
         public string StudyProgram { get => studyProgram; set => studyProgram = value; }
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
-        [MinLength(1)]
-        [MaxLength(1)]
         public string Year { get => year; set => year = value; }
 
         public bool IsSocialCase { get => isSocialCase; set => isSocialCase = value; }
@@ -131,6 +120,48 @@ namespace Licenta.Models
         public string Address { get => address; set => address = value; }
 
         public string CivilStatus { get => civilStatus; set => civilStatus = value; }
+        public AccomodationRequest AccomodationRequest { get => accomodationRequest; set => accomodationRequest = value; }
+
+        //e nevoie de fielduri by default null??
+        public Student(string email, string cnp, string password, string confirmPassword,
+            string firstName, string lastName, string initial, Faculty faculty,
+            Specialization specialization, string studyProgram, string year,
+            bool isSocialCase, bool isMedicalCase, float media, DateTime birthDate,
+            string sex, string country, string taxa_buget, int group, int credits,
+            string phoneNo, string idCardNo, string idCardIssuedBy, DateTime idCardIssuedDate,
+            string district, string localty, string address, string civilStatus)
+        {
+            Email = email;
+            Cnp = cnp;
+            Password = password;
+            ConfirmPassword = confirmPassword;
+            FirstName = firstName;
+            LastName = lastName;
+            Initial = initial;
+            Faculty = faculty;
+            Specialization = specialization;
+            StudyProgram = studyProgram;
+            Year = year;
+            IsSocialCase = isSocialCase;
+            IsMedicalCase = isMedicalCase;
+            Media = media;
+            BirthDate = birthDate;
+            Sex = sex;
+            Country = country;
+            Taxa_buget = taxa_buget;
+            Group = group;
+            Credits = credits;
+            PhoneNo = phoneNo;
+            IdCardNo = idCardNo;
+            IdCardIssuedBy = idCardIssuedBy;
+            IdCardIssuedDate = idCardIssuedDate;
+            District = district;
+            Localty = localty;
+            Address = address;
+            CivilStatus = civilStatus;
+        }
         #endregion
+
+
     }
 }

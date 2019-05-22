@@ -53,7 +53,7 @@ namespace Licenta.Controllers
         }
 
         [HttpPost("/app/homepageadmin")]
-        public IActionResult HomePageAdmin(Camin camin)
+        public IActionResult HomePageAdmin(Dorm camin)
         {
             if(ModelState.IsValid)
             {
