@@ -1,0 +1,5 @@
+﻿{
+  "ConnectionStrings": {
+    "AppConnectionString":  "server=(localdb)\\ProjectsV13;Database=CazariDatabase;Integrated Security=true;MultipleActiveResults=true;"
+  }
+}

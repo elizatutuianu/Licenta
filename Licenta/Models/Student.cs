@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Licenta.Models
 {
-    public class Student
+    public class Student : User
     {
         #region Fields
-        private string email;
-        private string password;
-        private string confirmPassword;
         private string cnp;
 
         private string firstName;
@@ -50,25 +47,10 @@ namespace Licenta.Models
 
         //REGISTER
         [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
-        [EmailAddress(ErrorMessage = ResourcesStrings.INVALID)]
-        public string Email { get => email; set => email = value; }
-
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
         [RegularExpression("^[0-9]*$")]
         [MinLength(13, ErrorMessage = ResourcesStrings.INVALID)]
         [MaxLength(13, ErrorMessage = ResourcesStrings.INVALID)]
         public string Cnp { get => cnp; set => cnp = value; }
-
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
-        [DataType(DataType.Password)]
-        [MinLength(6, ErrorMessage = ResourcesStrings.PASSWORD_SIZE)]
-        [RegularExpression(@"^((?=.*[a-z])(?=.*[A-Z])(?=.*\d)).+$", ErrorMessage = ResourcesStrings.PASSWORD_FORMAT)]
-        public string Password { get => password; set => password = value; }
-
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
-        [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = ResourcesStrings.CONFIRM_PASSWORD_UNMATCH)]
-        public string ConfirmPassword { get => confirmPassword; set => confirmPassword = value; }
 
         //HOME PAGE STUDENT
         public string FirstName { get => firstName; set => firstName = value; }
@@ -123,18 +105,16 @@ namespace Licenta.Models
         public AccomodationRequest AccomodationRequest { get => accomodationRequest; set => accomodationRequest = value; }
 
         //e nevoie de fielduri by default null??
-        public Student(string email, string cnp, string password, string confirmPassword,
-            string firstName, string lastName, string initial, Faculty faculty,
-            Specialization specialization, string studyProgram, string year,
+        public Student(string cnp, string firstName, string lastName, string initial,
+            Faculty faculty, Specialization specialization, string studyProgram, string year,
             bool isSocialCase, bool isMedicalCase, float media, DateTime birthDate,
             string sex, string country, string taxa_buget, int group, int credits,
             string phoneNo, string idCardNo, string idCardIssuedBy, DateTime idCardIssuedDate,
-            string district, string localty, string address, string civilStatus)
+            string district, string localty, string address, string civilStatus, string email,
+            string password, string confirmPassword, bool isAdmin = false)
+            : base(email, password, confirmPassword, isAdmin)
         {
-            Email = email;
             Cnp = cnp;
-            Password = password;
-            ConfirmPassword = confirmPassword;
             FirstName = firstName;
             LastName = lastName;
             Initial = initial;

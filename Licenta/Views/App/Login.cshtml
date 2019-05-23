@@ -1,15 +1,19 @@
-﻿@{
+﻿@model User
+
+@{
     ViewBag.Title = "Login";
 }
-<form id="login" name="Login" action="Login">
+<form method="get" id="login" name="Login" action="Login">
     <div>
-        <label for="email">Username</label>
-        <input type="email" name="email" placeholder="Enter Email" required/>
+        <label asp-for="Email">Username</label>
+        <input asp-for="Email" placeholder="Enter Email">
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <br>
     <div>
-        <label for="password">Password</label>
-        <input type="password" name="password" placeholder="Enter Password" required/>
+        <label asp-for="Password"><b>Password</b></label>
+        <input asp-for="Password" placeholder="Enter Password">
+        <span asp-validation-for="Password" class="text-danger"></span>
     </div>
     <br>
     <div>

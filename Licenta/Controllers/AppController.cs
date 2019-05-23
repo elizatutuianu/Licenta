@@ -10,6 +10,7 @@ namespace Licenta.Controllers
 {
     public class AppController : Controller
     {
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
