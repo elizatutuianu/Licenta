@@ -8,6 +8,8 @@ namespace Licenta.Models
 {
     public class Dorm
     {
+        [Key]
+        private int id;
         private string dormName;
         private int dormComfort;
         private int dormNoRooms;
@@ -50,31 +52,34 @@ namespace Licenta.Models
             get => rooms;
             set
             {
-                for (int i = 0; i < this.DormNoRooms; i++)
-                {
-                    if (this.DormGender == "F")
-                        roomGender = "F";
-                    else if (this.DormGender == "M")
-                        roomGender = "M";
-                    else
-                        roomGender = null;
-                    rooms.Add(new Room(i + 1, roomGender, null));
-                }
+                //for (int i = 0; i < this.DormNoRooms; i++)
+                //{
+                //    if (this.DormGender == "F")
+                //        roomGender = "F";
+                //    else if (this.DormGender == "M")
+                //        roomGender = "M";
+                //    else
+                //        roomGender = null;
+                //    rooms.Add(new Room(i + 1, roomGender, null));
+                //}
+                rooms = value;
             }
         }
 
-        public Dorm(string dormName, int dormComfort, int dormNoRooms, int dormBedsInRoom, string dormGender, bool isDormForRomanians, List<Room> rooms)
-        {
-            DormName = dormName;
-            DormComfort = dormComfort;
-            DormNoRooms = dormNoRooms;
-            DormBedsInRoom = dormBedsInRoom;
-            DormGender = dormGender;
-            IsDormForRomanians = isDormForRomanians;
-            Rooms = new List<Room>(DormNoRooms);
-            for (int i = 0; i < DormNoRooms; i++)
-                Rooms.Add(new Room(i + 1, DormGender != null ? DormGender : null, null));
+        public int Id { get => id; set => id = value; }
 
-        }
+        //public Dorm(string dormName, int dormComfort, int dormNoRooms, int dormBedsInRoom, string dormGender, bool isDormForRomanians, List<Room> rooms)
+        //{
+        //    DormName = dormName;
+        //    DormComfort = dormComfort;
+        //    DormNoRooms = dormNoRooms;
+        //    DormBedsInRoom = dormBedsInRoom;
+        //    DormGender = dormGender;
+        //    IsDormForRomanians = isDormForRomanians;
+        //    Rooms = new List<Room>(DormNoRooms);
+        //    for (int i = 0; i < DormNoRooms; i++)
+        //        Rooms.Add(new Room(i + 1, DormGender != null ? DormGender : null, null));
+
+        //}
     }
 }

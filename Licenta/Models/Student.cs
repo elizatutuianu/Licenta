@@ -14,9 +14,7 @@ namespace Licenta.Models
         private string firstName;
         private string lastName;
         private string initial;
-        private DateTime birthDate;
         private string sex;
-        private string country;
         private Faculty faculty;
         private Specialization specialization;
         private string studyProgram; //licenta_z, master_z,licenta_if,  master_if
@@ -30,13 +28,8 @@ namespace Licenta.Models
         private float media;
         private int credits;
         private string phoneNo;
-        private string idCardNo;
-        private string idCardIssuedBy;
-        private DateTime idCardIssuedDate;
-        private string district;
-        private string localty;
-        private string address;
-        private string civilStatus;
+
+        private IdCardStudent IdCardStudent;
         //private string brothersInASE; //optional
 
         private AccomodationRequest accomodationRequest;
@@ -75,11 +68,7 @@ namespace Licenta.Models
 
         public float Media { get => media; set => media = value; }
 
-        public DateTime BirthDate { get => birthDate; set => birthDate = value; }
-
         public string Sex { get => sex; set => sex = value; }
-
-        public string Country { get => country; set => country = value; }
 
         public string Taxa_buget { get => taxa_buget; set => taxa_buget = value; }
 
@@ -89,57 +78,46 @@ namespace Licenta.Models
 
         public string PhoneNo { get => phoneNo; set => phoneNo = value; }
 
-        public string IdCardNo { get => idCardNo; set => idCardNo = value; }
-
-        public string IdCardIssuedBy { get => idCardIssuedBy; set => idCardIssuedBy = value; }
-
-        public DateTime IdCardIssuedDate { get => idCardIssuedDate; set => idCardIssuedDate = value; }
-
-        public string District { get => district; set => district = value; }
-
-        public string Localty { get => localty; set => localty = value; }
-
-        public string Address { get => address; set => address = value; }
-
-        public string CivilStatus { get => civilStatus; set => civilStatus = value; }
         public AccomodationRequest AccomodationRequest { get => accomodationRequest; set => accomodationRequest = value; }
+        public IdCardStudent IdCardStudent1 { get => IdCardStudent; set => IdCardStudent = value; }
+        public string LanguageOfStudy1 { get => languageOfStudy; set => languageOfStudy = value; }
 
         //e nevoie de fielduri by default null??
-        public Student(string cnp, string firstName, string lastName, string initial,
-            Faculty faculty, Specialization specialization, string studyProgram, string year,
-            bool isSocialCase, bool isMedicalCase, float media, DateTime birthDate,
-            string sex, string country, string taxa_buget, int group, int credits,
-            string phoneNo, string idCardNo, string idCardIssuedBy, DateTime idCardIssuedDate,
-            string district, string localty, string address, string civilStatus, string email,
-            string password, string confirmPassword, bool isAdmin = false)
-            : base(email, password, confirmPassword, isAdmin)
-        {
-            Cnp = cnp;
-            FirstName = firstName;
-            LastName = lastName;
-            Initial = initial;
-            Faculty = faculty;
-            Specialization = specialization;
-            StudyProgram = studyProgram;
-            Year = year;
-            IsSocialCase = isSocialCase;
-            IsMedicalCase = isMedicalCase;
-            Media = media;
-            BirthDate = birthDate;
-            Sex = sex;
-            Country = country;
-            Taxa_buget = taxa_buget;
-            Group = group;
-            Credits = credits;
-            PhoneNo = phoneNo;
-            IdCardNo = idCardNo;
-            IdCardIssuedBy = idCardIssuedBy;
-            IdCardIssuedDate = idCardIssuedDate;
-            District = district;
-            Localty = localty;
-            Address = address;
-            CivilStatus = civilStatus;
-        }
+        //public Student(string cnp, string firstName, string lastName, string initial,
+        //    Faculty faculty, Specialization specialization, string studyProgram, string year,
+        //    bool isSocialCase, bool isMedicalCase, float media, DateTime birthDate,
+        //    string sex, string country, string taxa_buget, int group, int credits,
+        //    string phoneNo, string idCardNo, string idCardIssuedBy, DateTime idCardIssuedDate,
+        //    string district, string localty, string address, string civilStatus, string email,
+        //    string password, string confirmPassword, bool isAdmin = false)
+        //    : base(email, password, confirmPassword, isAdmin)
+        //{
+        //    Cnp = cnp;
+        //    FirstName = firstName;
+        //    LastName = lastName;
+        //    Initial = initial;
+        //    Faculty = faculty;
+        //    Specialization = specialization;
+        //    StudyProgram = studyProgram;
+        //    Year = year;
+        //    IsSocialCase = isSocialCase;
+        //    IsMedicalCase = isMedicalCase;
+        //    Media = media;
+        //    BirthDate = birthDate;
+        //    Sex = sex;
+        //    Country = country;
+        //    Taxa_buget = taxa_buget;
+        //    Group = group;
+        //    Credits = credits;
+        //    PhoneNo = phoneNo;
+        //    IdCardNo = idCardNo;
+        //    IdCardIssuedBy = idCardIssuedBy;
+        //    IdCardIssuedDate = idCardIssuedDate;
+        //    District = district;
+        //    Localty = localty;
+        //    Address = address;
+        //    CivilStatus = civilStatus;
+        //}
         #endregion
 
 

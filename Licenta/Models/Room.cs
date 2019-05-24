@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +8,8 @@ namespace Licenta.Models
 {
     public class Room
     {
+        [Key]
+        private int id;
         private int roomNo;
         private string roomGender;
         private int bedsInRoom;
@@ -34,12 +37,13 @@ namespace Licenta.Models
             }
         }
         public int BedsInRoom { get => bedsInRoom; set => bedsInRoom = value; }
+        public int Id { get => id; set => id = value; }
 
-        public Room(int roomNo, string roomGender, List<Student> studentsInRoom)
-        {
-            RoomNo = roomNo;
-            RoomGender = roomGender;
-            StudentsInRoom = studentsInRoom;
-        }
+        //public Room(int roomNo, string roomGender, List<Student> studentsInRoom)
+        //{
+        //    RoomNo = roomNo;
+        //    RoomGender = roomGender;
+        //    StudentsInRoom = studentsInRoom;
+        //}
     }
 }

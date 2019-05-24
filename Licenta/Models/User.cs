@@ -8,6 +8,8 @@ namespace Licenta.Models
 {
     public class User
     {
+        [Key]
+        private int id;
         private string email;
         private string password;
         private string confirmPassword;
@@ -28,13 +30,14 @@ namespace Licenta.Models
         [Compare("Password", ErrorMessage = ResourcesStrings.CONFIRM_PASSWORD_UNMATCH)]
         public string ConfirmPassword { get => confirmPassword; set => confirmPassword = value; }
         public bool IsAdmin { get => isAdmin; set => isAdmin = value; }
+        public int Id { get => id; set => id = value; }
 
-        public User(string email, string password, string confirmPassword, bool isAdmin)
-        {
-            Email = email;
-            Password = password;
-            ConfirmPassword = confirmPassword;
-            IsAdmin = isAdmin;
-        }
+        //public User(string email, string password, string confirmPassword, bool isAdmin)
+        //{
+        //    Email = email;
+        //    Password = password;
+        //    ConfirmPassword = confirmPassword;
+        //    IsAdmin = isAdmin;
+        //}
     }
 }
