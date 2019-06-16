@@ -12,21 +12,6 @@
         var data = db.Query(query);
         var grid = new WebGrid(data);
     }*@
-<script lang="text/javascript">
-    function showHideForm() {
-        var x = document.getElementsByClassName("formAdmin");
-        if (x[0].style.display === "none")
-            x[0].style.display = "block";
-        else
-            if (x[0].style.display === "block")
-                x[0].style.display = "none";
-    }
-    function showFormDD() {
-        var x = document.getElementById("formDD");
-        if (x.style.display === "none")
-            x.style.display = "block";
-    }
-</script>
 
 <style>
     .grid-container {

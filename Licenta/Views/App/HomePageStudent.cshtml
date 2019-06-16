@@ -1,94 +1,7 @@
-﻿@{
+﻿@model Student
+@{
     ViewBag.Title = "HomePageStudent";
 }
-
-<script lang="text/javascript">
-    var action = 1;
-
-    function showElement(clicked_id) {
-        var x;
-        if (clicked_id === "btnAddPref") {
-            x = document.getElementsByClassName("formStudentPref");
-            if (x[0].style.display === "none")
-                x[0].style.display = "block";
-            else
-                if (x[0].style.display === "block")
-                    x[0].style.display = "none";
-        }
-        if (clicked_id === "btnShowDormPref") {
-            x = document.getElementById("dormPref");
-            if (x.style.display === "none")
-                x.style.display = "block";
-        }
-        if (clicked_id === "btnShowRoommatePref") {
-            x = document.getElementById("roommatesPref");
-            if (x.style.display === "none")
-                x.style.display = "block";
-        }
-        else if (clicked_id === "btnAdd1PrefRoom") {
-            x = document.getElementById("room1Pref");
-            if (x.style.display === "none")
-                x.style.display = "block";
-        }
-
-        else if (clicked_id === "btnAdd2DormPref") {
-            x = document.getElementById("2DormPref");
-            if (x.style.display === "none")
-                x.style.display = "block";
-        }
-        else if (clicked_id === "btnAdd2PrefRoom") {
-            x = document.getElementById("room2Pref");
-            if (x.style.display === "none")
-                x.style.display = "block";
-        }
-
-        else if (clicked_id === "btnAdd3DormPref") {
-            x = document.getElementById("3DormPref");
-            if (x.style.display === "none")
-                x.style.display = "block";
-        }
-        else if (clicked_id === "btnAdd3PrefRoom") {
-            x = document.getElementById("room3Pref");
-            if (x.style.display === "none")
-                x.style.display = "block";
-        }
-
-        else if (clicked_id === "btnAdd4DormPref") {
-            x = document.getElementById("4DormPref");
-            if (x.style.display === "none")
-                x.style.display = "block";
-        }
-        else if (clicked_id === "btnAdd4PrefRoom") {
-            x = document.getElementById("room4Pref");
-            if (x.style.display === "none")
-                x.style.display = "block";
-        }
-
-        else if (clicked_id === "btnAdd5DormPref") {
-            x = document.getElementById("5DormPref");
-            if (x.style.display === "none")
-                x.style.display = "block";
-        }
-        else if (clicked_id === "btnAdd5PrefRoom") {
-            x = document.getElementById("room5Pref");
-            if (x.style.display === "none")
-                x.style.display = "block";
-        }
-    }
-    function disableButton() {
-        if (action == 1) {
-            //SEND DATA TO DB
-            //IDEA: DIALOG: ARE YOU SURE YOU WANT TO SEND YOUR REQUEST? Y N
-            action = 2;
-        }
-        else {
-            document.getElementById("divRequestSent").style.display = "block"
-            setTimeout(function () {
-                document.getElementById("divRequestSent").style.display = "none";
-            }, 1000);
-        }
-    }
-</script>
 
 <div>
     <h1>Your data:</h1>
@@ -204,8 +117,8 @@
         <p>You are allowed to add up to 4 roommates of your choice. Also, you need to specify the last included comfort (from 1 to 5) that you are willing to give up on in order to be accommodated with your roommates of choice.</p>
         <p><i>Example: Set comfort 2. You are allocated in a dorm of comfort 1, one of your roommates of choice is allocated in a dorm of comfort 3, and the rest of them are allocated to a dorm of comfort 2. You will stay with the others in a dorm of comfort 2, and he will be allocated in a different dorm (of comfort 3).</i></p>
         <div>
-            <label for="lastComfort"><b>Last comfort accepted</b></label>
-            <input type="number" placeholder="Enter last comfort accepted" name="lastComfort" required>
+            <label asp-for="LastConfortAccepted"><b>Last comfort accepted</b></label>
+            <input asp-for="LastConfortAccepted" placeholder="Enter last comfort accepted" min="1" max="5" name="lastComfort" required>
         </div>
         <br />
         <partial name="NewStudentForm" />

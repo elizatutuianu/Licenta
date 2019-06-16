@@ -28,9 +28,8 @@ namespace Licenta.Models
         private float media;
         private int credits;
         private string phoneNo;
-
+        private int lastConfortAccepted;
         private IdCardStudent IdCardStudent;
-        //private string brothersInASE; //optional
 
         private AccomodationRequest accomodationRequest;
 
@@ -81,6 +80,8 @@ namespace Licenta.Models
         public AccomodationRequest AccomodationRequest { get => accomodationRequest; set => accomodationRequest = value; }
         public IdCardStudent IdCardStudent1 { get => IdCardStudent; set => IdCardStudent = value; }
         public string LanguageOfStudy1 { get => languageOfStudy; set => languageOfStudy = value; }
+        [Range(1,5)]
+        public int LastConfortAccepted { get => lastConfortAccepted; set => lastConfortAccepted = value; }
 
         //e nevoie de fielduri by default null??
         //public Student(string cnp, string firstName, string lastName, string initial,

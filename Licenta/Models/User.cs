@@ -15,17 +15,17 @@ namespace Licenta.Models
         private string confirmPassword;
         private bool isAdmin;
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
+        //[Required(ErrorMessage = ResourcesStrings.REQUIRED)]
         [EmailAddress(ErrorMessage = ResourcesStrings.INVALID)]
         public string Email { get => email; set => email = value; }
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
+        //[Required(ErrorMessage = ResourcesStrings.REQUIRED)]
         [DataType(DataType.Password)]
         [MinLength(6, ErrorMessage = ResourcesStrings.PASSWORD_SIZE)]
         [RegularExpression(@"^((?=.*[a-z])(?=.*[A-Z])(?=.*\d)).+$", ErrorMessage = ResourcesStrings.PASSWORD_FORMAT)]
         public string Password { get => password; set => password = value; }
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
+        //[Required(ErrorMessage = ResourcesStrings.REQUIRED)]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = ResourcesStrings.CONFIRM_PASSWORD_UNMATCH)]
         public string ConfirmPassword { get => confirmPassword; set => confirmPassword = value; }
