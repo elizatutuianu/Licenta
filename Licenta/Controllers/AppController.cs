@@ -11,12 +11,13 @@ namespace Licenta.Controllers
 {
     public class AppController : Controller
     {
-        private readonly DBContext context;
+        private readonly DBContext _context;
         private readonly Repository _repository;
 
-        public AppController(DBContext context)
+        public AppController(DBContext context, Repository repo)
         {
-            this.context = context;
+            this._context = context;
+            this._repository = repo;
         }
 
         [HttpGet("/app/getstudents")]
@@ -31,6 +32,8 @@ namespace Licenta.Controllers
                 return BadRequest("Failed to get students");
             }
         }
+
+        
 
         [HttpGet]
         public IActionResult Login()
@@ -53,11 +56,7 @@ namespace Licenta.Controllers
             return View();
         }
 
-        [HttpGet("/app/homepageadmin")]
-        public IActionResult HomePageAdmin()
-        {
-            return View();
-        }
+        
 
         //[HttpPost("/app/homepageadmin")]
         //public IActionResult HomePageAdmin(Dorm dorm)

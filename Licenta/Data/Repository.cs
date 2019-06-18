@@ -20,7 +20,6 @@ namespace Licenta.Data
             return db.SaveChanges() > 0;
         }
 
-        //update
         public void UpdateStudent(Student model)
         {
             var student = db.Students.FirstOrDefault(item => item.Cnp == model.Cnp);
@@ -45,6 +44,64 @@ namespace Licenta.Data
                 return null;
             }
         }
+
+        public void CreateDorm(Dorm model)
+        {
+            try
+            {
+                Dorm dorm = new Dorm();
+                Room room; 
+                dorm.DormName = model.DormName;
+                dorm.DormComfort = model.DormComfort;
+                dorm.DormNoRooms = model.DormNoRooms;
+                dorm.DormBedsInRoom = model.DormBedsInRoom;
+                dorm.DormGender = model.DormGender;
+                dorm.IsDormForRomanians = model.IsDormForRomanians;
+                db.Dorms.Add(dorm);
+                for (int i = 0; i < model.DormNoRooms; i++)
+                {
+                    room = new Room();
+                    room.BedsInRoom = model.DormBedsInRoom;
+                    if (model.DormGender != "Mixt")
+                        room.RoomGender = model.DormGender;
+                    room.RoomNo = i + 1;
+                    db.Rooms.Add(room);
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }
+
+        public IEnumerable<Dorm> GetAllDorms()
+        {
+            try
+            {
+                return db.Dorms
+                          .OrderBy(s => s.Id)
+                          .ToList(); ;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable<Room> GetAllRooms()
+        {
+            try
+            {
+                return db.Rooms
+                          .OrderBy(r => r.RoomNo)
+                          .ToList(); ;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
 
     }
 }

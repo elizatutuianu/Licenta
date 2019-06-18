@@ -42,8 +42,6 @@ namespace Licenta.Migrations
 
                     b.Property<int>("DormBedsInRoom");
 
-                    b.Property<int>("DormBedsInRoom1");
-
                     b.Property<int>("DormComfort");
 
                     b.Property<string>("DormGender")
@@ -55,8 +53,6 @@ namespace Licenta.Migrations
                     b.Property<int>("DormNoRooms");
 
                     b.Property<bool>("IsDormForRomanians");
-
-                    b.Property<string>("RoomGender");
 
                     b.HasKey("Id");
 
