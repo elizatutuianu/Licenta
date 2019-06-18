@@ -30,6 +30,7 @@
 <div>
     <label asp-for="StudyProgram"><b>Study program</b></label>
     <select asp-for="StudyProgram" id="study_program" onchange="populateYear(this.id, 'year')">
+        <option hidden disabled selected>--select option--</option>
         <option value="License">License</option>
         <option value="Master">Master</option>
     </select>
@@ -43,19 +44,9 @@
 </div>
 <br />
 <div>
-    <label asp-for="LanguageOfStudy"><b>Language of study</b></label>
-    <select asp-for="LanguageOfStudy" id="lang">
-        <option value="ro">Romanian</option>
-        <option value="en">English</option>
-        <option value="fr">French</option>
-        <option value="gr">German</option>
-    </select>
-    <span asp-validation-for="LanguageOfStudy" class="text-danger"></span>
-</div>
-<br />
-<div>
     <label asp-for="Faculty"><b>Faculty</b></label>
     <select asp-for="Faculty" id="faculty" onchange="populateSpecialization('study_program', this.id, 'specialization')">
+        <option hidden disabled selected>--select option--</option>
         <option value="FABIZ">Faculty of Business Administration in foreign languages</option>
         <option value="FAMP">Faculty of Administration and Public Management</option>
         <option value="BBS">Bucharest Business School</option>

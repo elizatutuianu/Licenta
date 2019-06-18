@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Licenta.Migrations
 {
-    [DbContext(typeof(MyAppContext))]
+    [DbContext(typeof(DBContext))]
     [Migration("20190524135856_InitialDB")]
     partial class InitialDB
     {

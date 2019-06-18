@@ -17,7 +17,6 @@ namespace Licenta.Models
         private string dormGender;
         private bool isDormForRomanians;
         private List<Room> rooms = new List<Room>();
-
         string roomGender;
 
         [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
@@ -65,21 +64,8 @@ namespace Licenta.Models
                 rooms = value;
             }
         }
-
         public int Id { get => id; set => id = value; }
-
-        //public Dorm(string dormName, int dormComfort, int dormNoRooms, int dormBedsInRoom, string dormGender, bool isDormForRomanians, List<Room> rooms)
-        //{
-        //    DormName = dormName;
-        //    DormComfort = dormComfort;
-        //    DormNoRooms = dormNoRooms;
-        //    DormBedsInRoom = dormBedsInRoom;
-        //    DormGender = dormGender;
-        //    IsDormForRomanians = isDormForRomanians;
-        //    Rooms = new List<Room>(DormNoRooms);
-        //    for (int i = 0; i < DormNoRooms; i++)
-        //        Rooms.Add(new Room(i + 1, DormGender != null ? DormGender : null, null));
-
-        //}
+        public int DormBedsInRoom1 { get => dormBedsInRoom; set => dormBedsInRoom = value; }
+        public string RoomGender { get => roomGender; set => roomGender = value; }
     }
 }

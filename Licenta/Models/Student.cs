@@ -23,12 +23,11 @@ namespace Licenta.Models
         private int group;//grupa studentului
 
         private bool isSocialCase;
-        private string languageOfStudy;
         private bool isMedicalCase;
         private float media;
         private int credits;
         private string phoneNo;
-        private int lastConfortAccepted;
+        private int lastConfortAccepted = 5;
         private IdCardStudent IdCardStudent;
 
         private AccomodationRequest accomodationRequest;
@@ -55,8 +54,6 @@ namespace Licenta.Models
 
         public Specialization Specialization { get => specialization; set => specialization = value; }
 
-        public string LanguageOfStudy { get => Specialization.SpecLanguageOfStudy; }
-
         public string StudyProgram { get => studyProgram; set => studyProgram = value; }
 
         public string Year { get => year; set => year = value; }
@@ -79,8 +76,8 @@ namespace Licenta.Models
 
         public AccomodationRequest AccomodationRequest { get => accomodationRequest; set => accomodationRequest = value; }
         public IdCardStudent IdCardStudent1 { get => IdCardStudent; set => IdCardStudent = value; }
-        public string LanguageOfStudy1 { get => languageOfStudy; set => languageOfStudy = value; }
-        [Range(1,5)]
+
+        //[Range(1,5)]
         public int LastConfortAccepted { get => lastConfortAccepted; set => lastConfortAccepted = value; }
 
         //e nevoie de fielduri by default null??

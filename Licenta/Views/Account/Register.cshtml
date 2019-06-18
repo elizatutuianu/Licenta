@@ -2,9 +2,9 @@
 @{
     ViewBag.Title = "Register";
 }
-
 <form method="post" id="register" action="Register">
     <h1>@ViewBag.Title</h1>
+    <div>@ViewBag.errorMessage</div>
     <p>Please fill in this form to create an account.</p>
     <div>
         <label asp-for="Email"><b>Email</b></label>

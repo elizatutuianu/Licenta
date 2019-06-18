@@ -6,7 +6,7 @@
     <script src="~/node_modules/jquery-validation/jquery.validate.min.js"></script>
     <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
 }
-@*@{
+@*{
         var db = Database.Open("SmallBakery");
         var query = "SELECT * FROM Product ORDER BY Name";
         var data = db.Query(query);
@@ -25,8 +25,8 @@
     }
 </style>
 
-<button type="button" id="btnStart" onclick="showHideForm()">Start</button>
-<button type="button" id="btnStop" onclick="showHideForm()">Stop</button>
+<button type="button" id="btnStart" onclick="showHideForm(this.id)">Start</button>
+<button type="button" id="btnStop" disabled onclick="showHideForm(this.id)">Stop</button>
 
 <form method="post" class="formAdmin" id="formAddDorm" style="display:none">
     <h2>
@@ -47,6 +47,7 @@
         <div class="grid-item"><input asp-for="DormBedsInRoom" min="1" max="5" placeholder="Beds per room"></div>
         <div class="grid-item">
             <select asp-for="DormGender">
+                <option hidden disabled selected>Gender</option>                
                 <option value="G">Only for girls</option>
                 <option value="B">Only for boys</option>
                 <option value="M">Mixed</option>
@@ -54,11 +55,12 @@
         </div>
         <div class="grid-item">
             <select asp-for="IsDormForRomanians">
+                <option hidden disabled selected>Romanians/Foreigners</option>
                 <option value="1">For romanian students</option>
                 <option value="0">For foreign students</option>
             </select>
         </div>
-        <button type="submit" id="btnAddDorm" onclick="showFormDD()">ADD</button>
+        <button type="button" id="btnAddDorm" onclick="showFormDD()">ADD</button>
     </div>
 </form>
 @*get table from DB*@

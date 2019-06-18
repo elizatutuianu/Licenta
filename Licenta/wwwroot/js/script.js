@@ -83,18 +83,26 @@ function disableButton() {
         }, 1000);
     }
 }
-    function showHideForm() {
-        var x = document.getElementsByClassName("formAdmin");
-        if (x[0].style.display === "none")
-            x[0].style.display = "block";
-        else
-            if (x[0].style.display === "block")
-                x[0].style.display = "none";
+function showHideForm(clicked_id) {
+    var x = document.getElementsByClassName("formAdmin");
+    var btnStop = document.getElementById("btnStop");
+    var btnStart = document.getElementById("btnStart");
+    if (clicked_id == "btnStart") {
+        btnStop.disabled = false;
+        btnStart.disabled = true;
+        x[0].style.display = "block";
     }
-    function showFormDD() {
-        var x = document.getElementById("formDD");
-        if (x.style.display === "none")
-            x.style.display = "block";
+    else if (clicked_id == "btnStop" && btnStop.disabled == false) {
+        x[0].style.display = "none";
+        document.getElementById("formDD").style.display = "none";
+        btnStop.disabled = true;
+        btnStart.disabled = false;
+    }
+}
+function showFormDD() {
+    var x = document.getElementById("formDD");
+    if (x.style.display === "none")
+        x.style.display = "block";
 }
 function populateSpecialization(studyProg, fac, spec) {
     var studyProg = document.getElementById(studyProg);
@@ -247,9 +255,9 @@ function populateYear(studyProg, year) {
     var year = document.getElementById(year);
     year.innerHTML = "";
     if (studyProg.value == "License")
-        var optionArray = ["1|1", "2|2", "3|3"];
+        var optionArray = ["|", "1|1", "2|2", "3|3"];
     else if (studyProg.value == "Master")
-        var optionArray = ["1|1", "2|2"];
+        var optionArray = ["|", "1|1", "2|2"];
     for (var option in optionArray) {
         var pair = optionArray[option].split("|");
         var newOption = document.createElement("option");

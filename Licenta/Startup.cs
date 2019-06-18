@@ -27,11 +27,13 @@ namespace Licenta
         // This method gets called by thuntime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MyAppContext>(cfg =>
+            services.AddDbContext<DBContext>(cfg =>
                 {
                     cfg.UseSqlServer(_config.GetConnectionString("AppConnectionString"));
                 });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddScoped<Repository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
