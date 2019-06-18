@@ -4,20 +4,18 @@ using Licenta.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Licenta.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20190524135856_InitialDB")]
-    partial class InitialDB
+    partial class DBContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
+                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -31,7 +29,7 @@ namespace Licenta.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AccomodationRequest");
+                    b.ToTable("AccomodationRequests");
                 });
 
             modelBuilder.Entity("Licenta.Models.Dorm", b =>
@@ -43,6 +41,8 @@ namespace Licenta.Migrations
                     b.Property<int?>("AccomodationRequestId");
 
                     b.Property<int>("DormBedsInRoom");
+
+                    b.Property<int>("DormBedsInRoom1");
 
                     b.Property<int>("DormComfort");
 
@@ -56,11 +56,13 @@ namespace Licenta.Migrations
 
                     b.Property<bool>("IsDormForRomanians");
 
+                    b.Property<string>("RoomGender");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AccomodationRequestId");
 
-                    b.ToTable("Dorm");
+                    b.ToTable("Dorms");
                 });
 
             modelBuilder.Entity("Licenta.Models.Faculty", b =>
@@ -127,7 +129,7 @@ namespace Licenta.Migrations
 
                     b.HasIndex("DormId");
 
-                    b.ToTable("Room");
+                    b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("Licenta.Models.Specialization", b =>
@@ -183,13 +185,11 @@ namespace Licenta.Migrations
 
                     b.Property<string>("Initial");
 
-                    b.Property<bool>("IsAdmin");
-
                     b.Property<bool>("IsMedicalCase");
 
                     b.Property<bool>("IsSocialCase");
 
-                    b.Property<string>("LanguageOfStudy1");
+                    b.Property<int>("LastConfortAccepted");
 
                     b.Property<string>("LastName");
 

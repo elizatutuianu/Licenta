@@ -16,13 +16,5 @@ namespace Licenta.Models
         public string Name { get => name; set => name = value; }
         public List<Specialization> Specializations { get => specializations; set => specializations = value; }
         public int Id { get => id; set => id = value; }
-        //public Faculty(string name, List<Specialization> specializations)
-        //{
-        //    Name = name;
-        //    Specializations = new List<Specialization>();
-        //    foreach (Specialization specialization in specializations)
-        //        Specializations.Add(specialization);
-
-        //}
     }
 }

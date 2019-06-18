@@ -38,12 +38,5 @@ namespace Licenta.Models
         }
         public int BedsInRoom { get => bedsInRoom; set => bedsInRoom = value; }
         public int Id { get => id; set => id = value; }
-
-        //public Room(int roomNo, string roomGender, List<Student> studentsInRoom)
-        //{
-        //    RoomNo = roomNo;
-        //    RoomGender = roomGender;
-        //    StudentsInRoom = studentsInRoom;
-        //}
     }
 }

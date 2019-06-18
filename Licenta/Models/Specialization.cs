@@ -20,13 +20,5 @@ namespace Licenta.Models
         public int SpecNoOfFemaleStudents { get => specNoOfFemaleStudents; set => specNoOfFemaleStudents = value; }
         public string SpecLanguageOfStudy { get => specLanguageOfStudy; set => specLanguageOfStudy = value; }
         public int Id { get => id; set => id = value; }
-
-        //public Specialization(string specName, int specNoOfStudents, int specNoOfFemaleStudents, string specLanguageOfStudy)
-        //{
-        //    SpecName = specName;
-        //    SpecNoOfStudents = specNoOfStudents;
-        //    SpecNoOfFemaleStudents = specNoOfFemaleStudents;
-        //    SpecLanguageOfStudy = specLanguageOfStudy;
-        //}
     }
 }

@@ -29,13 +29,5 @@ namespace Licenta.Models
         [Compare("Password", ErrorMessage = ResourcesStrings.CONFIRM_PASSWORD_UNMATCH)]
         public string ConfirmPassword { get => confirmPassword; set => confirmPassword = value; }
         public int Id { get => id; set => id = value; }
-
-        //public User(string email, string password, string confirmPassword, bool isAdmin)
-        //{
-        //    Email = email;
-        //    Password = password;
-        //    ConfirmPassword = confirmPassword;
-        //    IsAdmin = isAdmin;
-        //}
     }
 }

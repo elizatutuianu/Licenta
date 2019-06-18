@@ -79,45 +79,6 @@ namespace Licenta.Models
 
         //[Range(1,5)]
         public int LastConfortAccepted { get => lastConfortAccepted; set => lastConfortAccepted = value; }
-
-        //e nevoie de fielduri by default null??
-        //public Student(string cnp, string firstName, string lastName, string initial,
-        //    Faculty faculty, Specialization specialization, string studyProgram, string year,
-        //    bool isSocialCase, bool isMedicalCase, float media, DateTime birthDate,
-        //    string sex, string country, string taxa_buget, int group, int credits,
-        //    string phoneNo, string idCardNo, string idCardIssuedBy, DateTime idCardIssuedDate,
-        //    string district, string localty, string address, string civilStatus, string email,
-        //    string password, string confirmPassword, bool isAdmin = false)
-        //    : base(email, password, confirmPassword, isAdmin)
-        //{
-        //    Cnp = cnp;
-        //    FirstName = firstName;
-        //    LastName = lastName;
-        //    Initial = initial;
-        //    Faculty = faculty;
-        //    Specialization = specialization;
-        //    StudyProgram = studyProgram;
-        //    Year = year;
-        //    IsSocialCase = isSocialCase;
-        //    IsMedicalCase = isMedicalCase;
-        //    Media = media;
-        //    BirthDate = birthDate;
-        //    Sex = sex;
-        //    Country = country;
-        //    Taxa_buget = taxa_buget;
-        //    Group = group;
-        //    Credits = credits;
-        //    PhoneNo = phoneNo;
-        //    IdCardNo = idCardNo;
-        //    IdCardIssuedBy = idCardIssuedBy;
-        //    IdCardIssuedDate = idCardIssuedDate;
-        //    District = district;
-        //    Localty = localty;
-        //    Address = address;
-        //    CivilStatus = civilStatus;
-        //}
         #endregion
-
-
     }
 }

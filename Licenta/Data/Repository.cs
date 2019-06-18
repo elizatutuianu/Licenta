@@ -36,10 +36,9 @@ namespace Licenta.Data
         {
             try
             {
-                var list = db.Students
-                           .OrderBy(s => s.Id)
-                           .ToList();
-                return list;
+                return db.Students
+                          .OrderBy(s => s.Id)
+                          .ToList(); ;
             }
             catch (Exception ex)
             {

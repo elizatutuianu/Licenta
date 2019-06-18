@@ -20,13 +20,5 @@ namespace Licenta.Models
         public List<Dorm> ArDorm { get => arDorm; set => arDorm = value; }
         public List<Room> ArRoom { get => arRoom; set => arRoom = value; }
         public int Id { get => id; set => id = value; }
-
-        //public AccomodationRequest(List<Tuple<Dorm, Room>> arDormRooms, List<Student> arRoommates, int arConfort)
-        //{
-        //    ArDormRooms = arDormRooms;
-        //    ArRoommates = arRoommates;
-        //    ArConfort = arConfort;
-        //}
-
     }
 }

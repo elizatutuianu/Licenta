@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Licenta.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AccountController : Controller
     {
@@ -34,7 +34,7 @@ namespace Licenta.Controllers
                 if (_repository.SaveAll())
                 {
                     ViewBag.errorMessage = "Registration completed!";
-                    return Created($"/api/students/{model.Id}", model);
+                    return Created($"students/{model.Id}", model);
                 }
                 else
                     ViewBag.errorMessage = "Account unavailable. You are not a student of ASE!";

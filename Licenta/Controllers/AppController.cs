@@ -24,10 +24,7 @@ namespace Licenta.Controllers
         {
             try
             {
-                var list = context.Students
-                          .OrderBy(s => s.Id)
-                          .ToList();
-                return Ok(list);
+                return Ok(_repository.GetAllStudents());
             }
             catch (Exception ex)
             {

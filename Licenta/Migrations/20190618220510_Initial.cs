@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Licenta.Migrations
 {
-    public partial class InitialDB : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AccomodationRequest",
+                name: "AccomodationRequests",
                 columns: table => new
                 {
                     ArConfort = table.Column<int>(nullable: false),
@@ -18,7 +18,7 @@ namespace Licenta.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AccomodationRequest", x => x.Id);
+                    table.PrimaryKey("PK_AccomodationRequests", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -56,7 +56,7 @@ namespace Licenta.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Dorm",
+                name: "Dorms",
                 columns: table => new
                 {
                     DormName = table.Column<string>(nullable: false),
@@ -67,15 +67,17 @@ namespace Licenta.Migrations
                     IsDormForRomanians = table.Column<bool>(nullable: false),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DormBedsInRoom1 = table.Column<int>(nullable: false),
+                    RoomGender = table.Column<string>(nullable: true),
                     AccomodationRequestId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Dorm", x => x.Id);
+                    table.PrimaryKey("PK_Dorms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Dorm_AccomodationRequest_AccomodationRequestId",
+                        name: "FK_Dorms_AccomodationRequests_AccomodationRequestId",
                         column: x => x.AccomodationRequestId,
-                        principalTable: "AccomodationRequest",
+                        principalTable: "AccomodationRequests",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -104,7 +106,7 @@ namespace Licenta.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Room",
+                name: "Rooms",
                 columns: table => new
                 {
                     RoomNo = table.Column<int>(nullable: false),
@@ -117,17 +119,17 @@ namespace Licenta.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Room", x => x.Id);
+                    table.PrimaryKey("PK_Rooms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Room_AccomodationRequest_AccomodationRequestId",
+                        name: "FK_Rooms_AccomodationRequests_AccomodationRequestId",
                         column: x => x.AccomodationRequestId,
-                        principalTable: "AccomodationRequest",
+                        principalTable: "AccomodationRequests",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Room_Dorm_DormId",
+                        name: "FK_Rooms_Dorms_DormId",
                         column: x => x.DormId,
-                        principalTable: "Dorm",
+                        principalTable: "Dorms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -139,7 +141,6 @@ namespace Licenta.Migrations
                     Email = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: false),
                     ConfirmPassword = table.Column<string>(nullable: false),
-                    IsAdmin = table.Column<bool>(nullable: false),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Cnp = table.Column<string>(maxLength: 13, nullable: false),
@@ -160,16 +161,16 @@ namespace Licenta.Migrations
                     PhoneNo = table.Column<string>(nullable: true),
                     AccomodationRequestId = table.Column<int>(nullable: true),
                     IdCardStudent1Id = table.Column<int>(nullable: true),
-                    LanguageOfStudy1 = table.Column<string>(nullable: true),
+                    LastConfortAccepted = table.Column<int>(nullable: false),
                     RoomId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Students_AccomodationRequest_AccomodationRequestId",
+                        name: "FK_Students_AccomodationRequests_AccomodationRequestId",
                         column: x => x.AccomodationRequestId,
-                        principalTable: "AccomodationRequest",
+                        principalTable: "AccomodationRequests",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -185,9 +186,9 @@ namespace Licenta.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Students_Room_RoomId",
+                        name: "FK_Students_Rooms_RoomId",
                         column: x => x.RoomId,
-                        principalTable: "Room",
+                        principalTable: "Rooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -199,18 +200,18 @@ namespace Licenta.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dorm_AccomodationRequestId",
-                table: "Dorm",
+                name: "IX_Dorms_AccomodationRequestId",
+                table: "Dorms",
                 column: "AccomodationRequestId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Room_AccomodationRequestId",
-                table: "Room",
+                name: "IX_Rooms_AccomodationRequestId",
+                table: "Rooms",
                 column: "AccomodationRequestId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Room_DormId",
-                table: "Room",
+                name: "IX_Rooms_DormId",
+                table: "Rooms",
                 column: "DormId");
 
             migrationBuilder.CreateIndex(
@@ -253,19 +254,19 @@ namespace Licenta.Migrations
                 name: "IdCardStudent");
 
             migrationBuilder.DropTable(
-                name: "Room");
+                name: "Rooms");
 
             migrationBuilder.DropTable(
                 name: "Specialization");
 
             migrationBuilder.DropTable(
-                name: "Dorm");
+                name: "Dorms");
 
             migrationBuilder.DropTable(
                 name: "Faculty");
 
             migrationBuilder.DropTable(
-                name: "AccomodationRequest");
+                name: "AccomodationRequests");
         }
     }
 }
