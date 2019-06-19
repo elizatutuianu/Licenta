@@ -2,6 +2,7 @@
 
 function showElement(clicked_id) {
     var x;
+    var i = 0;
     if (clicked_id === "btnAddPref") {
         x = document.getElementsByClassName("formStudentPref");
         if (x[0].style.display === "none")
@@ -20,54 +21,18 @@ function showElement(clicked_id) {
         if (x.style.display === "none")
             x.style.display = "block";
     }
-    else if (clicked_id === "btnAdd1PrefRoom") {
-        x = document.getElementById("room1Pref");
+    else if (clicked_id === "btnAddPrefRoom") {
+        x = document.getElementById("roomPref");
         if (x.style.display === "none")
             x.style.display = "block";
     }
 
-    else if (clicked_id === "btnAdd2DormPref") {
-        x = document.getElementById("2DormPref");
-        if (x.style.display === "none")
-            x.style.display = "block";
-    }
-    else if (clicked_id === "btnAdd2PrefRoom") {
-        x = document.getElementById("room2Pref");
-        if (x.style.display === "none")
-            x.style.display = "block";
-    }
-
-    else if (clicked_id === "btnAdd3DormPref") {
-        x = document.getElementById("3DormPref");
-        if (x.style.display === "none")
-            x.style.display = "block";
-    }
-    else if (clicked_id === "btnAdd3PrefRoom") {
-        x = document.getElementById("room3Pref");
-        if (x.style.display === "none")
-            x.style.display = "block";
-    }
-
-    else if (clicked_id === "btnAdd4DormPref") {
-        x = document.getElementById("4DormPref");
-        if (x.style.display === "none")
-            x.style.display = "block";
-    }
-    else if (clicked_id === "btnAdd4PrefRoom") {
-        x = document.getElementById("room4Pref");
-        if (x.style.display === "none")
-            x.style.display = "block";
-    }
-
-    else if (clicked_id === "btnAdd5DormPref") {
-        x = document.getElementById("5DormPref");
-        if (x.style.display === "none")
-            x.style.display = "block";
-    }
-    else if (clicked_id === "btnAdd5PrefRoom") {
-        x = document.getElementById("room5Pref");
-        if (x.style.display === "none")
-            x.style.display = "block";
+    else if (clicked_id === "btnAddAnotherDorm" && i < 5) {
+        //trimite catre baza de date
+        i++;
+        x = document.getElementById("roomPref");
+        if (x.style.display === "block")
+            x.style.display = "none";
     }
 }
 function disableButton() {

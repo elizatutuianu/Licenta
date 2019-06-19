@@ -25,7 +25,7 @@ namespace Licenta.Controllers
             return View();
         }
 
-        [HttpPost("register")]
+        [HttpPut("register")]
         public IActionResult Register([FromBody]Student model)
         {
             try

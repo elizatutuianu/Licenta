@@ -14,6 +14,8 @@ namespace Licenta.Models
         private string roomGender;
         private int bedsInRoom;
         private List<Student> studentsInRoom = new List<Student>();
+        public int DormId { get; set; }
+        public int? AccomodationRequestId { get; set; }
 
         public int RoomNo { get => roomNo; set => roomNo = value; }
         public string RoomGender

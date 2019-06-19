@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Licenta.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20190618220510_Initial")]
-    partial class Initial
+    [Migration("20190619134945_FKRoom")]
+    partial class FKRoom
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,7 +27,7 @@ namespace Licenta.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ArConfort");
+                    b.Property<int>("LastComfortAccepted");
 
                     b.HasKey("Id");
 
@@ -44,12 +44,9 @@ namespace Licenta.Migrations
 
                     b.Property<int>("DormBedsInRoom");
 
-                    b.Property<int>("DormBedsInRoom1");
-
                     b.Property<int>("DormComfort");
 
-                    b.Property<string>("DormGender")
-                        .IsRequired();
+                    b.Property<string>("DormGender");
 
                     b.Property<string>("DormName")
                         .IsRequired();
@@ -57,8 +54,6 @@ namespace Licenta.Migrations
                     b.Property<int>("DormNoRooms");
 
                     b.Property<bool>("IsDormForRomanians");
-
-                    b.Property<string>("RoomGender");
 
                     b.HasKey("Id");
 
@@ -119,7 +114,7 @@ namespace Licenta.Migrations
 
                     b.Property<int>("BedsInRoom");
 
-                    b.Property<int?>("DormId");
+                    b.Property<int>("DormId");
 
                     b.Property<string>("RoomGender");
 
@@ -183,15 +178,13 @@ namespace Licenta.Migrations
 
                     b.Property<int>("Group");
 
-                    b.Property<int?>("IdCardStudent1Id");
+                    b.Property<int?>("IdCardStudentId");
 
                     b.Property<string>("Initial");
 
                     b.Property<bool>("IsMedicalCase");
 
                     b.Property<bool>("IsSocialCase");
-
-                    b.Property<int>("LastConfortAccepted");
 
                     b.Property<string>("LastName");
 
@@ -220,7 +213,7 @@ namespace Licenta.Migrations
 
                     b.HasIndex("FacultyId");
 
-                    b.HasIndex("IdCardStudent1Id");
+                    b.HasIndex("IdCardStudentId");
 
                     b.HasIndex("RoomId");
 
@@ -244,7 +237,8 @@ namespace Licenta.Migrations
 
                     b.HasOne("Licenta.Models.Dorm")
                         .WithMany("Rooms")
-                        .HasForeignKey("DormId");
+                        .HasForeignKey("DormId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Licenta.Models.Specialization", b =>
@@ -264,9 +258,9 @@ namespace Licenta.Migrations
                         .WithMany()
                         .HasForeignKey("FacultyId");
 
-                    b.HasOne("Licenta.Models.IdCardStudent", "IdCardStudent1")
+                    b.HasOne("Licenta.Models.IdCardStudent", "IdCardStudent")
                         .WithMany()
-                        .HasForeignKey("IdCardStudent1Id");
+                        .HasForeignKey("IdCardStudentId");
 
                     b.HasOne("Licenta.Models.Room")
                         .WithMany("StudentsInRoom")

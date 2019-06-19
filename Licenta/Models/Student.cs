@@ -27,8 +27,7 @@ namespace Licenta.Models
         private float media;
         private int credits;
         private string phoneNo;
-        private int lastConfortAccepted = 5;
-        private IdCardStudent IdCardStudent;
+        private IdCardStudent idCardStudent;
 
         private AccomodationRequest accomodationRequest;
 
@@ -74,11 +73,10 @@ namespace Licenta.Models
 
         public string PhoneNo { get => phoneNo; set => phoneNo = value; }
 
-        public AccomodationRequest AccomodationRequest { get => accomodationRequest; set => accomodationRequest = value; }
-        public IdCardStudent IdCardStudent1 { get => IdCardStudent; set => IdCardStudent = value; }
+        public IdCardStudent IdCardStudent { get => idCardStudent; set => idCardStudent = value; }
 
-        //[Range(1,5)]
-        public int LastConfortAccepted { get => lastConfortAccepted; set => lastConfortAccepted = value; }
+        public AccomodationRequest AccomodationRequest { get => accomodationRequest; set => accomodationRequest = value; }
+
         #endregion
     }
 }

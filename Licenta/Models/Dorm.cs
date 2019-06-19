@@ -17,27 +17,27 @@ namespace Licenta.Models
         private string dormGender;
         private bool isDormForRomanians;
         private List<Room> rooms = new List<Room>();
+        public int? AccomodationRequestId { get; set; }
+
 
         [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
         [MinLength(3)]
         public string DormName { get => dormName; set => dormName = value; }
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
+        //[Required(ErrorMessage = ResourcesStrings.REQUIRED)]
         public int DormComfort { get => dormComfort; set => dormComfort = value; }
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
+        //[Required(ErrorMessage = ResourcesStrings.REQUIRED)]
         public int DormNoRooms { get => dormNoRooms; set => dormNoRooms = value; }
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
-
+        //[Required(ErrorMessage = ResourcesStrings.REQUIRED)]
         public List<Room> Rooms { get => rooms; set => rooms = value; }
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
+        //[Required(ErrorMessage = ResourcesStrings.REQUIRED)]
         public string DormGender { get => dormGender; set => dormGender = value; } //F,M,Mixt
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
+        //[Required(ErrorMessage = ResourcesStrings.REQUIRED)]
         public bool IsDormForRomanians { get => isDormForRomanians; set => isDormForRomanians = value; }
-
         public int Id { get => id; set => id = value; }
         public int DormBedsInRoom { get => dormBedsInRoom; set => dormBedsInRoom = value; }
     }

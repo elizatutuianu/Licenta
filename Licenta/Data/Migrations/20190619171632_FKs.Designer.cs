@@ -4,14 +4,16 @@ using Licenta.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Licenta.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20190619171632_FKs")]
+    partial class FKs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,7 +40,7 @@ namespace Licenta.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AccomodationRequestId");
+                    b.Property<int>("AccomodationRequestId");
 
                     b.Property<int>("DormBedsInRoom");
 
@@ -108,7 +110,7 @@ namespace Licenta.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AccomodationRequestId");
+                    b.Property<int>("AccomodationRequestId");
 
                     b.Property<int>("BedsInRoom");
 
@@ -125,25 +127,6 @@ namespace Licenta.Migrations
                     b.HasIndex("DormId");
 
                     b.ToTable("Rooms");
-                });
-
-            modelBuilder.Entity("Licenta.Models.Roommate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AccomodationRequestId");
-
-                    b.Property<int>("StudentId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccomodationRequestId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Roommate");
                 });
 
             modelBuilder.Entity("Licenta.Models.Specialization", b =>
@@ -243,31 +226,20 @@ namespace Licenta.Migrations
                 {
                     b.HasOne("Licenta.Models.AccomodationRequest")
                         .WithMany("ArDorm")
-                        .HasForeignKey("AccomodationRequestId");
+                        .HasForeignKey("AccomodationRequestId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Licenta.Models.Room", b =>
                 {
                     b.HasOne("Licenta.Models.AccomodationRequest")
                         .WithMany("ArRoom")
-                        .HasForeignKey("AccomodationRequestId");
+                        .HasForeignKey("AccomodationRequestId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Licenta.Models.Dorm")
                         .WithMany("Rooms")
                         .HasForeignKey("DormId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Licenta.Models.Roommate", b =>
-                {
-                    b.HasOne("Licenta.Models.AccomodationRequest", "AccomodationRequest")
-                        .WithMany("ArRoommates")
-                        .HasForeignKey("AccomodationRequestId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Licenta.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -281,7 +253,7 @@ namespace Licenta.Migrations
             modelBuilder.Entity("Licenta.Models.Student", b =>
                 {
                     b.HasOne("Licenta.Models.AccomodationRequest", "AccomodationRequest")
-                        .WithMany()
+                        .WithMany("ArRoommates")
                         .HasForeignKey("AccomodationRequestId");
 
                     b.HasOne("Licenta.Models.Faculty", "Faculty")

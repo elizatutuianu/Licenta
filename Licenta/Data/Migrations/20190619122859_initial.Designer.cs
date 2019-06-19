@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Licenta.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20190618231629_DropDormFields")]
-    partial class DropDormFields
+    [Migration("20190619122859_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,7 +27,7 @@ namespace Licenta.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ArConfort");
+                    b.Property<int>("LastComfortAccepted");
 
                     b.HasKey("Id");
 
@@ -46,8 +46,7 @@ namespace Licenta.Migrations
 
                     b.Property<int>("DormComfort");
 
-                    b.Property<string>("DormGender")
-                        .IsRequired();
+                    b.Property<string>("DormGender");
 
                     b.Property<string>("DormName")
                         .IsRequired();
@@ -179,15 +178,13 @@ namespace Licenta.Migrations
 
                     b.Property<int>("Group");
 
-                    b.Property<int?>("IdCardStudent1Id");
+                    b.Property<int?>("IdCardStudentId");
 
                     b.Property<string>("Initial");
 
                     b.Property<bool>("IsMedicalCase");
 
                     b.Property<bool>("IsSocialCase");
-
-                    b.Property<int>("LastConfortAccepted");
 
                     b.Property<string>("LastName");
 
@@ -216,7 +213,7 @@ namespace Licenta.Migrations
 
                     b.HasIndex("FacultyId");
 
-                    b.HasIndex("IdCardStudent1Id");
+                    b.HasIndex("IdCardStudentId");
 
                     b.HasIndex("RoomId");
 
@@ -260,9 +257,9 @@ namespace Licenta.Migrations
                         .WithMany()
                         .HasForeignKey("FacultyId");
 
-                    b.HasOne("Licenta.Models.IdCardStudent", "IdCardStudent1")
+                    b.HasOne("Licenta.Models.IdCardStudent", "IdCardStudent")
                         .WithMany()
-                        .HasForeignKey("IdCardStudent1Id");
+                        .HasForeignKey("IdCardStudentId");
 
                     b.HasOne("Licenta.Models.Room")
                         .WithMany("StudentsInRoom")

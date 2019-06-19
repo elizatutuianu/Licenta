@@ -12,13 +12,13 @@ namespace Licenta.Models
         private int id;
         private List<Dorm> arDorm = new List<Dorm>();
         private List<Room> arRoom = new List<Room>();
-        private List<Student> arRoommates = new List<Student>();
-        private int arConfort;
+        private int lastComfortAccepted;
+        private List<Roommate> arRoommates = new List<Roommate>();
 
-        public List<Student> ArRoommates { get => arRoommates; set => arRoommates = value; }
-        public int ArConfort { get => arConfort; set => arConfort = value; }
+        public int LastComfortAccepted { get => lastComfortAccepted; set => lastComfortAccepted = value; }
+        public List<Roommate> ArRoommates { get => arRoommates; set => arRoommates = value; }
+        public int Id { get => id; set => id = value; }
         public List<Dorm> ArDorm { get => arDorm; set => arDorm = value; }
         public List<Room> ArRoom { get => arRoom; set => arRoom = value; }
-        public int Id { get => id; set => id = value; }
     }
 }

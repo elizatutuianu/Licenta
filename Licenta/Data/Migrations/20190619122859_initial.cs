@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Licenta.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace Licenta.Migrations
                 name: "AccomodationRequests",
                 columns: table => new
                 {
-                    ArConfort = table.Column<int>(nullable: false),
+                    LastComfortAccepted = table.Column<int>(nullable: false),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
@@ -62,13 +62,11 @@ namespace Licenta.Migrations
                     DormName = table.Column<string>(nullable: false),
                     DormComfort = table.Column<int>(nullable: false),
                     DormNoRooms = table.Column<int>(nullable: false),
-                    DormBedsInRoom = table.Column<int>(nullable: false),
-                    DormGender = table.Column<string>(nullable: false),
+                    DormGender = table.Column<string>(nullable: true),
                     IsDormForRomanians = table.Column<bool>(nullable: false),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DormBedsInRoom1 = table.Column<int>(nullable: false),
-                    RoomGender = table.Column<string>(nullable: true),
+                    DormBedsInRoom = table.Column<int>(nullable: false),
                     AccomodationRequestId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -159,9 +157,8 @@ namespace Licenta.Migrations
                     Group = table.Column<int>(nullable: false),
                     Credits = table.Column<int>(nullable: false),
                     PhoneNo = table.Column<string>(nullable: true),
+                    IdCardStudentId = table.Column<int>(nullable: true),
                     AccomodationRequestId = table.Column<int>(nullable: true),
-                    IdCardStudent1Id = table.Column<int>(nullable: true),
-                    LastConfortAccepted = table.Column<int>(nullable: false),
                     RoomId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -180,8 +177,8 @@ namespace Licenta.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Students_IdCardStudent_IdCardStudent1Id",
-                        column: x => x.IdCardStudent1Id,
+                        name: "FK_Students_IdCardStudent_IdCardStudentId",
+                        column: x => x.IdCardStudentId,
                         principalTable: "IdCardStudent",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -230,9 +227,9 @@ namespace Licenta.Migrations
                 column: "FacultyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_IdCardStudent1Id",
+                name: "IX_Students_IdCardStudentId",
                 table: "Students",
-                column: "IdCardStudent1Id");
+                column: "IdCardStudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Students_RoomId",

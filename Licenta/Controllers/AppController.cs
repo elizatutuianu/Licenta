@@ -51,10 +51,7 @@ namespace Licenta.Controllers
             return View();
         }
 
-        public IActionResult HomePageStudent()
-        {
-            return View();
-        }
+        
 
         
 
