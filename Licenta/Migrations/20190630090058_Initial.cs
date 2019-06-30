@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Licenta.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,7 +22,7 @@ namespace Licenta.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Faculty",
+                name: "Faculties",
                 columns: table => new
                 {
                     Name = table.Column<string>(nullable: true),
@@ -31,11 +31,11 @@ namespace Licenta.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Faculty", x => x.Id);
+                    table.PrimaryKey("PK_Faculties", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "IdCardStudent",
+                name: "IdCardStudents",
                 columns: table => new
                 {
                     BirthDate = table.Column<DateTime>(nullable: false),
@@ -52,7 +52,7 @@ namespace Licenta.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdCardStudent", x => x.Id);
+                    table.PrimaryKey("PK_IdCardStudents", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,7 +81,7 @@ namespace Licenta.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Specialization",
+                name: "Specializations",
                 columns: table => new
                 {
                     SpecName = table.Column<string>(nullable: true),
@@ -94,26 +94,53 @@ namespace Licenta.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Specialization", x => x.Id);
+                    table.PrimaryKey("PK_Specializations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Specialization_Faculty_FacultyId",
+                        name: "FK_Specializations_Faculties_FacultyId",
                         column: x => x.FacultyId,
-                        principalTable: "Faculty",
+                        principalTable: "Faculties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DormsPreferreds",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AccomodationRequestId = table.Column<int>(nullable: false),
+                    DormId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DormsPreferreds", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DormsPreferreds_AccomodationRequests_AccomodationRequestId",
+                        column: x => x.AccomodationRequestId,
+                        principalTable: "AccomodationRequests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DormsPreferreds_Dorms_DormId",
+                        column: x => x.DormId,
+                        principalTable: "Dorms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Rooms",
                 columns: table => new
                 {
+                    DormId = table.Column<int>(nullable: false),
+                    IsFull = table.Column<bool>(nullable: false),
                     RoomNo = table.Column<int>(nullable: false),
                     RoomGender = table.Column<string>(nullable: true),
                     BedsInRoom = table.Column<int>(nullable: false),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AccomodationRequestId = table.Column<int>(nullable: true),
-                    DormId = table.Column<int>(nullable: true)
+                    AccomodationRequestId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -129,7 +156,33 @@ namespace Licenta.Migrations
                         column: x => x.DormId,
                         principalTable: "Dorms",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RoomPreferreds",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AccomodationRequestId = table.Column<int>(nullable: false),
+                    RoomId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoomPreferreds", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RoomPreferreds_AccomodationRequests_AccomodationRequestId",
+                        column: x => x.AccomodationRequestId,
+                        principalTable: "AccomodationRequests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RoomPreferreds_Rooms_RoomId",
+                        column: x => x.RoomId,
+                        principalTable: "Rooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -148,10 +201,10 @@ namespace Licenta.Migrations
                     FacultyId = table.Column<int>(nullable: true),
                     SpecializationId = table.Column<int>(nullable: true),
                     StudyProgram = table.Column<string>(nullable: true),
-                    Year = table.Column<string>(nullable: true),
+                    Year = table.Column<int>(nullable: false),
                     IsSocialCase = table.Column<bool>(nullable: false),
                     IsMedicalCase = table.Column<bool>(nullable: false),
-                    Media = table.Column<float>(nullable: false),
+                    Media = table.Column<double>(nullable: false),
                     Sex = table.Column<string>(nullable: true),
                     Taxa_buget = table.Column<string>(nullable: true),
                     Group = table.Column<int>(nullable: false),
@@ -171,15 +224,15 @@ namespace Licenta.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Students_Faculty_FacultyId",
+                        name: "FK_Students_Faculties_FacultyId",
                         column: x => x.FacultyId,
-                        principalTable: "Faculty",
+                        principalTable: "Faculties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Students_IdCardStudent_IdCardStudentId",
+                        name: "FK_Students_IdCardStudents_IdCardStudentId",
                         column: x => x.IdCardStudentId,
-                        principalTable: "IdCardStudent",
+                        principalTable: "IdCardStudents",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -189,17 +242,73 @@ namespace Licenta.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Students_Specialization_SpecializationId",
+                        name: "FK_Students_Specializations_SpecializationId",
                         column: x => x.SpecializationId,
-                        principalTable: "Specialization",
+                        principalTable: "Specializations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Roommates",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AccomodationRequestId = table.Column<int>(nullable: false),
+                    StudentId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roommates", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Roommates_AccomodationRequests_AccomodationRequestId",
+                        column: x => x.AccomodationRequestId,
+                        principalTable: "AccomodationRequests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Roommates_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Dorms_AccomodationRequestId",
                 table: "Dorms",
                 column: "AccomodationRequestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DormsPreferreds_AccomodationRequestId",
+                table: "DormsPreferreds",
+                column: "AccomodationRequestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DormsPreferreds_DormId",
+                table: "DormsPreferreds",
+                column: "DormId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Roommates_AccomodationRequestId",
+                table: "Roommates",
+                column: "AccomodationRequestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Roommates_StudentId",
+                table: "Roommates",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoomPreferreds_AccomodationRequestId",
+                table: "RoomPreferreds",
+                column: "AccomodationRequestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoomPreferreds_RoomId",
+                table: "RoomPreferreds",
+                column: "RoomId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rooms_AccomodationRequestId",
@@ -212,8 +321,8 @@ namespace Licenta.Migrations
                 column: "DormId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Specialization_FacultyId",
-                table: "Specialization",
+                name: "IX_Specializations_FacultyId",
+                table: "Specializations",
                 column: "FacultyId");
 
             migrationBuilder.CreateIndex(
@@ -245,22 +354,31 @@ namespace Licenta.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "DormsPreferreds");
+
+            migrationBuilder.DropTable(
+                name: "Roommates");
+
+            migrationBuilder.DropTable(
+                name: "RoomPreferreds");
+
+            migrationBuilder.DropTable(
                 name: "Students");
 
             migrationBuilder.DropTable(
-                name: "IdCardStudent");
+                name: "IdCardStudents");
 
             migrationBuilder.DropTable(
                 name: "Rooms");
 
             migrationBuilder.DropTable(
-                name: "Specialization");
+                name: "Specializations");
 
             migrationBuilder.DropTable(
                 name: "Dorms");
 
             migrationBuilder.DropTable(
-                name: "Faculty");
+                name: "Faculties");
 
             migrationBuilder.DropTable(
                 name: "AccomodationRequests");

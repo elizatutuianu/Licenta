@@ -18,14 +18,14 @@ namespace Licenta.Models
         private Faculty faculty;
         private Specialization specialization;
         private string studyProgram; //licenta_z, master_z,licenta_if,  master_if
-        private string year;
+        private int? year;
         private string taxa_buget;
-        private int group;//grupa studentului
+        private int? group; //grupa studentului
 
-        private bool isSocialCase;
-        private bool isMedicalCase;
-        private float media;
-        private int credits;
+        private bool? isSocialCase;
+        private bool? isMedicalCase;
+        private double? media;
+        private int? credits;
         private string phoneNo;
         private IdCardStudent idCardStudent;
 
@@ -55,21 +55,21 @@ namespace Licenta.Models
 
         public string StudyProgram { get => studyProgram; set => studyProgram = value; }
 
-        public string Year { get => year; set => year = value; }
+        public int? Year { get => year; set => year = value; }
 
-        public bool IsSocialCase { get => isSocialCase; set => isSocialCase = value; }
+        public bool? IsSocialCase { get => isSocialCase; set => isSocialCase = value; }
 
-        public bool IsMedicalCase { get => isMedicalCase; set => isMedicalCase = value; }
+        public bool? IsMedicalCase { get => isMedicalCase; set => isMedicalCase = value; }
 
-        public float Media { get => media; set => media = value; }
+        public double? Media { get => media; set => media = value; }
 
         public string Sex { get => sex; set => sex = value; }
 
         public string Taxa_buget { get => taxa_buget; set => taxa_buget = value; }
 
-        public int Group { get => group; set => group = value; }
+        public int? Group { get => group; set => group = value; }
 
-        public int Credits { get => credits; set => credits = value; }
+        public int? Credits { get => credits; set => credits = value; }
 
         public string PhoneNo { get => phoneNo; set => phoneNo = value; }
 

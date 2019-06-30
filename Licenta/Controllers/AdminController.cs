@@ -34,15 +34,13 @@ namespace Licenta.Controllers
                 {
                     _repository.CreateDorm(model);
                     if (_repository.SaveAll())
-                    {
                         return Created($"dorms/{model.Id}", model);
-                    }
                 }
                 catch (Exception ex)
                 {
                 }
             }
-            
+
             return View();
         }
 

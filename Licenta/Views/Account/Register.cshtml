@@ -2,37 +2,34 @@
 @{
     ViewBag.Title = "Register";
 }
-<form method="post" id="register" action="Register">
-    <h1>@ViewBag.Title</h1>
-    <div>@ViewBag.errorMessage</div>
-    <p>Please fill in this form to create an account.</p>
-    <div>
-        <label asp-for="Email"><b>Email</b></label>
-        <input asp-for="Email" placeholder="Enter Email">
-        <span asp-validation-for="Email" class="text-danger"></span>
+@*<h1>@ViewBag.Title</h1>
+    <div>@ViewBag.errorMessage</div>*@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <form method="post" id="register" asp-controller="Account" asp-action="Register">
+            <div asp-validation-summary="All"></div>
+            @if (!string.IsNullOrEmpty(ViewBag.message))
+            {
+                <p>@ViewBag.messaage</p>
+            }
+            <input type="email" asp-for="Email" class="fadeIn first" autocomplete="off" placeholder="Email">
+            <span asp-validation-for="Email" class="text-danger"></span>
+
+            <input type="text" asp-for="Cnp" class="fadeIn second" placeholder="CNP">
+            <span asp-validation-for="Cnp" class="text-danger"></span>
+
+            <input type="password" asp-for="Password" class="fadeIn third" placeholder="Password">
+            <span asp-validation-for="Password" class="text-danger"></span>
+
+            <input type="password" asp-for="ConfirmPassword" class="fadeIn fourth" placeholder="Confirm Password">
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+            <input type="submit" class="fadeIn fifth" value="Join" />
+
+        </form>
+        <div id="formFooter">
+            <a class="underlineHover" asp-controller="App" asp-action="Login">Go to Log In</a>
+        </div>
     </div>
-    <br />
-    <div>
-        <label asp-for="Cnp"><b>CNP</b></label>
-        <input asp-for="Cnp" placeholder="Enter CNP">
-        <span asp-validation-for="Cnp" class="text-danger"></span>
-    </div>
-    <br />
-    <div>
-        <label asp-for="Password"><b>Password</b></label>
-        <input asp-for="Password" placeholder="Enter Password">
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <br />
-    <div>
-        <label asp-for="ConfirmPassword"><b>Repeat Password</b></label>
-        <input asp-for="ConfirmPassword" placeholder="Confirm Password">
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-    </div>
-    <br />
-    <button type="submit" class="registerbtn">Register</button>
-    <div class="container signin">
-        <p>Already have an account? <a asp-controller="App" asp-action="Login">Sign in</a>.</p>
-    </div>
-</form>
+</div>
 

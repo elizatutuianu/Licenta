@@ -8,41 +8,42 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Licenta.Controllers
 {
-    [Route("[controller]")]
-    [ApiController]
+    //[Route("[controller]")]
+    //[ApiController]
     public class AccountController : Controller
     {
         private readonly Repository _repository;
+        //private readonly UserManager<User> _userManager;
+        //private readonly SignInManager<User> _signInManager;
 
-        public AccountController(Repository repository)
+        public AccountController(Repository repository)//, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _repository = repository;
+            //_userManager = userManager;
+            //_signInManager = signInManager;
         }
 
-        [HttpGet("register")]
+        [HttpGet("Register")]
         public IActionResult Register()
         {
             return View();
         }
 
-        [HttpPut("register")]
-        public IActionResult Register([FromBody]Student model)
+        [HttpPost("Register")]
+        public IActionResult Register(Student model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                _repository.UpdateStudent(model);
-                if (_repository.SaveAll())
-                {
-                    ViewBag.errorMessage = "Registration completed!";
-                    return Created($"students/{model.Id}", model);
-                }
-                else
-                    ViewBag.errorMessage = "Account unavailable. You are not a student of ASE!";
+                ViewBag.message = _repository.UpdateStudent(model);
+                _repository.SaveAll();
+                //return ;
+                //Created($"students/{model.Id}", model);
+                //return RedirectToAction("Login", "App");
+                //} 
+                
             }
-            catch (Exception ex)
-            {
-            }
-            return View();
+            return RedirectToAction("Login","App");
+
         }
     }
 }

@@ -20,6 +20,28 @@ namespace Licenta.Controllers
             this._repository = repo;
         }
 
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult LoginGet(User user)
+        {
+            //var u = user;
+            //u.ConfirmPassword = u.Password;
+            //if (ModelState.IsValid)
+            //{
+            if (_repository.VerifyStudent(user))
+                if (user.Email == "admin@a.ro" && user.Password == "123Admin!")
+                    return RedirectToAction("HomePageAdmin", "Admin");
+                else
+                    return RedirectToAction("HomePageStudent", "AccomodationRequest");
+            //}
+            return View();
+        }
+
         [HttpGet("/app/getstudents")]
         public ActionResult<IEnumerable<Student>> GetStudents()
         {
@@ -33,14 +55,6 @@ namespace Licenta.Controllers
             }
         }
 
-        
-
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
         public IActionResult ChangePassword()
         {
             return View();
@@ -51,9 +65,11 @@ namespace Licenta.Controllers
             return View();
         }
 
-        
-
-        
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            return RedirectToAction("Login", "App");
+        }
 
         //[HttpPost("/app/homepageadmin")]
         //public IActionResult HomePageAdmin(Dorm dorm)

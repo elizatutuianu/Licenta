@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Licenta.Data;
+using Licenta.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +28,9 @@ namespace Licenta
         // This method gets called by thuntime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddIdentity<User, IdentityRole>()
+            //    .AddEntityFrameworkStores<DBContext>()
+            //    .AddDefaultTokenProviders();
             services.AddDbContext<DBContext>(cfg =>
                 {
                     cfg.UseSqlServer(_config.GetConnectionString("AppConnectionString"));
@@ -45,6 +49,7 @@ namespace Licenta
             }
             app.UseStaticFiles();
             app.UseNodeModules(env);
+            //app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute("Default",

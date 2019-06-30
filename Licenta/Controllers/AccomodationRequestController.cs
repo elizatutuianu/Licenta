@@ -19,32 +19,32 @@ namespace Licenta.Controllers
             _repository = repository;
         }
 
-        [HttpGet]
-        public IActionResult AccomodationRequest()
+        [HttpGet("HomePageStudent")]
+        public IActionResult HomePageStudent()
         {
             return View();
         }
 
-        [HttpPost("accReq")]
-        public IActionResult AccomodationRequest([FromBody]AccomodationRequest model)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _repository.CreateAccomodationRequest(model);
-                    if (_repository.SaveAll())
-                    {
-                        return Created($"accomodationrequest/{model.Id}", model);
-                    }
-                }
-                catch (Exception ex)
-                {
-                }
-            }
+        //[HttpPost("AccReq")]
+        //public IActionResult HomePageStudent([FromBody]AccomodationRequest model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _repository.CreateAccomodationRequest(model);
+        //            if (_repository.SaveAll())
+        //            {
+        //                return Created($"accomodationrequest/{model.Id}", model);
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //        }
+        //    }
 
-            return View();
-        }
+        //    return View();
+        //}
 
         [HttpGet("GetAccomodationRequests")]
         public ActionResult<IEnumerable<AccomodationRequest>> GetAccomodationRequests()

@@ -1,31 +1,26 @@
 ﻿@model User
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Log In";
 }
-<form method="get" id="login" name="Login" action="Login">
-    <div>
-        <label asp-for="Email">Username</label>
-        <input asp-for="Email" placeholder="Enter Email">
-        <span asp-validation-for="Email" class="text-danger"></span>
+@*<form method="get" id="login" name="Login" action="Login">*@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        @*<div class="fadeIn first">@ViewBag.Title</div>*@
+        <form method="get" asp-action="LoginGet" asp-controller="App">
+            <input type="email" asp-for="Email" class="fadeIn first" autocomplete="off" @*name="login"*@ placeholder="Email">
+            <span asp-validation-for="Email" class="text-danger"></span>
+
+            <input type="password" asp-for="Password" class="fadeIn second" placeholder="Password">
+            <span asp-validation-for="Password" class="text-danger"></span>
+
+            <button type="submit" class="fadeIn third">Log In</button>
+        </form>
+        <div id="formFooter">
+            <a class="underlineHover" asp-controller="Account" asp-action="Register">Don't have an account?</a>
+            <br><br />
+            <a class="underlineHover" asp-controller="App" asp-action="ChangePassword">Forgot password?</a>
+        </div>
     </div>
-    <br>
-    <div>
-        <label asp-for="Password"><b>Password</b></label>
-        <input asp-for="Password" placeholder="Enter Password">
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <br>
-    <div>
-        <input type="checkbox" name="rememberusername" id="rememberusername">
-        <label for="rememberusername" class="label">Remember me!</label>
-    </div>
-    <br>
-    <div>
-        <button type="submit" id="loginbtn">Login</button>
-    </div>
-    <div>
-        <p>Don't have an account? <a asp-controller="Account" asp-action="Register">Register</a>.</p>
-        <p>Can't remember password? <a asp-controller="App" asp-action="ChangePassword">Change it</a>.</p>
-    </div>
-</form>
+</div>
+@*</form>*@

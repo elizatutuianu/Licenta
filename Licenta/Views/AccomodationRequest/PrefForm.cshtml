@@ -17,7 +17,7 @@
                 <p>You are allowed to add up to 5 dorms of your choice in the wanted order. If you want, you can also add rooms preferred.</p>
                 <div>
                     <label for="dorm">Dorm preferred: </label>
-                    <select name="1dorm" id="1dorm" required>
+                    <select required>
                         <option hidden disabled selected>Dorm name</option>
                         <option value="Moxa">Moxa D</option>
                         <option value="BelvedereNou">Belvedere Nou (A6-A8)</option>
@@ -40,8 +40,13 @@
                 <h3>
                     *Optional: Add roommate/s:
                 </h3>
-                <p>You are allowed to add up to 4 roommates of your choice. Also, you need to specify the last included comfort (from 1 to 5) that you are willing to give up on in order to be accommodated with your roommates of choice.</p>
-                <p><i>Example: Set comfort 2. You are allocated in a dorm of comfort 1, one of your roommates of choice is allocated in a dorm of comfort 3, and the rest of them are allocated to a dorm of comfort 2. You will stay with the others in a dorm of comfort 2, and he will be allocated in a different dorm (of comfort 3).</i></p>
+                <p>You are allowed to add up to 4 roommates of your choice. Also, you need to 
+                specify the last included comfort (from 1 to 5) that you are willing to give up on 
+                in order to be accommodated with your roommates of choice.</p>
+                <p><i>Example: Set comfort 2. You are allocated in a dorm of comfort 1, one of your 
+                    roommates of choice is allocated in a dorm of comfort 3, and the rest of them 
+                    are allocated to a dorm of comfort 2. You will stay with the others in a dorm
+                    of comfort 2, and he will be allocated in a different dorm (of comfort 3).</i></p>
                 <div>
                     <label asp-for="LastComfortAccepted"><b>Last comfort accepted</b></label>
                     <input asp-for="LastComfortAccepted" placeholder="Enter last comfort accepted" min="1" max="5" name="lastComfort" required>

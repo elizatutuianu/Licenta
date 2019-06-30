@@ -17,5 +17,11 @@ namespace Licenta.Data
         public DbSet<Dorm> Dorms { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<AccomodationRequest> AccomodationRequests { get; set; }
+        public DbSet<Faculty> Faculties { get; set; }
+        public DbSet<Specialization> Specializations { get; set; }
+        public DbSet<IdCardStudent> IdCardStudents { get; set; }
+        public DbSet<Roommate> Roommates { get; set; }
+        public DbSet<DormsPreferred> DormsPreferreds { get; set; }
+        public DbSet<RoomPreferred> RoomPreferreds { get; set; }
     }
 }

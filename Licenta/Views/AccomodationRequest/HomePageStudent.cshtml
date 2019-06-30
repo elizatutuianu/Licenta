@@ -1,25 +1,19 @@
 ﻿@model Student
 @{
-    ViewBag.Title = "HomePageStudent";
+    ViewBag.Title = "Home";
 }
-
-<div>
-    <h1>Your data:</h1>
-    First name: <input type="text" value=" " name="fname" readonly>
-    <br />
-    Last name: <input type="text" value=" " name="lname" readonly>
-    <br />
-    Email: <input type="email" value=" " name="email" readonly>
-    <br />
-    Father's initial: <input type="text" value=" " name="initial" readonly>
-    <br />
-    Faculty: <input type="text" value=" " name="faculty" readonly>
-    <br />
-    Specialization: <input type="text" value=" " name="specialization" readonly>
-    <br />
-    Language of study: <input type="text" value=" " name="lang" readonly>
-    <br />
-    Study program:<input type="text" value=" " name="study_program" readonly>
+<div id="formContent">
+    <h2>Your info:</h2>
+    <form>
+        Name: <input type="text" value=" " name="name" readonly style="border: none">
+        Email: <input type="email" value=" " name="email" readonly>
+        Father's initial: <input type="text" value=" " name="initial" readonly>
+        Faculty: <input type="text" value=" " name="faculty" readonly>
+        Specialization: <input type="text" value=" " name="specialization" readonly>
+        Grade: <input type="text" value=" " name="media" readonly>
+        Language of study: <input type="text" value=" " name="lang" readonly>
+        Study program:<input type="text" value=" " name="study_program" readonly>
+    </form>
     <ul style="list-style-type:none;" class="btnsHome">
         <li>
             <button type="button" id="btnSend" onclick="disableButton()"><img src="~/img/send.png" /></button>
@@ -28,7 +22,10 @@
         <li><button type="button" id="btnAddPref" onclick="showElement(this.id)"><img src="~/img/add.png" /></button></li>
         <li><button type="button" id="btnVizRepartizare"><img src="~/img/files.png" /></button></li>
     </ul>
-</div>
-<partial name="PrefForm" style="display:none"/>
+    <partial name="PrefForm" style="display:none" />
 
-<button type="button" id="btnLogOut"><img src="~/img/logout.png" /></button>
+</div>
+<form align="right" method="post" asp-action="Logout" asp-controller="App">
+    <input type="submit" class="logoutPosition" id="btnLogOut" value="EXIT"/>
+</form>
+

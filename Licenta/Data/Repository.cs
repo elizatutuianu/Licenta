@@ -20,15 +20,28 @@ namespace Licenta.Data
             return db.SaveChanges() > 0;
         }
 
-        public void UpdateStudent(Student model)
+        public bool VerifyStudent(User user)
+        {
+            var u = db.Students.FirstOrDefault(item => item.Email == user.Email && item.Password == user.Password);
+            if (u != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public String UpdateStudent(Student model)
         {
             var student = db.Students.FirstOrDefault(item => item.Cnp == model.Cnp);
-            if (student != null)
+            if (student != null && student.Email == null)
             {
                 student.Email = model.Email;
                 student.Password = model.Password;
+                student.ConfirmPassword = model.ConfirmPassword;
                 db.Students.Update(student);
+                return "Success!";
             }
+            return "Already have an account!";
         }
 
         public IEnumerable<Student> GetAllStudents()
@@ -103,65 +116,66 @@ namespace Licenta.Data
             }
         }
 
-        public void CreateAccomodationRequest(AccomodationRequest model)
-        {
-            try
-            {
-                AccomodationRequest ar = new AccomodationRequest();
-                if (model.ArDorm != null)
-                {
-                    ar.ArDorm = new List<Dorm>();
-                    ar.ArRoom = new List<Room>();
-                    int sizeArrayDorms = model.ArDorm.Count();
-                    Dorm dorm;
-                    Room room;
-                    for (int i = 0; i < sizeArrayDorms; i++)
-                    {
-                        dorm = db.Dorms.FirstOrDefault(item => item.DormName == model.ArDorm[i].DormName);
-                        if (dorm.AccomodationRequestId == null)
-                            ar.ArDorm.Add(dorm);
-                        else
-                        {
-                            Dorm newDorm = new Dorm();
-                            newDorm.DormBedsInRoom = dorm.DormBedsInRoom;
-                            newDorm.DormComfort = dorm.DormComfort;
-                            newDorm.DormGender = dorm.DormGender;
-                            newDorm.DormName = dorm.DormName;
-                            newDorm.DormNoRooms = dorm.DormNoRooms;
-                            newDorm.IsDormForRomanians = dorm.IsDormForRomanians;
-                            newDorm.AccomodationRequestId = ar.Id;
-                            ar.ArDorm.Add(newDorm);
-                        }
-                        if (i + 1 <= model.ArRoom.Count())
-                        {
-                            room = db.Rooms.Where(item => item.DormId == dorm.Id && item.RoomNo == model.ArRoom[i].RoomNo).FirstOrDefault();
-                            if (room.AccomodationRequestId == null)
-                                ar.ArRoom.Add(room);
-                            else
-                            {
-                                Room newRoom = new Room();
-                                newRoom.BedsInRoom = room.BedsInRoom;
-                                newRoom.DormId = room.DormId;
-                                newRoom.RoomGender = room.RoomGender;
-                                newRoom.RoomNo = room.RoomNo;
-                                newRoom.StudentsInRoom = room.StudentsInRoom;
-                                newRoom.AccomodationRequestId = ar.Id;
-                                ar.ArRoom.Add(newRoom);
-                            }
-                        }
-                        //else show message room doesn t exist
-                    }
-                    ar.LastComfortAccepted = model.LastComfortAccepted;
-                }
-                else
-                    ar.LastComfortAccepted = 5;
-                db.AccomodationRequests.Add(ar);
-            }
-            catch (Exception ex)
-            {
+        //public void CreateAccomodationRequest(AccomodationRequest model)
+        //{
+        //    try
+        //    {
+        //        AccomodationRequest ar = new AccomodationRequest();
+        //        if (model.ArDorm != null)
+        //        {
+        //            ar.ArDorm = new List<Dorm>();
+        //            ar.ArRoom = new List<Room>();
+        //            int sizeArrayDorms = model.ArDorm.Count();
+        //            Dorm dorm;
+        //            Room room;
+        //            for (int i = 0; i < sizeArrayDorms; i++)
+        //            {
+        //                dorm = db.Dorms.FirstOrDefault(item => item.DormName == model.ArDorm[i].DormName);
+        //                if (dorm.AccomodationRequestId == null)
+        //                    ar.ArDorm.Add(dorm);
+        //                else
+        //                {
+        //                    Dorm newDorm = new Dorm();
+        //                    newDorm.DormBedsInRoom = dorm.DormBedsInRoom;
+        //                    newDorm.DormComfort = dorm.DormComfort;
+        //                    newDorm.DormGender = dorm.DormGender;
+        //                    newDorm.DormName = dorm.DormName;
+        //                    newDorm.DormNoRooms = dorm.DormNoRooms;
+        //                    newDorm.IsDormForRomanians = dorm.IsDormForRomanians;
+        //                    newDorm.AccomodationRequestId = ar.Id;
+        //                    ar.ArDorm.Add(newDorm);
+        //                }
+        //                if (i + 1 <= model.ArRoom.Count())
+        //                {
+        //                    room = db.Rooms.Where(item => item.DormId == dorm.Id && item.RoomNo == model.ArRoom[i].RoomNo).FirstOrDefault();
+        //                    if (room.AccomodationRequestId == null)
+        //                        ar.ArRoom.Add(room);
+        //                    else
+        //                    {
+        //                        Room newRoom = new Room();
+        //                        newRoom.BedsInRoom = room.BedsInRoom;
+        //                        newRoom.DormId = room.DormId;
+        //                        newRoom.RoomGender = room.RoomGender;
+        //                        newRoom.RoomNo = room.RoomNo;
+        //                        newRoom.StudentsInRoom = room.StudentsInRoom;
+        //                        newRoom.AccomodationRequestId = ar.Id;
+        //                        ar.ArRoom.Add(newRoom);
+        //                    }
+        //                }
+        //                //else show message room doesn t exist
+        //            }
+        //            ar.LastComfortAccepted = model.LastComfortAccepted;
+        //        }
+        //        else
+        //            ar.LastComfortAccepted = 5;
+        //        db.AccomodationRequests.Add(ar);
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-            }
-        }
+        //    }
+        //}
+
         public IEnumerable<AccomodationRequest> GetAllAccRequests()
         {
             try

@@ -47,7 +47,7 @@
         <div class="grid-item"><input asp-for="DormBedsInRoom" min="1" max="5" placeholder="Beds per room"></div>
         <div class="grid-item">
             <select asp-for="DormGender">
-                <option hidden disabled selected>Gender</option>                
+                <option hidden disabled selected>Gender</option>
                 <option value="G">Only for girls</option>
                 <option value="B">Only for boys</option>
                 <option value="M">Mixed</option>
@@ -89,4 +89,6 @@
 </form>
 
 <button type="button" id="btnSubmitStart">Submit</button>
-<button type="button" id="btnLogOut"><img src="~/img/logout.png" /></button>
+<form align="right" method="post" asp-action="Logout" asp-controller="App">
+    <input type="submit" id="btnLogOut" value="EXIT"/>
+</form>
