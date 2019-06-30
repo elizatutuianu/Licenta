@@ -72,21 +72,23 @@
                     @grid.GetHtml()
                 </div>
     </form>*@
-<form class="formAdmin" id="formDD" style="display:none">
+<div class="formAdmin" id="formDD" style="display:none">
     <h2>
         Set deadlines:
     </h2>
-    <h3>
-        Students have to register until:
-        <input type="date" />
-        <button type="button" id="btnAddDDStudents">Add deadline</button>
-    </h3>
-    <h3>
-        Process will end:
-        <input type="date" />
-        <button type="button" id="btnAddFinalDD">Add deadline</button>
-    </h3>
-</form>
+    <form method="post" asp-action="Deadlines" asp-controller="Admin">
+        <h3>
+            Students have to register until:
+            <input type="date" />
+            <button type="button" id="btnAddDDStudents">Add deadline</button>
+        </h3>
+        <h3>
+            Process will end:
+            <input type="date" />
+            <button type="button" id="btnAddFinalDD">Add deadline</button>
+        </h3>
+    </form>
+</div>
 
 <button type="button" id="btnSubmitStart">Submit</button>
 <form align="right" method="post" asp-action="Logout" asp-controller="App">

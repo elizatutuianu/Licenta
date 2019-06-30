@@ -19,12 +19,6 @@ namespace Licenta.Controllers
             _repository = repository;
         }
 
-        [HttpGet("HomePageStudent")]
-        public IActionResult HomePageStudent()
-        {
-            return View();
-        }
-
         //[HttpPost("AccReq")]
         //public IActionResult HomePageStudent([FromBody]AccomodationRequest model)
         //{

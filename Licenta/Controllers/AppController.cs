@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Licenta.Models;
 using Licenta.Data;
+using Microsoft.AspNetCore.Http;
 
 namespace Licenta.Controllers
 {
@@ -29,16 +30,18 @@ namespace Licenta.Controllers
         [HttpGet]
         public IActionResult LoginGet(User user)
         {
-            //var u = user;
-            //u.ConfirmPassword = u.Password;
-            //if (ModelState.IsValid)
-            //{
-            if (_repository.VerifyStudent(user))
+            User u = _repository.VerifyStudent(user);
+            if (u != null)
                 if (user.Email == "admin@a.ro" && user.Password == "123Admin!")
                     return RedirectToAction("HomePageAdmin", "Admin");
                 else
-                    return RedirectToAction("HomePageStudent", "AccomodationRequest");
-            //}
+                {
+                    //ViewBag.Student = (Student)u;
+                    //int id = u.Id;
+                    TempData["id"] = u.Id;
+                    return RedirectToAction("HomePageStudent", "HomePageStudent");
+                    //return View("/AccomodationRequest/HomePageStudent", (Student)u);
+                }
             return View();
         }
 
@@ -59,12 +62,7 @@ namespace Licenta.Controllers
         {
             return View();
         }
-
-        public IActionResult Welcome()
-        {
-            return View();
-        }
-
+      
         [HttpPost]
         public IActionResult Logout()
         {

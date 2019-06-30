@@ -27,6 +27,8 @@ namespace Licenta.Models
         private double? media;
         private int? credits;
         private string phoneNo;
+
+
         private IdCardStudent idCardStudent;
 
         private AccomodationRequest accomodationRequest;

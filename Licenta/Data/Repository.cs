@@ -20,14 +20,21 @@ namespace Licenta.Data
             return db.SaveChanges() > 0;
         }
 
-        public bool VerifyStudent(User user)
+        public User VerifyStudent(User user)
         {
             var u = db.Students.FirstOrDefault(item => item.Email == user.Email && item.Password == user.Password);
-            if (u != null)
-            {
-                return true;
-            }
-            return false;
+            return u;
+        }
+
+        public User GetUserByID(int id)
+        {
+            var u = db.Students.FirstOrDefault(item => item.Id == id);
+            var fac = u.Faculty.Name;
+            //var faculty = db.Faculties.FirstOrDefault(item => item.Id == u.fac);
+            //u.Faculty.Name = faculty.Name;
+            var spec = db.Specializations.FirstOrDefault(item => item.Id == u.Specialization.Id);
+            u.Specialization.SpecName = spec.SpecName;
+            return u;
         }
 
         public String UpdateStudent(Student model)
