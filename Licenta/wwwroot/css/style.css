@@ -86,7 +86,7 @@ h2.active {
 
 /* FORM TYPOGRAPHY*/
 
-input[type=button], input[type=submit], button[type=submit], button[type=reset] {
+input[type=button], button[type=button], input[type=submit], button[type=submit], button[type=reset] {
     background-color: #56baed;
     border: none;
     color: white;
@@ -108,17 +108,17 @@ input[type=button], input[type=submit], button[type=submit], button[type=reset] 
     transition: all 0.3s ease-in-out;
 }
 
-    input[type=button]:hover, button[type=submit]:hover, button[type=reset]:hover {
+    input[type=button]:hover, input[type=submit]:hover, button[type=submit]:hover, button[type=reset]:hover, button[type=button]:hover {
         background-color: #39ace7;
     }
 
-    input[type=button]:active, button[type=submit]:active, button[type=reset]:active {
-        -moz-transform: scale(0.95);
-        -webkit-transform: scale(0.95);
-        -o-transform: scale(0.95);
-        -ms-transform: scale(0.95);
-        transform: scale(0.95);
-    }
+        input[type=button]:active, input[type=submit]:active, button[type=button]:active, button[type=submit]:active, button[type=reset]:active {
+            -moz-transform: scale(0.95);
+            -webkit-transform: scale(0.95);
+            -o-transform: scale(0.95);
+            -ms-transform: scale(0.95);
+            transform: scale(0.95);
+        }
 
 #btnLogOut {
     background-color: #b3d9ff;
@@ -132,7 +132,7 @@ input[type=button], input[type=submit], button[type=submit], button[type=reset] 
         color: white;
     }
 
-input[type=text], input[type=email], input[type=password] {
+input[type=text],input[type=number],select, input[type=email], input[type=password] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;

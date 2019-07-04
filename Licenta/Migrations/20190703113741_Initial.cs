@@ -22,6 +22,24 @@ namespace Licenta.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Dorms",
+                columns: table => new
+                {
+                    DormName = table.Column<string>(nullable: false),
+                    DormComfort = table.Column<int>(nullable: false),
+                    DormNoRooms = table.Column<int>(nullable: false),
+                    DormGender = table.Column<string>(nullable: true),
+                    IsDormForRomanians = table.Column<bool>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DormBedsInRoom = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dorms", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Faculties",
                 columns: table => new
                 {
@@ -56,26 +74,51 @@ namespace Licenta.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Dorms",
+                name: "DormsPreferreds",
                 columns: table => new
                 {
-                    DormName = table.Column<string>(nullable: false),
-                    DormComfort = table.Column<int>(nullable: false),
-                    DormNoRooms = table.Column<int>(nullable: false),
-                    DormGender = table.Column<string>(nullable: true),
-                    IsDormForRomanians = table.Column<bool>(nullable: false),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DormBedsInRoom = table.Column<int>(nullable: false),
-                    AccomodationRequestId = table.Column<int>(nullable: true)
+                    AccomodationRequestId = table.Column<int>(nullable: true),
+                    DormId = table.Column<int>(nullable: true),
+                    DormName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Dorms", x => x.Id);
+                    table.PrimaryKey("PK_DormsPreferreds", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Dorms_AccomodationRequests_AccomodationRequestId",
+                        name: "FK_DormsPreferreds_AccomodationRequests_AccomodationRequestId",
                         column: x => x.AccomodationRequestId,
                         principalTable: "AccomodationRequests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DormsPreferreds_Dorms_DormId",
+                        column: x => x.DormId,
+                        principalTable: "Dorms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Rooms",
+                columns: table => new
+                {
+                    DormId = table.Column<int>(nullable: false),
+                    IsFull = table.Column<bool>(nullable: false),
+                    RoomNo = table.Column<int>(nullable: false),
+                    RoomGender = table.Column<string>(nullable: true),
+                    BedsInRoom = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rooms", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Rooms_Dorms_DormId",
+                        column: x => x.DormId,
+                        principalTable: "Dorms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -104,69 +147,14 @@ namespace Licenta.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DormsPreferreds",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AccomodationRequestId = table.Column<int>(nullable: false),
-                    DormId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DormsPreferreds", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DormsPreferreds_AccomodationRequests_AccomodationRequestId",
-                        column: x => x.AccomodationRequestId,
-                        principalTable: "AccomodationRequests",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DormsPreferreds_Dorms_DormId",
-                        column: x => x.DormId,
-                        principalTable: "Dorms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Rooms",
-                columns: table => new
-                {
-                    DormId = table.Column<int>(nullable: false),
-                    IsFull = table.Column<bool>(nullable: false),
-                    RoomNo = table.Column<int>(nullable: false),
-                    RoomGender = table.Column<string>(nullable: true),
-                    BedsInRoom = table.Column<int>(nullable: false),
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AccomodationRequestId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Rooms", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Rooms_AccomodationRequests_AccomodationRequestId",
-                        column: x => x.AccomodationRequestId,
-                        principalTable: "AccomodationRequests",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Rooms_Dorms_DormId",
-                        column: x => x.DormId,
-                        principalTable: "Dorms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "RoomPreferreds",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AccomodationRequestId = table.Column<int>(nullable: false),
-                    RoomId = table.Column<int>(nullable: false)
+                    AccomodationRequestId = table.Column<int>(nullable: true),
+                    RoomId = table.Column<int>(nullable: true),
+                    RoomNo = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -176,13 +164,13 @@ namespace Licenta.Migrations
                         column: x => x.AccomodationRequestId,
                         principalTable: "AccomodationRequests",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_RoomPreferreds_Rooms_RoomId",
                         column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -194,24 +182,24 @@ namespace Licenta.Migrations
                     ConfirmPassword = table.Column<string>(nullable: false),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FacultyId = table.Column<int>(nullable: false),
+                    SpecializationId = table.Column<int>(nullable: false),
+                    IdCardStudentId = table.Column<int>(nullable: false),
+                    AccomodationRequestId = table.Column<int>(nullable: true),
                     Cnp = table.Column<string>(maxLength: 13, nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Initial = table.Column<string>(nullable: true),
-                    FacultyId = table.Column<int>(nullable: true),
-                    SpecializationId = table.Column<int>(nullable: true),
                     StudyProgram = table.Column<string>(nullable: true),
-                    Year = table.Column<int>(nullable: false),
-                    IsSocialCase = table.Column<bool>(nullable: false),
-                    IsMedicalCase = table.Column<bool>(nullable: false),
-                    Media = table.Column<double>(nullable: false),
+                    Year = table.Column<int>(nullable: true),
+                    IsSocialCase = table.Column<bool>(nullable: true),
+                    IsMedicalCase = table.Column<bool>(nullable: true),
+                    Media = table.Column<double>(nullable: true),
                     Sex = table.Column<string>(nullable: true),
                     Taxa_buget = table.Column<string>(nullable: true),
-                    Group = table.Column<int>(nullable: false),
-                    Credits = table.Column<int>(nullable: false),
+                    Group = table.Column<int>(nullable: true),
+                    Credits = table.Column<int>(nullable: true),
                     PhoneNo = table.Column<string>(nullable: true),
-                    IdCardStudentId = table.Column<int>(nullable: true),
-                    AccomodationRequestId = table.Column<int>(nullable: true),
                     RoomId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -266,19 +254,14 @@ namespace Licenta.Migrations
                         column: x => x.AccomodationRequestId,
                         principalTable: "AccomodationRequests",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Roommates_Students_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Students",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Dorms_AccomodationRequestId",
-                table: "Dorms",
-                column: "AccomodationRequestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DormsPreferreds_AccomodationRequestId",
@@ -309,11 +292,6 @@ namespace Licenta.Migrations
                 name: "IX_RoomPreferreds_RoomId",
                 table: "RoomPreferreds",
                 column: "RoomId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Rooms_AccomodationRequestId",
-                table: "Rooms",
-                column: "AccomodationRequestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rooms_DormId",
@@ -366,6 +344,9 @@ namespace Licenta.Migrations
                 name: "Students");
 
             migrationBuilder.DropTable(
+                name: "AccomodationRequests");
+
+            migrationBuilder.DropTable(
                 name: "IdCardStudents");
 
             migrationBuilder.DropTable(
@@ -379,9 +360,6 @@ namespace Licenta.Migrations
 
             migrationBuilder.DropTable(
                 name: "Faculties");
-
-            migrationBuilder.DropTable(
-                name: "AccomodationRequests");
         }
     }
 }

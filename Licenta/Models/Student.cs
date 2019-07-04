@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +16,11 @@ namespace Licenta.Models
         private string lastName;
         private string initial;
         private string sex;
+        public int FacultyId { get; set; }
+        [ForeignKey("FacultyId")]
         private Faculty faculty;
+        public int SpecializationId { get; set; }
+        [ForeignKey("SpecializationId")]
         private Specialization specialization;
         private string studyProgram; //licenta_z, master_z,licenta_if,  master_if
         private int? year;
@@ -27,10 +32,12 @@ namespace Licenta.Models
         private double? media;
         private int? credits;
         private string phoneNo;
-
-
+        public int IdCardStudentId { get; set; }
+        [ForeignKey("IdCardStudentId")]
         private IdCardStudent idCardStudent;
 
+        public int? AccomodationRequestId { get; set; }
+        [ForeignKey("AccomodationRequestIds")]
         private AccomodationRequest accomodationRequest;
 
         #endregion
@@ -78,6 +85,13 @@ namespace Licenta.Models
         public IdCardStudent IdCardStudent { get => idCardStudent; set => idCardStudent = value; }
 
         public AccomodationRequest AccomodationRequest { get => accomodationRequest; set => accomodationRequest = value; }
+
+        public override string ToString()
+        {
+            return this.FirstName + " " + this.LastName;
+        }
+
+
 
         #endregion
     }

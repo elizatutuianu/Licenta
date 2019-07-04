@@ -10,15 +10,15 @@ namespace Licenta.Models
     {
         [Key]
         private int id;
-        private List<Dorm> arDorm = new List<Dorm>();
-        private List<Room> arRoom = new List<Room>();
+        private List<DormsPreferred> arDorm = new List<DormsPreferred>();
+        private List<RoomPreferred> arRoom = new List<RoomPreferred>();
         private int lastComfortAccepted;
         private List<Roommate> arRoommates = new List<Roommate>();
 
         public int LastComfortAccepted { get => lastComfortAccepted; set => lastComfortAccepted = value; }
         public List<Roommate> ArRoommates { get => arRoommates; set => arRoommates = value; }
         public int Id { get => id; set => id = value; }
-        public List<Dorm> ArDorm { get => arDorm; set => arDorm = value; }
-        public List<Room> ArRoom { get => arRoom; set => arRoom = value; }
+        public List<DormsPreferred> ArDorm { get => arDorm; set => arDorm = value; }
+        public List<RoomPreferred> ArRoom { get => arRoom; set => arRoom = value; }
     }
 }

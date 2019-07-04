@@ -1,40 +1,5 @@
 ﻿var action = 1;
 
-function showElement(clicked_id) {
-    var x;
-    var i = 0;
-    if (clicked_id === "btnAddPref") {
-        x = document.getElementsByClassName("formStudentPref");
-        if (x[0].style.display === "none")
-            x[0].style.display = "block";
-        else
-            if (x[0].style.display === "block")
-                x[0].style.display = "none";
-    }
-    if (clicked_id === "btnShowDormPref") {
-        x = document.getElementById("dormPref");
-        if (x.style.display === "none")
-            x.style.display = "block";
-    }
-    if (clicked_id === "btnShowRoommatePref") {
-        x = document.getElementById("roommatesPref");
-        if (x.style.display === "none")
-            x.style.display = "block";
-    }
-    else if (clicked_id === "btnAddPrefRoom") {
-        x = document.getElementById("roomPref");
-        if (x.style.display === "none")
-            x.style.display = "block";
-    }
-
-    else if (clicked_id === "btnAddAnotherDorm" && i < 5) {
-        //trimite catre baza de date
-        i++;
-        x = document.getElementById("roomPref");
-        if (x.style.display === "block")
-            x.style.display = "none";
-    }
-}
 function disableButton() {
     if (action == 1) {
         //SEND DATA TO DB
@@ -74,7 +39,7 @@ function populateSpecialization(studyProg, fac, spec) {
     var fac = document.getElementById(fac);
     var spec = document.getElementById(spec);
     spec.innerHTML = "";
-    if (studyProg.value == "License") {
+    if (studyProg.value == "licenta_zi") {
         if (fac.value == "FABIZ")
             var optionArray = ["|", "Administrarea Afacerilor|Business Administration"];
         else if (fac.value == "FAMP")
@@ -104,7 +69,7 @@ function populateSpecialization(studyProg, fac, spec) {
             var optionArray = ["|", "Economie si afaceri internationale|International Business and Economics",
                 "Limbi moderne aplicate|Applied Modern Languages"];
     }
-    else if (studyProg.value == "Master") {
+    else if (studyProg.value == "master_zi") {
         if (fac.value == "FABIZ")
             var optionArray = ["|", "Antreprenoriat si administrarea afacerilor in domeniul energiei|Entrepreneurship and Business Administration in Energy",
                 "Administrarea Afacerilor|Business Administration",
@@ -219,9 +184,9 @@ function populateYear(studyProg, year) {
     var studyProg = document.getElementById(studyProg);
     var year = document.getElementById(year);
     year.innerHTML = "";
-    if (studyProg.value == "License")
+    if (studyProg.value == "licenta_zi")
         var optionArray = ["|", "1|1", "2|2", "3|3"];
-    else if (studyProg.value == "Master")
+    else if (studyProg.value == "master_zi")
         var optionArray = ["|", "1|1", "2|2"];
     for (var option in optionArray) {
         var pair = optionArray[option].split("|");

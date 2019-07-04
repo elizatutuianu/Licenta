@@ -23,5 +23,15 @@ namespace Licenta.Data
         public DbSet<Roommate> Roommates { get; set; }
         public DbSet<DormsPreferred> DormsPreferreds { get; set; }
         public DbSet<RoomPreferred> RoomPreferreds { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelbuilder)
+        {
+            foreach (var relationship in modelbuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+
+            base.OnModelCreating(modelbuilder);
+        }
     }
 }

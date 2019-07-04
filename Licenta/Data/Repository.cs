@@ -29,11 +29,8 @@ namespace Licenta.Data
         public User GetUserByID(int id)
         {
             var u = db.Students.FirstOrDefault(item => item.Id == id);
-            var fac = u.Faculty.Name;
-            //var faculty = db.Faculties.FirstOrDefault(item => item.Id == u.fac);
-            //u.Faculty.Name = faculty.Name;
-            var spec = db.Specializations.FirstOrDefault(item => item.Id == u.Specialization.Id);
-            u.Specialization.SpecName = spec.SpecName;
+            u.Faculty = db.Faculties.FirstOrDefault(item => item.Id == u.FacultyId);
+            u.Specialization = db.Specializations.FirstOrDefault(item => item.Id == u.SpecializationId);
             return u;
         }
 
@@ -49,6 +46,33 @@ namespace Licenta.Data
                 return "Success!";
             }
             return "Already have an account!";
+        }
+
+        public int CheckStudentInDb(Student student)
+        {
+            try
+            {
+                Student stud = db.Students.FirstOrDefault(item => item.FirstName == student.FirstName
+                && item.LastName == student.LastName
+                && item.Initial == student.Initial
+                && item.Specialization.SpecName == student.Specialization.SpecName
+                && item.Faculty.Name == student.Faculty.Name
+                && item.Year == student.Year
+                && item.StudyProgram == student.StudyProgram);
+                if (stud != null)
+                {
+                    return stud.Id;
+                }
+            }catch(Exception ex)
+            {
+                
+            }
+            return -1;
+        }
+
+        public void CreateRoommate(Roommate roommate)
+        {
+            db.Roommates.Add(roommate);
         }
 
         public IEnumerable<Student> GetAllStudents()
@@ -93,6 +117,18 @@ namespace Licenta.Data
             {
 
             }
+        }
+
+        public void AddAccomodationRequest(AccomodationRequest model, Student student)
+        {
+            Student stud = db.Students.FirstOrDefault(item => item.Id == student.Id);
+            if (stud.AccomodationRequestId == null)
+            {
+                stud.AccomodationRequest = model;
+                db.AccomodationRequests.Add(model);
+                db.Students.Update(stud);
+            }
+
         }
 
         public IEnumerable<Dorm> GetAllDorms()
@@ -196,5 +232,12 @@ namespace Licenta.Data
                 return null;
             }
         }
+
+        //public void AddDormToAccomodationRequest(Dorm dorm, Student student)
+        //{
+        //    Student stud = db.Students.FirstOrDefault(item => item.Id == student.Id);
+        //    stud.AccomodationRequest.ArDorm.Add(dorm);
+        //    db.Students.Update(stud);
+        //}
     }
 }

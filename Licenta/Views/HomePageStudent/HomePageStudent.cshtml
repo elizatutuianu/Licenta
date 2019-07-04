@@ -4,26 +4,25 @@
 }
 <div id="formContent">
     <h2>Your info:</h2>
-    @*<form method="get" asp-controller="AccomodationRequest" asp-action="InfoStudent">*@
-    
-        First Name: <input type="text" value="@Model.FirstName" name="name" readonly style="border: none">
-        Last Name: <input type="text" value="@Model.LastName" name="name" readonly style="border: none">
+    <br />
+        First Name: <input type="text" value="@Model.FirstName" name="firstname" readonly>
+        Last Name: <input type="text" value="@Model.LastName" name="lastname" readonly>
         Email: <input type="email" value="@Model.Email" name="email" readonly>
         Father's initial: <input type="text" value="@Model.Initial" name="initial" readonly>
         Faculty: <input type="text" value="@Model.Faculty.Name" name="faculty" readonly>
         Specialization: <input type="text" value="@Model.Specialization.SpecName" name="specialization" readonly>
         Grade: <input type="text" value="@Model.Media" name="media" readonly>
         Study program:<input type="text" value="@Model.StudyProgram" name="study_program" readonly>
-   @* </form>*@
     <ul style="list-style-type:none;" class="btnsHome">
         <li>
             <button type="button" id="btnSend" onclick="disableButton()"><img src="~/img/send.png" /></button>
             <div id="divRequestSent" style="display:none"><i>You already sent you request</i></div>
         </li>
-        <li><button type="button" id="btnAddPref" onclick="showElement(this.id)"><img src="~/img/add.png" /></button></li>
-        <li><button type="button" id="btnVizRepartizare"><img src="~/img/files.png" /></button></li>
+        <form method="get" asp-controller="Preferences" asp-action="Preferences">
+            <li><input type="submit" id="btnAddPref" onclick="showElement(this.id)" value="Preferences" /></li>
+        </form>
+        <li><input type="submit" id="btnVizRepartizare" value="View allocation"/></li>
     </ul>
-    <partial name="PrefForm" style="display:none" />
 
 </div>
 <form align="right" method="post" asp-action="Logout" asp-controller="App">

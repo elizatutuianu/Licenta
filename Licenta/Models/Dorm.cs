@@ -17,6 +17,7 @@ namespace Licenta.Models
         private string dormGender;
         private bool isDormForRomanians;
         private List<Room> rooms = new List<Room>();
+        public bool IsFull { get; set; }
 
 
         [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
