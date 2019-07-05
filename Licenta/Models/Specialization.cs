@@ -15,7 +15,8 @@ namespace Licenta.Models
         private int specNoOfFemaleStudents;
         private string specLanguageOfStudy;
 
-        public string SpecName { get => specName; set => specName = value; }
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
+        public string SpecName { get => specName ?? string.Empty; set => specName = value ?? string.Empty; }
         public int SpecNoOfStudents { get => specNoOfStudents; set => specNoOfStudents = value; }
         public int SpecNoOfFemaleStudents { get => specNoOfFemaleStudents; set => specNoOfFemaleStudents = value; }
         public string SpecLanguageOfStudy { get => specLanguageOfStudy; set => specLanguageOfStudy = value; }

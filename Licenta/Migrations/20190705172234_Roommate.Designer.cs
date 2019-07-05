@@ -4,14 +4,16 @@ using Licenta.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Licenta.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20190705172234_Roommate")]
+    partial class Roommate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +27,7 @@ namespace Licenta.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("LastComfortAccepted");
+                    b.Property<int>("LastComfortAccepted");
 
                     b.HasKey("Id");
 
@@ -158,7 +160,7 @@ namespace Licenta.Migrations
 
                     b.Property<string>("LastName");
 
-                    b.Property<int?>("StudentId");
+                    b.Property<int>("StudentId");
 
                     b.HasKey("Id");
 
@@ -179,7 +181,7 @@ namespace Licenta.Migrations
 
                     b.Property<int?>("RoomId");
 
-                    b.Property<string>("RoomNo");
+                    b.Property<int>("RoomNo");
 
                     b.HasKey("Id");
 

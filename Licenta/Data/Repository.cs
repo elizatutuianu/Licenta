@@ -63,9 +63,10 @@ namespace Licenta.Data
                 {
                     return stud.Id;
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
-                
+
             }
             return -1;
         }
@@ -124,11 +125,19 @@ namespace Licenta.Data
             Student stud = db.Students.FirstOrDefault(item => item.Id == student.Id);
             if (stud.AccomodationRequestId == null)
             {
+                foreach (Roommate roommate in model.ArRoommates)
+                {
+                    Student studentRoommate = db.Students.FirstOrDefault(item => item.FirstName == roommate.FirstName && item.LastName == roommate.LastName && item.Initial == roommate.Initial);
+                    if (studentRoommate != null)
+                    {
+                        roommate.Student = studentRoommate;
+                        roommate.StudentId = studentRoommate.Id;
+                    }
+                }
                 stud.AccomodationRequest = model;
                 db.AccomodationRequests.Add(model);
                 db.Students.Update(stud);
             }
-
         }
 
         public IEnumerable<Dorm> GetAllDorms()
@@ -159,66 +168,6 @@ namespace Licenta.Data
             }
         }
 
-        //public void CreateAccomodationRequest(AccomodationRequest model)
-        //{
-        //    try
-        //    {
-        //        AccomodationRequest ar = new AccomodationRequest();
-        //        if (model.ArDorm != null)
-        //        {
-        //            ar.ArDorm = new List<Dorm>();
-        //            ar.ArRoom = new List<Room>();
-        //            int sizeArrayDorms = model.ArDorm.Count();
-        //            Dorm dorm;
-        //            Room room;
-        //            for (int i = 0; i < sizeArrayDorms; i++)
-        //            {
-        //                dorm = db.Dorms.FirstOrDefault(item => item.DormName == model.ArDorm[i].DormName);
-        //                if (dorm.AccomodationRequestId == null)
-        //                    ar.ArDorm.Add(dorm);
-        //                else
-        //                {
-        //                    Dorm newDorm = new Dorm();
-        //                    newDorm.DormBedsInRoom = dorm.DormBedsInRoom;
-        //                    newDorm.DormComfort = dorm.DormComfort;
-        //                    newDorm.DormGender = dorm.DormGender;
-        //                    newDorm.DormName = dorm.DormName;
-        //                    newDorm.DormNoRooms = dorm.DormNoRooms;
-        //                    newDorm.IsDormForRomanians = dorm.IsDormForRomanians;
-        //                    newDorm.AccomodationRequestId = ar.Id;
-        //                    ar.ArDorm.Add(newDorm);
-        //                }
-        //                if (i + 1 <= model.ArRoom.Count())
-        //                {
-        //                    room = db.Rooms.Where(item => item.DormId == dorm.Id && item.RoomNo == model.ArRoom[i].RoomNo).FirstOrDefault();
-        //                    if (room.AccomodationRequestId == null)
-        //                        ar.ArRoom.Add(room);
-        //                    else
-        //                    {
-        //                        Room newRoom = new Room();
-        //                        newRoom.BedsInRoom = room.BedsInRoom;
-        //                        newRoom.DormId = room.DormId;
-        //                        newRoom.RoomGender = room.RoomGender;
-        //                        newRoom.RoomNo = room.RoomNo;
-        //                        newRoom.StudentsInRoom = room.StudentsInRoom;
-        //                        newRoom.AccomodationRequestId = ar.Id;
-        //                        ar.ArRoom.Add(newRoom);
-        //                    }
-        //                }
-        //                //else show message room doesn t exist
-        //            }
-        //            ar.LastComfortAccepted = model.LastComfortAccepted;
-        //        }
-        //        else
-        //            ar.LastComfortAccepted = 5;
-        //        db.AccomodationRequests.Add(ar);
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //    }
-        //}
-
         public IEnumerable<AccomodationRequest> GetAllAccRequests()
         {
             try
@@ -232,12 +181,5 @@ namespace Licenta.Data
                 return null;
             }
         }
-
-        //public void AddDormToAccomodationRequest(Dorm dorm, Student student)
-        //{
-        //    Student stud = db.Students.FirstOrDefault(item => item.Id == student.Id);
-        //    stud.AccomodationRequest.ArDorm.Add(dorm);
-        //    db.Students.Update(stud);
-        //}
     }
 }

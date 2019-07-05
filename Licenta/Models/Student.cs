@@ -45,25 +45,31 @@ namespace Licenta.Models
         #region Getter&Setters
 
         //REGISTER
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
         [RegularExpression("^[0-9]*$")]
         [MinLength(13, ErrorMessage = ResourcesStrings.INVALID)]
         [MaxLength(13, ErrorMessage = ResourcesStrings.INVALID)]
         public string Cnp { get => cnp; set => cnp = value; }
 
-        //HOME PAGE STUDENT
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string FirstName { get => firstName; set => firstName = value; }
 
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string LastName { get => lastName; set => lastName = value; }
 
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string Initial { get => initial; set => initial = value; }
 
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public Faculty Faculty { get => faculty; set => faculty = value; }
 
         public Specialization Specialization { get => specialization; set => specialization = value; }
 
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string StudyProgram { get => studyProgram; set => studyProgram = value; }
 
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public int? Year { get => year; set => year = value; }
 
         public bool? IsSocialCase { get => isSocialCase; set => isSocialCase = value; }

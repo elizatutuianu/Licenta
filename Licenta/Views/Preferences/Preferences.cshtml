@@ -3,8 +3,6 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 <script>
-    var roommates = [];
-
     function showElement(clicked_id) {
         var x;
         clickedElement = document.getElementById(clicked_id);
@@ -57,42 +55,6 @@
     function btnAddRoommate(roommate) {
         roommates.push(roommate);
     }
-
-
-    //$(document).ready(function () {
-    //    $('#submitAcc').bootstrapValidator({
-    //        fields: {
-    //            Username: {
-    //                selector: '.User',
-    //                message: 'name not valid',
-    //                validators: {
-    //                    notEmpty: {
-    //                        message: 'Name can not empty'
-    //                    },
-    //                    stringLength: {
-    //                        min: 6,
-    //                        max: 12,
-    //                        message: 'Name will be 6 to 12 digite'
-    //                    }
-    //                }
-    //            },
-    //            Password: {
-    //                selector: '.pwd',
-    //                message: 'Password not valid',
-    //                validators: {
-    //                    notEmpty: {
-    //                        message: 'Password can not empty'
-    //                    },
-    //                    stringLength: {
-    //                        min: 6,
-    //                        max: 12,
-    //                        message: 'Password will be 6 to 12 digite'
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    })
-    //})
 </script>
 <h4>AccomodationRequest</h4>
 <hr />
@@ -148,20 +110,20 @@
             @for (int i = 0; i < 5; i++)
             {
 
-                <label asp-for="@Model.ArRoommates[i].Student.FirstName"><b>First name</b></label>
-                <input asp-for="@Model.ArRoommates[i].Student.FirstName" placeholder="Enter first name">
+                <label asp-for="@Model.ArRoommates[i].FirstName"><b>First name</b></label>
+                <input asp-for="@Model.ArRoommates[i].FirstName" placeholder="Enter first name">
                 <span asp-validation-for="@Model.ArRoommates[i].Student.FirstName" class="text-danger"></span>
                 <br />
                 <br />
-                <label asp-for="@Model.ArRoommates[i].Student.LastName"><b>Last name</b></label>
-                <input asp-for="@Model.ArRoommates[i].Student.LastName" placeholder="Enter last name">
-                <span asp-validation-for="@Model.ArRoommates[i].Student.LastName" class="text-danger"></span>
+                <label asp-for="@Model.ArRoommates[i].LastName"><b>Last name</b></label>
+                <input asp-for="@Model.ArRoommates[i].LastName" placeholder="Enter last name">
+                <span asp-validation-for="@Model.ArRoommates[i].LastName" class="text-danger"></span>
                 <br />
                 <br />
-                <label asp-for="@Model.ArRoommates[i].Student.Initial"><b>Father's initial</b></label>
-                <input asp-for="@Model.ArRoommates[i].Student.Initial" placeholder="Enter father's initial">
-                <span asp-validation-for="@Model.ArRoommates[i].Student.Initial" class="text-danger"></span>
-                <br />
+                <label asp-for="@Model.ArRoommates[i].Initial"><b>Father's initial</b></label>
+                <input asp-for="@Model.ArRoommates[i].Initial" placeholder="Enter father's initial">
+                <span asp-validation-for="@Model.ArRoommates[i].Initial" class="text-danger"></span>
+                @*<br />
                 <br />
                 <label asp-for="@Model.ArRoommates[i].Student.StudyProgram"><b>Study program</b></label>
                 <select asp-for="@Model.ArRoommates[i].Student.StudyProgram" id="study_program" onchange="populateYear(this.id, 'year')">
@@ -199,7 +161,7 @@
                 <br />
                 <label asp-for="@Model.ArRoommates[i].Student.Specialization.SpecName"><b>Specialization</b></label>
                 <select asp-for="@Model.ArRoommates[i].Student.Specialization.SpecName" id="specialization"></select>
-                <span asp-validation-for="@Model.ArRoommates[i].Student.Specialization.SpecName" class="text-danger"></span>
+                <span asp-validation-for="@Model.ArRoommates[i].Student.Specialization.SpecName" class="text-danger"></span>*@
                 <br />
                 <br />
                 <input type="button" id="btnAddRoommate" @*onclick="addRoommate(@Model.ArRoommates[i])" *@ value="Add roommate" />
@@ -210,7 +172,7 @@
                 specify the last included comfort (from 1 to 5) that you are willing to give up on
                 in order to be accommodated with your roommates of choice.
             </p>
-            <input asp-for="@Model.LastComfortAccepted" placeholder="Last comfort accepted" min="1" max="5" name="lastComfort" required>
+            <input type="number" asp-for="@Model.LastComfortAccepted" placeholder="Last comfort accepted" min="1" max="5">
         </div>
         <br />
         <br />

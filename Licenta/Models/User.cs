@@ -14,20 +14,20 @@ namespace Licenta.Models
         private string password;
         private string confirmPassword;
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         [EmailAddress(ErrorMessage = ResourcesStrings.INVALID)]
-        public string Email { get => email; set => email = value; }
+        public string Email { get => email ?? string.Empty; set => email = value ?? string.Empty; }
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         [DataType(DataType.Password)]
         [MinLength(6, ErrorMessage = ResourcesStrings.PASSWORD_SIZE)]
         [RegularExpression(@"^((?=.*[a-z])(?=.*[A-Z])(?=.*\d)).+$", ErrorMessage = ResourcesStrings.PASSWORD_FORMAT)]
-        public string Password { get => password; set => password = value; }
+        public string Password { get => password ?? string.Empty; set => password = value ?? string.Empty; }
 
-        [Required(ErrorMessage = ResourcesStrings.REQUIRED)]
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = ResourcesStrings.CONFIRM_PASSWORD_UNMATCH)]
-        public string ConfirmPassword { get => confirmPassword; set => confirmPassword = value; }
+        public string ConfirmPassword { get => confirmPassword ?? string.Empty; set => confirmPassword = value ?? string.Empty; }
         public int Id { get => id; set => id = value; }
     }
 }

@@ -17,8 +17,12 @@ namespace Licenta.Models
         public int? DormId { get; set; }
         [ForeignKey("DormId")]
         public Dorm Dorm { get; set; }
+
+        private string dormName;
+
         [StringRange(AllowableValues = new[] { "Moxa", "Belvedere nou", "Belvedere vechi", "Tei", "Agronomie" }, ErrorMessage = "This dorm does not exist.")]
-        public string DormName { get; set; }
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
+        public string DormName { get => dormName ?? string.Empty; set => dormName = value ?? string.Empty; }
     }
 
     internal class StringRangeAttribute : ValidationAttribute

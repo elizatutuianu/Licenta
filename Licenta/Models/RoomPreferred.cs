@@ -17,6 +17,8 @@ namespace Licenta.Models
         public int? RoomId { get; set; }
         [ForeignKey("RoomId")]
         public Room Room { get; set; }
-        public int RoomNo { get; set; }
+
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
+        public string RoomNo { get; set; }
     }
 }

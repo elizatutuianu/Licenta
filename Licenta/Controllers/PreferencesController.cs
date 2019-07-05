@@ -18,7 +18,7 @@ namespace Licenta.Controllers
         {
             _repository = repository;
         }
-        
+
         public IActionResult Preferences()
         {
             return View();
@@ -27,14 +27,11 @@ namespace Licenta.Controllers
         [HttpPost]
         public IActionResult Preferences(AccomodationRequest accomodationRequest)
         {
-            if (ModelState.IsValid)
-            {
-                _repository.AddAccomodationRequest(accomodationRequest, HomePageStudentController.student);
-                _repository.SaveAll();
-            }
+            _repository.AddAccomodationRequest(accomodationRequest, HomePageStudentController.student);
+            _repository.SaveAll();
             return View();
         }
 
-        
+
     }
 }

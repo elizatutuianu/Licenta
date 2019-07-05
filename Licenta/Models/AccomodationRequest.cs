@@ -12,13 +12,17 @@ namespace Licenta.Models
         private int id;
         private List<DormsPreferred> arDorm = new List<DormsPreferred>();
         private List<RoomPreferred> arRoom = new List<RoomPreferred>();
-        private int lastComfortAccepted;
+        private string lastComfortAccepted;
         private List<Roommate> arRoommates = new List<Roommate>();
 
-        public int LastComfortAccepted { get => lastComfortAccepted; set => lastComfortAccepted = value; }
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
+        public string LastComfortAccepted { get => lastComfortAccepted; set => lastComfortAccepted = value; }
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public List<Roommate> ArRoommates { get => arRoommates; set => arRoommates = value; }
         public int Id { get => id; set => id = value; }
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public List<DormsPreferred> ArDorm { get => arDorm; set => arDorm = value; }
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public List<RoomPreferred> ArRoom { get => arRoom; set => arRoom = value; }
     }
 }
