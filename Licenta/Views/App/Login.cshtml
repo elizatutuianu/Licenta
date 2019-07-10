@@ -3,10 +3,8 @@
 @{
     ViewBag.Title = "Log In";
 }
-@*<form method="get" id="login" name="Login" action="Login">*@
 <div class="wrapper fadeInDown">
     <div id="formContent">
-        @*<div class="fadeIn first">@ViewBag.Title</div>*@
         <form method="get" asp-action="LoginGet" asp-controller="App">
             <input type="email" asp-for="Email" class="fadeIn first" autocomplete="off"  placeholder="Email">
             <span asp-validation-for="Email" class="text-danger"></span>
@@ -23,4 +21,3 @@
         </div>
     </div>
 </div>
-@*</form>*@

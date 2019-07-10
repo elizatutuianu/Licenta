@@ -1,0 +1,11 @@
+﻿@model Administrator
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <form method="post" asp-action="DeadlinesAdmin" asp-controller="DeadlinesAdmin">
+            <input type="datetime" asp-for="@Model.DdlRegistration" />
+            <input type="datetime" asp-for="@Model.DdlFinishProcess" />
+            
+            <input type="submit" value="SUBMIT" />
+        </form>
+    </div>
+</div>

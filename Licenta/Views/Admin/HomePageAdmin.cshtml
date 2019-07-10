@@ -1,4 +1,4 @@
-﻿@model Dorm
+﻿@model IEnumerable<Dorm>
 
 @{
     ViewBag.Title = "HomePageAdmin";
@@ -7,108 +7,50 @@
     <script src="~/node_modules/jquery-validation/jquery.validate.min.js"></script>
     <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
 }
-<script>
-    function addDorms() {
-        x = document.getElementById("noOfDormsToAdd").value;
-        for (i = 0; i < x; i++) {
-            //document.getElementById("containerDorms").style.display = "block";
-        }
-    }
-</script>
-@*{
-        var db = Database.Open("SmallBakery");
-        var query = "SELECT * FROM Product ORDER BY Name";
-        var data = db.Query(query);
-        var grid = new WebGrid(data);
-    }*@
-
 <style>
     .grid-container {
         display: grid;
-        grid-template-columns: auto auto auto auto auto auto auto;
+        grid-template-columns: auto auto auto auto auto auto;
+        grid-gap: 10px;
         padding: 10px;
+        /*padding: 5px;*/
     }
 
     .grid-item {
         text-align: center;
+        /*padding: 5px;*/
+        text-wrap: normal;
     }
 </style>
 
-
 <button type="button" id="btnStart" onclick="showHideForm(this.id)">Start</button>
 <button type="button" id="btnStop" disabled onclick="showHideForm(this.id)">Stop</button>
+<input type="button" value="Add dorm" onclick="@("window.location.href='" + @Url.Action("AddDorm", "AddDorm") + "'");" />
+<input type="button" value="Add deadlines" onclick="@("window.location.href='" + @Url.Action("DeadlinesAdmin", "DeadlinesAdmin") + "'");" />
 
-<form method="post" class="formAdmin" id="formAddDorm" asp-action="HomePageAdmin" asp-controller="Admin" style="display:none">
-    <div>
-        <h2>
-            Add dorm/s:
-        </h2>
-        <p>Number of dorms you want to add: <input id="noOfDormsToAdd" type="number" /></p>
-        <button type="button" onclick="addDorms()">Add dorms</button>
-    </div>
-    <div id="containerDorms" style="display:none">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <span asp-validation-for="DormName" class="text-danger"></span>
-        <span asp-validation-for="DormComfort" class="text-danger"></span>
-        <span asp-validation-for="DormNoRooms" class="text-danger"></span>
-        <span asp-validation-for="DormBedsInRoom" class="text-danger"></span>
-        <span asp-validation-for="DormGender" class="text-danger"></span>
-        <span asp-validation-for="IsDormForRomanians" class="text-danger"></span>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Comfort</th>
+            <th>Rooms</th>
+            <th>Beds in room</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dorm in Model)
+        {
+            <tr>
+                <td>@dorm.DormName</td>
+                <td>@dorm.DormComfort</td>
+                <td>@dorm.DormNoRooms</td>
+                <td>@dorm.DormBedsInRoom</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-        <div class="grid-container">
-            <div class="grid-item"><input asp-for="DormName" placeholder="Name of dorm"></div>
-            <div class="grid-item"><input asp-for="DormComfort" min="1" max="5" placeholder="Comfort"></div>
-            <div class="grid-item"><input asp-for="DormNoRooms" min="10" placeholder="Room's number"></div>
-            <div class="grid-item"><input asp-for="DormBedsInRoom" min="1" max="5" placeholder="Beds per room"></div>
-            <div class="grid-item">
-                <select asp-for="DormGender">
-                    <option hidden disabled selected>Gender</option>
-                    <option value="G">Only for girls</option>
-                    <option value="B">Only for boys</option>
-                    <option value="M">Mixed</option>
-                </select>
-            </div>
-            <div class="grid-item">
-                <select asp-for="IsDormForRomanians">
-                    <option hidden disabled selected>Romanians/Foreigners</option>
-                    <option value="1">For romanian students</option>
-                    <option value="0">For foreign students</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <input type="button" value="Some text" onclick="@("window.location.href='" + @Url.Action("Login", "App") + "'");" />
-    @*<button type="button" id="btnAddDorm" onclick="showFormDD()">ADD</button>*@
 
-</form>
-@*get table from DB*@
-@*<form id="viewDormsFromDB">
-
-            <h2>List of dorms</h2>
-                <h1>Small Bakery Products</h1>
-                <div id="grid">
-                    @grid.GetHtml()
-                </div>
-    </form>*@
-<div class="formAdmin" id="formDD" style="display:none">
-    <h2>
-        Set deadlines:
-    </h2>
-    <form method="post" asp-action="Deadlines" asp-controller="Admin">
-        <h3>
-            Students have to register until:
-            <input type="date" />
-            <button type="button" id="btnAddDDStudents">Add deadline</button>
-        </h3>
-        <h3>
-            Process will end:
-            <input type="date" />
-            <button type="button" id="btnAddFinalDD">Add deadline</button>
-        </h3>
-    </form>
-</div>
-
-<button type="button" id="btnSubmitStart">Submit</button>
 <form align="right" method="post" asp-action="Logout" asp-controller="App">
     <input type="submit" id="btnLogOut" value="EXIT" />
 </form>

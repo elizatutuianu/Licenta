@@ -14,25 +14,19 @@ function disableButton() {
     }
 }
 function showHideForm(clicked_id) {
-    var x = document.getElementsByClassName("formAdmin");
+    var x = document.getElementById("formAddDorm");
     var btnStop = document.getElementById("btnStop");
     var btnStart = document.getElementById("btnStart");
     if (clicked_id == "btnStart") {
         btnStop.disabled = false;
         btnStart.disabled = true;
-        x[0].style.display = "block";
+        x.style.display = "block";
     }
     else if (clicked_id == "btnStop" && btnStop.disabled == false) {
-        x[0].style.display = "none";
-        document.getElementById("formDD").style.display = "none";
+        x.style.display = "none";
         btnStop.disabled = true;
         btnStart.disabled = false;
     }
-}
-function showFormDD() {
-    var x = document.getElementById("formDD");
-    if (x.style.display === "none")
-        x.style.display = "block";
 }
 function populateSpecialization(studyProg, fac, spec) {
     var studyProg = document.getElementById(studyProg);

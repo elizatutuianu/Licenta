@@ -91,32 +91,25 @@ namespace Licenta.Data
 
         public void CreateDorm(Dorm model)
         {
-            try
+            Dorm dorm = new Dorm();
+            Room room;
+            dorm.DormName = model.DormName;
+            dorm.DormComfort = model.DormComfort;
+            dorm.DormNoRooms = model.DormNoRooms;
+            dorm.DormBedsInRoom = model.DormBedsInRoom;
+            dorm.DormGender = model.DormGender;
+            dorm.IsDormForRomanians = model.IsDormForRomanians;
+            for (int i = 0; i < model.DormNoRooms; i++)
             {
-                Dorm dorm = new Dorm();
-                Room room;
-                dorm.DormName = model.DormName;
-                dorm.DormComfort = model.DormComfort;
-                dorm.DormNoRooms = model.DormNoRooms;
-                dorm.DormBedsInRoom = model.DormBedsInRoom;
-                dorm.DormGender = model.DormGender;
-                dorm.IsDormForRomanians = model.IsDormForRomanians;
-                for (int i = 0; i < model.DormNoRooms; i++)
-                {
-                    room = new Room();
-                    room.BedsInRoom = model.DormBedsInRoom;
-                    if (model.DormGender != "Mixt")
-                        room.RoomGender = model.DormGender;
-                    room.RoomNo = i + 1;
-                    dorm.Rooms.Add(room);
-                    db.Rooms.Add(room);
-                }
-                db.Dorms.Add(dorm);
+                room = new Room();
+                room.BedsInRoom = model.DormBedsInRoom;
+                if (model.DormGender != "Mixt")
+                    room.RoomGender = model.DormGender;
+                room.RoomNo = i + 1;
+                dorm.Rooms.Add(room);
+                db.Rooms.Add(room);
             }
-            catch (Exception ex)
-            {
-
-            }
+            db.Dorms.Add(dorm);
         }
 
         public void AddAccomodationRequest(AccomodationRequest model, Student student)
@@ -141,16 +134,9 @@ namespace Licenta.Data
 
         public IEnumerable<Dorm> GetAllDorms()
         {
-            try
-            {
-                return db.Dorms
-                          .OrderBy(s => s.Id)
-                          .ToList(); ;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
+            return db.Dorms
+                      .OrderBy(s => s.Id)
+                      .ToList();
         }
 
         public IEnumerable<Room> GetAllRooms()

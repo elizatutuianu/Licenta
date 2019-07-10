@@ -1,0 +1,34 @@
+﻿@model Dorm
+<form method="post" asp-action="AddDorm" asp-controller="AddDorm">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <span asp-validation-for="@Model.DormName" class="text-danger"></span>
+    <span asp-validation-for="@Model.DormComfort" class="text-danger"></span>
+    <span asp-validation-for="@Model.DormNoRooms" class="text-danger"></span>
+    <span asp-validation-for="@Model.DormBedsInRoom" class="text-danger"></span>
+    <span asp-validation-for="@Model.DormGender" class="text-danger"></span>
+    <span asp-validation-for="@Model.IsDormForRomanians" class="text-danger"></span>
+
+    <div class="grid-container">
+        <div class="grid-item"><input asp-for="@Model.DormName" placeholder="Name of dorm"></div>
+        <div class="grid-item"><input asp-for="@Model.DormComfort" min="1" max="5" placeholder="Comfort"></div>
+        <div class="grid-item"><input asp-for="@Model.DormNoRooms" min="10" placeholder="Room's number"></div>
+        <div class="grid-item"><input asp-for="@Model.DormBedsInRoom" min="1" max="5" placeholder="Beds per room"></div>
+        <div class="grid-item">
+            <select asp-for="@Model.DormGender">
+                <option hidden disabled selected>Gender</option>
+                <option value="G">Only for girls</option>
+                <option value="B">Only for boys</option>
+                <option value="M">Mixed</option>
+            </select>
+        </div>
+        <div class="grid-item">
+            <select asp-for="@Model.IsDormForRomanians">
+                <option hidden disabled selected>Romanians/Foreigners</option>
+                <option value="True">For romanian students</option>
+                <option value="False">For foreign students</option>
+            </select>
+        </div>
+    </div>
+    @*<input type="button" value="Some text" onclick="@("window.location.href='" + @Url.Action("Login", "App") + "'");" />*@
+    <input type="submit" value="ADD" />
+</form>

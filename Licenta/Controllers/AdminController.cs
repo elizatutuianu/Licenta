@@ -19,62 +19,23 @@ namespace Licenta.Controllers
             _repository = repository;
         }
 
-        [HttpGet("HomePageAdmin")]
+        [HttpGet]
         public IActionResult HomePageAdmin()
         {
-            return View();
+            return View(_repository.GetAllDorms());
         }
 
-        [HttpPost("HomePageAdmin")]
-        public IActionResult HomePageAdmin([FromBody]Dorm model)
-        {
-            if (ModelState.IsValid)
-            {
-                _repository.CreateDorm(model);
-                if (_repository.SaveAll())
-                    return Created($"dorms/{model.Id}", model);
-            }
+        //[HttpPost]
+        //public IActionResult HomePageAdmin()
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        ////_repository.CreateDorm(model);
+        //        if (_repository.SaveAll()) ;
+        //    }
+        //    return View();
+        //}
 
-            return View();
-        }
-
-        [HttpGet("GetDorms")]
-        public ActionResult<IEnumerable<Student>> GetDorms()
-        {
-            try
-            {
-                return Ok(_repository.GetAllDorms());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest("Failed to get dorms");
-            }
-        }
-
-        [HttpGet("GetRooms")]
-        public ActionResult<IEnumerable<Student>> GetRooms()
-        {
-            try
-            {
-                return Ok(_repository.GetAllRooms());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest("Failed to get rooms");
-            }
-        }
-
-        [HttpGet("CountRooms")]
-        public int GetRoomsNo()
-        {
-            try
-            {
-                return _repository.GetAllRooms().Count();
-            }
-            catch (Exception ex)
-            {
-            }
-            return -1;
-        }
+        
     }
 }
