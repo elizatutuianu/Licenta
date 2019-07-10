@@ -28,9 +28,11 @@ namespace Licenta.Data
             return u;
         }
 
-        public User GetUserByID(int id)
+        public User GetUserByEmail(string email)
         {
-            var u = db.Students.FirstOrDefault(item => item.Id == id);
+            var u = db.Students.FirstOrDefault(item => item.Email == email);
+            if (u == null)
+                return null;
             u.Faculty = db.Faculties.FirstOrDefault(item => item.Id == u.FacultyId);
             u.Specialization = db.Specializations.FirstOrDefault(item => item.Id == u.SpecializationId);
             return u;
@@ -71,11 +73,6 @@ namespace Licenta.Data
 
             }
             return -1;
-        }
-
-        public void CreateRoommate(Roommate roommate)
-        {
-            db.Roommates.Add(roommate);
         }
 
         public IEnumerable<Student> GetAllStudents()
@@ -182,6 +179,19 @@ namespace Licenta.Data
             {
                 return null;
             }
+        }
+
+        public int ChangePassword(User user, string email)
+        {
+            Student u = db.Students.FirstOrDefault(item => item.Email == email);
+            if (user.Password == user.ConfirmPassword && u != null)
+            {
+                u.Password = user.Password;
+                u.ConfirmPassword = user.ConfirmPassword;
+                db.Students.Update(u);
+                return 1;
+            }
+            return 0;
         }
     }
 }

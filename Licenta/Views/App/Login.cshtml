@@ -8,7 +8,7 @@
     <div id="formContent">
         @*<div class="fadeIn first">@ViewBag.Title</div>*@
         <form method="get" asp-action="LoginGet" asp-controller="App">
-            <input type="email" asp-for="Email" class="fadeIn first" autocomplete="off" @*name="login"*@ placeholder="Email">
+            <input type="email" asp-for="Email" class="fadeIn first" autocomplete="off"  placeholder="Email">
             <span asp-validation-for="Email" class="text-danger"></span>
 
             <input type="password" asp-for="Password" class="fadeIn second" placeholder="Password">
@@ -19,7 +19,7 @@
         <div id="formFooter">
             <a class="underlineHover" asp-controller="Account" asp-action="Register">Don't have an account?</a>
             <br><br />
-            <a class="underlineHover" asp-controller="App" asp-action="ChangePassword">Forgot password?</a>
+            <a class="underlineHover" asp-controller="App" asp-action="ResetPassword">Forgot password?</a>
         </div>
     </div>
 </div>
