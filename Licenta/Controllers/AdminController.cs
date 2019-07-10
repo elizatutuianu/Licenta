@@ -30,15 +30,9 @@ namespace Licenta.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _repository.CreateDorm(model);
-                    if (_repository.SaveAll())
-                        return Created($"dorms/{model.Id}", model);
-                }
-                catch (Exception ex)
-                {
-                }
+                _repository.CreateDorm(model);
+                if (_repository.SaveAll())
+                    return Created($"dorms/{model.Id}", model);
             }
 
             return View();

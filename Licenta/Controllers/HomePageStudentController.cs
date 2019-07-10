@@ -11,7 +11,6 @@ namespace Licenta.Controllers
     public class HomePageStudentController : Controller
     {
         private readonly Repository _repository;
-        public static Student student;
 
         public HomePageStudentController(Repository repository)
         {
@@ -21,9 +20,9 @@ namespace Licenta.Controllers
         [HttpGet("HomePageStudent")]
         public IActionResult HomePageStudent()
         {
-            int id = (int)TempData["id"];
-            student = (Student)_repository.GetUserByID(id);
-            return View(student);
+            //int id = (int)TempData["id"];
+            //student = (Student)_repository.GetUserByID(id);
+            return View(AppController.student);
         }
 
     }

@@ -1,4 +1,5 @@
 ﻿@model Dorm
+
 @{
     ViewBag.Title = "HomePageAdmin";
 }
@@ -6,6 +7,14 @@
     <script src="~/node_modules/jquery-validation/jquery.validate.min.js"></script>
     <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
 }
+<script>
+    function addDorms() {
+        x = document.getElementById("noOfDormsToAdd").value;
+        for (i = 0; i < x; i++) {
+            //document.getElementById("containerDorms").style.display = "block";
+        }
+    }
+</script>
 @*{
         var db = Database.Open("SmallBakery");
         var query = "SELECT * FROM Product ORDER BY Name";
@@ -25,43 +34,52 @@
     }
 </style>
 
+
 <button type="button" id="btnStart" onclick="showHideForm(this.id)">Start</button>
 <button type="button" id="btnStop" disabled onclick="showHideForm(this.id)">Stop</button>
 
-<form method="post" class="formAdmin" id="formAddDorm" style="display:none">
-    <h2>
-        Add dorm:
-    </h2>
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <span asp-validation-for="DormName" class="text-danger"></span>
-    <span asp-validation-for="DormComfort" class="text-danger"></span>
-    <span asp-validation-for="DormNoRooms" class="text-danger"></span>
-    <span asp-validation-for="DormBedsInRoom" class="text-danger"></span>
-    <span asp-validation-for="DormGender" class="text-danger"></span>
-    <span asp-validation-for="IsDormForRomanians" class="text-danger"></span>
-
-    <div class="grid-container">
-        <div class="grid-item"><input asp-for="DormName" placeholder="Name of dorm"></div>
-        <div class="grid-item"><input asp-for="DormComfort" min="1" max="5" placeholder="Comfort"></div>
-        <div class="grid-item"><input asp-for="DormNoRooms" min="10" placeholder="Room's number"></div>
-        <div class="grid-item"><input asp-for="DormBedsInRoom" min="1" max="5" placeholder="Beds per room"></div>
-        <div class="grid-item">
-            <select asp-for="DormGender">
-                <option hidden disabled selected>Gender</option>
-                <option value="G">Only for girls</option>
-                <option value="B">Only for boys</option>
-                <option value="M">Mixed</option>
-            </select>
-        </div>
-        <div class="grid-item">
-            <select asp-for="IsDormForRomanians">
-                <option hidden disabled selected>Romanians/Foreigners</option>
-                <option value="1">For romanian students</option>
-                <option value="0">For foreign students</option>
-            </select>
-        </div>
-        <button type="button" id="btnAddDorm" onclick="showFormDD()">ADD</button>
+<form method="post" class="formAdmin" id="formAddDorm" asp-action="HomePageAdmin" asp-controller="Admin" style="display:none">
+    <div>
+        <h2>
+            Add dorm/s:
+        </h2>
+        <p>Number of dorms you want to add: <input id="noOfDormsToAdd" type="number" /></p>
+        <button type="button" onclick="addDorms()">Add dorms</button>
     </div>
+    <div id="containerDorms" style="display:none">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <span asp-validation-for="DormName" class="text-danger"></span>
+        <span asp-validation-for="DormComfort" class="text-danger"></span>
+        <span asp-validation-for="DormNoRooms" class="text-danger"></span>
+        <span asp-validation-for="DormBedsInRoom" class="text-danger"></span>
+        <span asp-validation-for="DormGender" class="text-danger"></span>
+        <span asp-validation-for="IsDormForRomanians" class="text-danger"></span>
+
+        <div class="grid-container">
+            <div class="grid-item"><input asp-for="DormName" placeholder="Name of dorm"></div>
+            <div class="grid-item"><input asp-for="DormComfort" min="1" max="5" placeholder="Comfort"></div>
+            <div class="grid-item"><input asp-for="DormNoRooms" min="10" placeholder="Room's number"></div>
+            <div class="grid-item"><input asp-for="DormBedsInRoom" min="1" max="5" placeholder="Beds per room"></div>
+            <div class="grid-item">
+                <select asp-for="DormGender">
+                    <option hidden disabled selected>Gender</option>
+                    <option value="G">Only for girls</option>
+                    <option value="B">Only for boys</option>
+                    <option value="M">Mixed</option>
+                </select>
+            </div>
+            <div class="grid-item">
+                <select asp-for="IsDormForRomanians">
+                    <option hidden disabled selected>Romanians/Foreigners</option>
+                    <option value="1">For romanian students</option>
+                    <option value="0">For foreign students</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <input type="button" value="Some text" onclick="@("window.location.href='" + @Url.Action("Login", "App") + "'");" />
+    @*<button type="button" id="btnAddDorm" onclick="showFormDD()">ADD</button>*@
+
 </form>
 @*get table from DB*@
 @*<form id="viewDormsFromDB">
@@ -92,5 +110,5 @@
 
 <button type="button" id="btnSubmitStart">Submit</button>
 <form align="right" method="post" asp-action="Logout" asp-controller="App">
-    <input type="submit" id="btnLogOut" value="EXIT"/>
+    <input type="submit" id="btnLogOut" value="EXIT" />
 </form>

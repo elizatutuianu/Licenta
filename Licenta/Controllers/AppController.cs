@@ -14,6 +14,7 @@ namespace Licenta.Controllers
     {
         private readonly DBContext _context;
         private readonly Repository _repository;
+        public static Student student;
 
         public AppController(DBContext context, Repository repo)
         {
@@ -30,15 +31,16 @@ namespace Licenta.Controllers
         [HttpGet]
         public IActionResult LoginGet(User user)
         {
-            User u = _repository.VerifyStudent(user);
-            if (u != null)
+            
+            if (user != null)
                 if (user.Email == "admin@a.ro" && user.Password == "123Admin!")
                     return RedirectToAction("HomePageAdmin", "Admin");
                 else
                 {
+                    student = _repository.VerifyStudent(user);
                     //ViewBag.Student = (Student)u;
                     //int id = u.Id;
-                    TempData["id"] = u.Id;
+                    //TempData["id"] = u.Id;
                     return RedirectToAction("HomePageStudent", "HomePageStudent");
                     //return View("/AccomodationRequest/HomePageStudent", (Student)u);
                 }

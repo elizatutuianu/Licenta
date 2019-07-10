@@ -20,9 +20,11 @@ namespace Licenta.Data
             return db.SaveChanges() > 0;
         }
 
-        public User VerifyStudent(User user)
+        public Student VerifyStudent(User user)
         {
             var u = db.Students.FirstOrDefault(item => item.Email == user.Email && item.Password == user.Password);
+            u.Faculty = db.Faculties.FirstOrDefault(item => item.Id == u.FacultyId);
+            u.Specialization = db.Specializations.FirstOrDefault(item => item.Id == u.SpecializationId);
             return u;
         }
 

@@ -27,7 +27,7 @@ namespace Licenta.Controllers
         [HttpPost]
         public IActionResult Preferences(AccomodationRequest accomodationRequest)
         {
-            _repository.AddAccomodationRequest(accomodationRequest, HomePageStudentController.student);
+            _repository.AddAccomodationRequest(accomodationRequest, AppController.student);
             _repository.SaveAll();
             return View();
         }
