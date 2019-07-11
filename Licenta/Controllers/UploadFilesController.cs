@@ -242,12 +242,12 @@ namespace Licenta.Controllers
         {
             if (ModelState.IsValid)
             {
-                //UploadFaculties(fileUpload);
-                //_repository.SaveAll();
-                //UploadSpecializations(fileUpload);
-                //_repository.SaveAll();
-                //UploadIdCards(fileUpload);
-                //_repository.SaveAll();
+                UploadFaculties(fileUpload);
+                _repository.SaveAll();
+                UploadSpecializations(fileUpload);
+                _repository.SaveAll();
+                UploadIdCards(fileUpload);
+                _repository.SaveAll();
                 UploadStudents(fileUpload);
                 _repository.SaveAll();
                 ViewBag.UploadMessage = "Upload successful.";
