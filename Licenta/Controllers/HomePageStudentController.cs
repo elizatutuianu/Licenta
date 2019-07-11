@@ -20,8 +20,6 @@ namespace Licenta.Controllers
         [HttpGet("HomePageStudent")]
         public IActionResult HomePageStudent()
         {
-            //int id = (int)TempData["id"];
-            //student = (Student)_repository.GetUserByID(id);
             return View(AppController.student);
         }
 

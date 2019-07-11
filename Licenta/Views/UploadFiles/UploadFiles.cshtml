@@ -1,0 +1,63 @@
+﻿@model Licenta.ViewModels.ExcelFile
+<script>
+    var _validFileExtensions = [".xls", ".xlsx"];
+    function Validate(oForm) {
+        var arrInputs = oForm.getElementsByTagName("input");
+        for (var i = 0; i < arrInputs.length; i++) {
+            var oInput = arrInputs[i];
+            if (oInput.type == "file") {
+                var sFileName = oInput.value;
+                if (sFileName.length > 0) {
+                    var blnValid = false;
+                    for (var j = 0; j < _validFileExtensions.length; j++) {
+                        var sCurExtension = _validFileExtensions[j];
+                        if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                            blnValid = true;
+                            break;
+                        }
+                    }
+                    if (!blnValid) {
+                        alert("Sorry, " + sFileName + " is invalid. Allowed extensions are: " + _validFileExtensions.join(", "));
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+</script>
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <form method="post" onsubmit="return Validate(this)" asp-action="UploadFiles" asp-controller="UploadFiles" enctype="multipart/form-data">
+            <div id="upload">
+                <span>Excel file for specializations</span>
+                <br />
+                <input type="file" asp-for="@Model.FileSpecializations" id="fileUpload" class="form-control" />
+            </div>
+            <br />
+            <div id="upload">
+                <span>Excel file for faculties</span><br />
+                <input type="file" asp-for="@Model.FileFaculties" id="fileUpload" class="form-control" />
+            </div>
+            <br />
+            <div id="upload">
+                <span>Excel file for Identity Cards of Students</span><br />
+                <input type="file" asp-for="@Model.FileIdCards" id="fileUpload" class="form-control" />
+            </div>
+            <br />
+            <div id="upload">
+                <span>Excel file for Students</span><br />
+                <input type="file" asp-for="@Model.FileStudents" id="fileUpload" class="form-control" />
+            </div>
+            <br />
+            <div id="divData"></div>
+
+            <br />
+            <input type="submit" id="btnUpload" value="Upload File" />
+        </form>
+        <div>@ViewBag.UploadMessage</div>
+        <br />
+        <br />
+    </div>
+</div>

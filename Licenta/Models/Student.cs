@@ -19,7 +19,7 @@ namespace Licenta.Models
         public int FacultyId { get; set; }
         [ForeignKey("FacultyId")]
         private Faculty faculty;
-        public int SpecializationId { get; set; }
+        public int? SpecializationId { get; set; }
         [ForeignKey("SpecializationId")]
         private Specialization specialization;
         private string studyProgram; //licenta_z, master_z,licenta_if,  master_if

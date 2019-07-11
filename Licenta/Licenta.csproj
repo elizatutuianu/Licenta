@@ -22,9 +22,12 @@
   <ItemGroup>
     <Compile Remove="Migrations\20190710221816_dateFormat.cs" />
     <Compile Remove="Migrations\20190710221816_dateFormat.Designer.cs" />
+    <Compile Remove="Migrations\20190711142915_FKSpecFac.cs" />
+    <Compile Remove="Migrations\20190711142915_FKSpecFac.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="dotnetcore.npoi" Version="1.2.1" />
     <PackageReference Include="Microsoft.AspNet.Session" Version="1.0.0-rc1-final" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
@@ -34,6 +37,7 @@
 
   <ItemGroup>
     <Folder Include="Views\AccomodationRequest\" />
+    <Folder Include="wwwroot\Upload\" />
   </ItemGroup>
 
 </Project>

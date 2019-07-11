@@ -28,6 +28,41 @@ namespace Licenta.Data
             return u;
         }
 
+        public void InsertStudent(Student student)
+        {
+            db.Students.Add(student);
+        }
+
+        public void InsertIdCard(IdCardStudent idCard)
+        {
+            db.IdCardStudents.Add(idCard);
+        }
+
+        public void InsertFaculty(Faculty faculty)
+        {
+            db.Faculties.Add(faculty);
+        }
+
+        public void InsertSpecialization(Specialization specialization)
+        {
+            db.Specializations.Add(specialization);
+        }
+
+        public Faculty GetFacultyByName(string name)
+        {
+            return db.Faculties.FirstOrDefault(item => item.Name == name);
+        }
+
+        public Specialization GetSpecializationByName(string name)
+        {
+            return db.Specializations.FirstOrDefault(item => item.SpecName == name);
+        }
+
+        public IdCardStudent GetIdCardStudentByNumber(string number)
+        {
+            return db.IdCardStudents.FirstOrDefault(item => item.IdCardNo == number);
+        }
+
         public User GetUserByEmail(string email)
         {
             var u = db.Students.FirstOrDefault(item => item.Email == email);
@@ -50,29 +85,6 @@ namespace Licenta.Data
                 return "Success!";
             }
             return "Already have an account!";
-        }
-
-        public int CheckStudentInDb(Student student)
-        {
-            try
-            {
-                Student stud = db.Students.FirstOrDefault(item => item.FirstName == student.FirstName
-                && item.LastName == student.LastName
-                && item.Initial == student.Initial
-                && item.Specialization.SpecName == student.Specialization.SpecName
-                && item.Faculty.Name == student.Faculty.Name
-                && item.Year == student.Year
-                && item.StudyProgram == student.StudyProgram);
-                if (stud != null)
-                {
-                    return stud.Id;
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return -1;
         }
 
         public IEnumerable<Student> GetAllStudents()
@@ -179,5 +191,6 @@ namespace Licenta.Data
             }
             return 0;
         }
+
     }
 }

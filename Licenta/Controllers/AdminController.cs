@@ -24,18 +24,5 @@ namespace Licenta.Controllers
         {
             return View(_repository.GetAllDorms());
         }
-
-        //[HttpPost]
-        //public IActionResult HomePageAdmin()
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        ////_repository.CreateDorm(model);
-        //        if (_repository.SaveAll()) ;
-        //    }
-        //    return View();
-        //}
-
-        
     }
 }

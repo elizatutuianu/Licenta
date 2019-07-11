@@ -27,6 +27,8 @@
 <button type="button" id="btnStop" disabled onclick="showHideForm(this.id)">Stop</button>
 <input type="button" value="Add dorm" onclick="@("window.location.href='" + @Url.Action("AddDorm", "AddDorm") + "'");" />
 <input type="button" value="Add deadlines" onclick="@("window.location.href='" + @Url.Action("DeadlinesAdmin", "DeadlinesAdmin") + "'");" />
+<input type="button" value="Upload files for database" onclick="@("window.location.href='" + @Url.Action("UploadFiles", "UploadFiles") + "'");" />
+
 
 <table>
     <thead>
