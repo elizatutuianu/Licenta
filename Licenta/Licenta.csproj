@@ -20,10 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20190710221816_dateFormat.cs" />
-    <Compile Remove="Migrations\20190710221816_dateFormat.Designer.cs" />
-    <Compile Remove="Migrations\20190711142915_FKSpecFac.cs" />
-    <Compile Remove="Migrations\20190711142915_FKSpecFac.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190710221816_dateFormat.cs" />
+    <Compile Remove="Data\Migrations\20190710221816_dateFormat.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190711142915_FKSpecFac.cs" />
+    <Compile Remove="Data\Migrations\20190711142915_FKSpecFac.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

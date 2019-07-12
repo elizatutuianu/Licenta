@@ -5,7 +5,7 @@
 }
 <div class="wrapper fadeInDown">
     <div id="formContent">
-        <form method="get" asp-action="LoginGet" asp-controller="App">
+        <form method="post" asp-action="Login" asp-controller="App">
             <input type="email" asp-for="Email" class="fadeIn first" autocomplete="off"  placeholder="Email">
             <span asp-validation-for="Email" class="text-danger"></span>
 
@@ -14,6 +14,9 @@
 
             <button type="submit" class="fadeIn third">Log In</button>
         </form>
+        <div>@ViewBag.LoginMessage</div>
+        <br />
+        <br />
         <div id="formFooter">
             <a class="underlineHover" asp-controller="Account" asp-action="Register">Don't have an account?</a>
             <br><br />

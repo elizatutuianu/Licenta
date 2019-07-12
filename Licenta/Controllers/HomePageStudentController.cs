@@ -20,6 +20,7 @@ namespace Licenta.Controllers
         [HttpGet("HomePageStudent")]
         public IActionResult HomePageStudent()
         {
+            ViewBag.AlreadySentRequest = TempData["mess"] != null ? TempData["mess"].ToString() : string.Empty;
             return View(AppController.student);
         }
 

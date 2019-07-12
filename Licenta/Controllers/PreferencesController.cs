@@ -27,8 +27,17 @@ namespace Licenta.Controllers
         [HttpPost]
         public IActionResult Preferences(AccomodationRequest accomodationRequest)
         {
-            _repository.AddAccomodationRequest(accomodationRequest, AppController.student);
-            _repository.SaveAll();
+            if (!AppController.student.AccomodationRequestId.HasValue)
+            {
+                _repository.AddAccomodationRequest(accomodationRequest, AppController.student);
+                _repository.SaveAll();
+                ViewBag.PrefMessage = "Accomodation request sent!";
+            }
+            else
+            {
+                TempData["mess"] = "Accomodation request already sent!";
+                return RedirectToAction("HomePageStudent", "HomePageStudent");
+            }
             return View();
         }
 

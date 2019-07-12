@@ -34,21 +34,22 @@ namespace Licenta.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult LoginGet(User user)
+        [HttpPost]
+        public IActionResult Login(User user)
         {
 
             if (user != null)
-                if (user.Email == "admin@a.ro" && user.Password == "123Admin!")
+                if (user.Email == "tutuianueliza@gmail.com" && user.Password == "123Admin!")
                     return RedirectToAction("HomePageAdmin", "Admin");
                 else
                 {
                     student = _repository.VerifyStudent(user);
-                    //ViewBag.Student = (Student)u;
-                    //int id = u.Id;
-                    //TempData["id"] = u.Id;
+                    if (student == null)
+                    {
+                        ViewBag.LoginMessage = "Please register!";
+                        return View();
+                    }
                     return RedirectToAction("HomePageStudent", "HomePageStudent");
-                    //return View("/AccomodationRequest/HomePageStudent", (Student)u);
                 }
             return View();
         }

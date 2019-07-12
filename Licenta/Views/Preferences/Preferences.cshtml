@@ -124,44 +124,44 @@
                 <input asp-for="@Model.ArRoommates[i].Initial" placeholder="Enter father's initial">
                 <span asp-validation-for="@Model.ArRoommates[i].Initial" class="text-danger"></span>
                 @*<br />
-                <br />
-                <label asp-for="@Model.ArRoommates[i].Student.StudyProgram"><b>Study program</b></label>
-                <select asp-for="@Model.ArRoommates[i].Student.StudyProgram" id="study_program" onchange="populateYear(this.id, 'year')">
-                    <option hidden disabled selected>--select option--</option>
-                    <option value="licenta_zi">License</option>
-                    <option value="master_zi">Master</option>
-                </select>
-                <span asp-validation-for="@Model.ArRoommates[i].Student.StudyProgram" class="text-danger"></span>
-                <br />
-                <br />
-                <label asp-for="@Model.ArRoommates[i].Student.Year"><b>Next year of study</b></label>
-                <select asp-for="@Model.ArRoommates[i].Student.Year" id="year"></select>
-                <span asp-validation-for="@Model.ArRoommates[i].Student.Year" class="text-danger"></span>
-                <br />
-                <br />
-                <label asp-for="@Model.ArRoommates[i].Student.Faculty.Name"><b>Faculty</b></label>
-                <br />
-                <select asp-for="@Model.ArRoommates[i].Student.Faculty.Name" id="faculty" onchange="populateSpecialization('study_program', this.id, 'specialization')">
-                    <option hidden disabled selected>--select option--</option>
-                    <option value="FABIZ">Faculty of Business Administration in foreign languages</option>
-                    <option value="FAMP">Faculty of Administration and Public Management</option>
-                    <option value="BBS">Bucharest Business School</option>
-                    <option value="BT">Faculty of Business and Tourism</option>
-                    <option value="CSIE">Facultaty of Cybernetics, Statistics and Economic Informatics</option>
-                    <option value="CIG">Faculty of Accounting and Management Information Systems</option>
-                    <option value="ETA">Faculty of Economics, Theoretical and Applied</option>
-                    <option value="EAM">Faculty of Agrifood and Environmental Economics</option>
-                    <option value="FABBV">Faculty of Finance and Banking</option>
-                    <option value="Management">Faculty of Management</option>
-                    <option value="Marketing">Faculty of Marketing</option>
-                    <option value="REI">Faculty of International Business and Economics</option>
-                </select>
-                <span asp-validation-for="@Model.ArRoommates[i].Student.Faculty.Name" class="text-danger"></span>
-                <br />
-                <br />
-                <label asp-for="@Model.ArRoommates[i].Student.Specialization.SpecName"><b>Specialization</b></label>
-                <select asp-for="@Model.ArRoommates[i].Student.Specialization.SpecName" id="specialization"></select>
-                <span asp-validation-for="@Model.ArRoommates[i].Student.Specialization.SpecName" class="text-danger"></span>*@
+                    <br />
+                    <label asp-for="@Model.ArRoommates[i].Student.StudyProgram"><b>Study program</b></label>
+                    <select asp-for="@Model.ArRoommates[i].Student.StudyProgram" id="study_program" onchange="populateYear(this.id, 'year')">
+                        <option hidden disabled selected>--select option--</option>
+                        <option value="licenta_zi">License</option>
+                        <option value="master_zi">Master</option>
+                    </select>
+                    <span asp-validation-for="@Model.ArRoommates[i].Student.StudyProgram" class="text-danger"></span>
+                    <br />
+                    <br />
+                    <label asp-for="@Model.ArRoommates[i].Student.Year"><b>Next year of study</b></label>
+                    <select asp-for="@Model.ArRoommates[i].Student.Year" id="year"></select>
+                    <span asp-validation-for="@Model.ArRoommates[i].Student.Year" class="text-danger"></span>
+                    <br />
+                    <br />
+                    <label asp-for="@Model.ArRoommates[i].Student.Faculty.Name"><b>Faculty</b></label>
+                    <br />
+                    <select asp-for="@Model.ArRoommates[i].Student.Faculty.Name" id="faculty" onchange="populateSpecialization('study_program', this.id, 'specialization')">
+                        <option hidden disabled selected>--select option--</option>
+                        <option value="FABIZ">Faculty of Business Administration in foreign languages</option>
+                        <option value="FAMP">Faculty of Administration and Public Management</option>
+                        <option value="BBS">Bucharest Business School</option>
+                        <option value="BT">Faculty of Business and Tourism</option>
+                        <option value="CSIE">Facultaty of Cybernetics, Statistics and Economic Informatics</option>
+                        <option value="CIG">Faculty of Accounting and Management Information Systems</option>
+                        <option value="ETA">Faculty of Economics, Theoretical and Applied</option>
+                        <option value="EAM">Faculty of Agrifood and Environmental Economics</option>
+                        <option value="FABBV">Faculty of Finance and Banking</option>
+                        <option value="Management">Faculty of Management</option>
+                        <option value="Marketing">Faculty of Marketing</option>
+                        <option value="REI">Faculty of International Business and Economics</option>
+                    </select>
+                    <span asp-validation-for="@Model.ArRoommates[i].Student.Faculty.Name" class="text-danger"></span>
+                    <br />
+                    <br />
+                    <label asp-for="@Model.ArRoommates[i].Student.Specialization.SpecName"><b>Specialization</b></label>
+                    <select asp-for="@Model.ArRoommates[i].Student.Specialization.SpecName" id="specialization"></select>
+                    <span asp-validation-for="@Model.ArRoommates[i].Student.Specialization.SpecName" class="text-danger"></span>*@
                 <br />
                 <br />
                 <input type="button" id="btnAddRoommate" @*onclick="addRoommate(@Model.ArRoommates[i])" *@ value="Add roommate" />
@@ -179,6 +179,7 @@
         <br />
         <input id="submitAcc" type="submit" value="Send Accomodation Request" />
     </form>
+    <div>@ViewBag.PrefMessage</div>
     <div>@Html.ValidationSummary(true)</div>
 </div>
 

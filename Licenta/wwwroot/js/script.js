@@ -1,20 +1,20 @@
 ﻿var action = 1;
 
 function disableButton() {
-    if (action == 1) {
-        //SEND DATA TO DB
-        //IDEA: DIALOG: ARE YOU SURE YOU WANT TO SEND YOUR REQUEST? Y N
-        action = 2;
-    }
-    else {
-        document.getElementById("divRequestSent").style.display = "block"
-        setTimeout(function () {
-            document.getElementById("divRequestSent").style.display = "none";
-        }, 1000);
-    }
+    //if (action == 1) {
+    //    //SEND DATA TO DB
+    //    //IDEA: DIALOG: ARE YOU SURE YOU WANT TO SEND YOUR REQUEST? Y N
+    //    action = 2;
+    //}
+    //else {
+    document.getElementById("divRequestSent").style.display = "block";
+    setTimeout(function () {
+        document.getElementById("divRequestSent").style.display = "none";
+    }, 1000);
+    //}
 }
 function showHideForm(clicked_id) {
-    var x = document.getElementById("formAddDorm");
+    var x = document.getElementById("forStartingProcess");
     var btnStop = document.getElementById("btnStop");
     var btnStart = document.getElementById("btnStart");
     if (clicked_id == "btnStart") {

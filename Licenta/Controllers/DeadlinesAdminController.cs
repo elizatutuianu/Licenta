@@ -11,6 +11,7 @@ namespace Licenta.Controllers
     public class DeadlinesAdminController : Controller
     {
         private readonly Repository _repository;
+        public static Administrator administrator;
 
         public DeadlinesAdminController(Repository repository)
         {
@@ -26,11 +27,9 @@ namespace Licenta.Controllers
         [HttpPost]
         public IActionResult DeadlinesAdmin(Administrator admin)
         {
-            //admin.Email = "admin@a.ro";
-            //admin.Password = "123Admin!";
-            //admin.ConfirmPassword = "123Admin!";
             if (ModelState.IsValid)
             {
+                administrator = admin;
                 return RedirectToAction("HomePageAdmin", "Admin");
             }
             return View();

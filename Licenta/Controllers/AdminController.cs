@@ -24,5 +24,6 @@ namespace Licenta.Controllers
         {
             return View(_repository.GetAllDorms());
         }
+
     }
 }

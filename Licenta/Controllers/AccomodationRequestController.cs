@@ -19,38 +19,21 @@ namespace Licenta.Controllers
             _repository = repository;
         }
 
-        //[HttpPost("AccReq")]
-        //public IActionResult HomePageStudent([FromBody]AccomodationRequest model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _repository.CreateAccomodationRequest(model);
-        //            if (_repository.SaveAll())
-        //            {
-        //                return Created($"accomodationrequest/{model.Id}", model);
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //        }
-        //    }
-
-        //    return View();
-        //}
-
-        [HttpGet("GetAccomodationRequests")]
-        public ActionResult<IEnumerable<AccomodationRequest>> GetAccomodationRequests()
+        [HttpGet]
+        public IActionResult AccomodationRequest()
         {
-            try
+            if (!AppController.student.AccomodationRequestId.HasValue)
             {
-                return Ok(_repository.GetAllAccRequests());
+                AccomodationRequest accomodation = new AccomodationRequest();
+                _repository.AddAccomodationRequest(accomodation, AppController.student);
+                _repository.SaveAll();
+                TempData["mess"] = "Accomodation request sent!";
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest("Failed to get accomodation requests");
+                TempData["mess"] = "Accomodation request already sent!";
             }
+            return RedirectToAction("HomePageStudent", "HomePageStudent");
         }
     }
 }

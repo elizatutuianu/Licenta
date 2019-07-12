@@ -23,6 +23,8 @@ namespace Licenta.Data
         public Student VerifyStudent(User user)
         {
             var u = db.Students.FirstOrDefault(item => item.Email == user.Email && item.Password == user.Password);
+            if (u == null)
+                return null;
             u.Faculty = db.Faculties.FirstOrDefault(item => item.Id == u.FacultyId);
             u.Specialization = db.Specializations.FirstOrDefault(item => item.Id == u.SpecializationId);
             return u;
@@ -73,10 +75,10 @@ namespace Licenta.Data
             return u;
         }
 
-        public String UpdateStudent(Student model)
+        public String RegisterStudent(Student model)
         {
             var student = db.Students.FirstOrDefault(item => item.Cnp == model.Cnp);
-            if (student != null && student.Email == null)
+            if (student != null && student.Email.Length == 0)
             {
                 student.Email = model.Email;
                 student.Password = model.Password;
@@ -85,20 +87,6 @@ namespace Licenta.Data
                 return "Success!";
             }
             return "Already have an account!";
-        }
-
-        public IEnumerable<Student> GetAllStudents()
-        {
-            try
-            {
-                return db.Students
-                          .OrderBy(s => s.Id)
-                          .ToList(); ;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
         }
 
         public void CreateDorm(Dorm model)
@@ -144,41 +132,40 @@ namespace Licenta.Data
             }
         }
 
+        public IEnumerable<Faculty> GetAllFaculties()
+        {
+            return db.Faculties
+                      .OrderBy(s => s.Id)
+                      .ToList();
+        }
+
+        public IEnumerable<Specialization> GetAllSpecializations()
+        {
+            return db.Specializations
+                      .OrderBy(s => s.Id)
+                      .ToList();
+        }
+
+        public IEnumerable<IdCardStudent> GetAllIdCardStudents()
+        {
+            return db.IdCardStudents
+                      .OrderBy(s => s.Id)
+                      .ToList();
+        }
+
+        public IEnumerable<Student> GetAllStudents()
+        {
+            return db.Students
+                      .OrderBy(s => s.Id)
+                      .ToList();
+        }
+
         public IEnumerable<Dorm> GetAllDorms()
         {
             return db.Dorms
                       .OrderBy(s => s.Id)
                       .ToList();
         }
-
-        public IEnumerable<Room> GetAllRooms()
-        {
-            try
-            {
-                return db.Rooms
-                          .OrderBy(r => r.RoomNo)
-                          .ToList(); ;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-
-        public IEnumerable<AccomodationRequest> GetAllAccRequests()
-        {
-            try
-            {
-                return db.AccomodationRequests
-                          .OrderBy(s => s.Id)
-                          .ToList(); ;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-
         public int ChangePassword(User user, string email)
         {
             Student u = db.Students.FirstOrDefault(item => item.Email == email);
@@ -192,5 +179,17 @@ namespace Licenta.Data
             return 0;
         }
 
+        //Calculate available beds
+
+        public int GetAllAvailableBeds()
+        {
+            int bedsInTotal = 0;
+            IEnumerable<Dorm> dorms = /*(List<Dorm>)*/GetAllDorms();
+            foreach (Dorm dorm in dorms)
+            {
+                bedsInTotal += dorm.DormBedsInRoom * dorm.DormNoRooms;
+            }
+            return bedsInTotal;
+        }
     }
 }

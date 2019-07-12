@@ -8,19 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Licenta.Controllers
 {
-    //[Route("[controller]")]
-    //[ApiController]
     public class AccountController : Controller
     {
         private readonly Repository _repository;
-        //private readonly UserManager<User> _userManager;
-        //private readonly SignInManager<User> _signInManager;
 
-        public AccountController(Repository repository)//, UserManager<User> userManager, SignInManager<User> signInManager)
-        {
+        public AccountController(Repository repository)
+        { 
             _repository = repository;
-            //_userManager = userManager;
-            //_signInManager = signInManager;
         }
 
         [HttpGet("Register")]
@@ -34,13 +28,8 @@ namespace Licenta.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewBag.message = _repository.UpdateStudent(model);
+                ViewBag.message = _repository.RegisterStudent(model);
                 _repository.SaveAll();
-                //return ;
-                //Created($"students/{model.Id}", model);
-                //return RedirectToAction("Login", "App");
-                //} 
-                
             }
             return RedirectToAction("Login","App");
 

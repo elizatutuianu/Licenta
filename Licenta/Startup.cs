@@ -28,9 +28,6 @@ namespace Licenta
         // This method gets called by thuntime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddIdentity<User, IdentityRole>()
-            //    .AddEntityFrameworkStores<DBContext>()
-            //    .AddDefaultTokenProviders();
             services.AddDbContext<DBContext>(cfg =>
                 {
                     cfg.UseSqlServer(_config.GetConnectionString("AppConnectionString"));
