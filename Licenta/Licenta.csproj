@@ -37,7 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\AccomodationRequest\" />
     <Folder Include="wwwroot\Upload\" />
   </ItemGroup>
 

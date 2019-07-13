@@ -4,14 +4,14 @@
 }
 <div class="wrapper fadeInDown">
     <div id="formContent">
+
+        <div id="divRequestSent"><br>@ViewBag.AlreadySentRequest</div>
         <h2>Your info:</h2>
         <br />
-        First Name: <input type="text" value="@Model.FirstName" name="firstname" readonly>
-        Last Name: <input type="text" value="@Model.LastName" name="lastname" readonly>
+        Name: <input type="text" value="@Model.FirstName @Model.Initial @Model.LastName" name="firstname" readonly>
         Email: <input type="email" value="@Model.Email" name="email" readonly>
-        Father's initial: <input type="text" value="@Model.Initial" name="initial" readonly>
-        Faculty: <input type="text" value="@Model.Faculty.Name" name="faculty" readonly>
-        Specialization: <input type="text" value="@Model.Specialization.SpecName" name="specialization" readonly>
+        Faculty: <input type="text" value="@Model.Faculty.Name, @Model.Specialization.SpecName" name="faculty" readonly>
+        @*Specialization: <input type="text" value="@Model.Specialization.SpecName" name="specialization" readonly>*@
         Grade: <input type="text" value="@Model.Media" name="media" readonly>
         Study program:<input type="text" value="@Model.StudyProgram" name="study_program" readonly>
         <ul style="list-style-type:none;" class="btnsHome">
@@ -19,14 +19,14 @@
                 <form method="get" asp-action="AccomodationRequest" asp-controller="AccomodationRequest">
                     <input type="submit" id="btnSend" value="Request without preferences" onclick="disableButton()" />
                 </form>
-            <li><div id="divRequestSent">@ViewBag.AlreadySentRequest</div><br /></li>
             </li>
             <form method="get" asp-controller="Preferences" asp-action="Preferences">
                 <li><input type="submit" id="btnAddPref" onclick="showElement(this.id)" value="Preferences" /></li>
             </form>
-            <li><input type="submit" id="btnVizRepartizare" value="View allocation" /></li>
+            <form method="get" asp-controller="IDCardInfoUpdate" asp-action="IDCardInfoUpdate">
+                <li><input type="submit" value="Update ID Card info" /></li>
+            </form>
         </ul>
-
     </div>
 </div>
 <form align="right" method="post" asp-action="Logout" asp-controller="App">

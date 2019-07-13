@@ -100,7 +100,6 @@ namespace Licenta.Controllers
                 ViewBag.Text = "An email with instructions to reset your password is sent to your registered email";
                 return View();
             }
-            //ViewBag.Text.ForeColor = System.Drawing.Color.Red;
             ViewBag.Text = "Username not found!";
             return View();
         }

@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Text;
 using System.Threading.Tasks;
+using Hangfire;
 using Licenta.Data;
 using Licenta.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,12 +14,11 @@ namespace Licenta.Controllers
 {
     public class DeadlinesAdminController : Controller
     {
-        private readonly Repository _repository;
-        public Administrator administrator = new Administrator();
+        public static Administrator administrator;
 
-        public DeadlinesAdminController(Repository repository)
+        public DeadlinesAdminController()
         {
-            _repository = repository;
+            administrator = new Administrator();
         }
 
         [HttpGet]
@@ -31,10 +34,13 @@ namespace Licenta.Controllers
             {
                 administrator.DdlRegistration = admin.DdlRegistration;
                 administrator.DdlFinishProcess = admin.DdlFinishProcess;
+
                 return RedirectToAction("HomePageAdmin", "Admin");
             }
             ViewBag.DeadlinesMessgage = "Wrong input. See format type!";
             return View();
         }
+
+
     }
 }

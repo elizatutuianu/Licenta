@@ -65,6 +65,11 @@ namespace Licenta.Data
             return db.IdCardStudents.FirstOrDefault(item => item.IdCardNo == number);
         }
 
+        public IdCardStudent GetIdCardStudentById(int id)
+        {
+            return db.IdCardStudents.FirstOrDefault(item => item.Id == id);
+        }
+
         public User GetUserByEmail(string email)
         {
             var u = db.Students.FirstOrDefault(item => item.Email == email);
@@ -263,6 +268,20 @@ namespace Licenta.Data
         public int GetStudentsFromProv()
         {
             return db.Students.Where(stud => stud.IdCardStudent.District != "Bucuresti").Count();
+        }
+
+        public void UpdateIdCardStudent(Student student, IdCardStudent idCardNew)
+        {
+            IdCardStudent idCardOld = db.IdCardStudents.FirstOrDefault(item => item.Id == student.IdCardStudentId);
+            idCardOld.IdCardNo = idCardNew.IdCardNo;
+            idCardOld.IdCardIssuedBy = idCardNew.IdCardIssuedBy;
+            idCardOld.IdCardIssuedDate = idCardNew.IdCardIssuedDate;
+            idCardOld.Country = idCardNew.Country;
+            idCardOld.District = idCardNew.District;
+            idCardOld.Localty = idCardNew.Localty;
+            idCardOld.Address = idCardNew.Address;
+            idCardOld.CivilStatus = idCardNew.CivilStatus;
+            db.IdCardStudents.Update(idCardOld);
         }
     }
 }

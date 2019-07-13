@@ -1,0 +1,21 @@
+﻿@model IdCardStudent
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <h2>ID Card info:</h2>
+        <form method="post" asp-action="IDCardInfoUpdate" asp-controller="IDCardInfoUpdate">
+            Number: <input type="text" asp-for="@Model.IdCardNo" value="@Model.IdCardNo">
+            Issued By: <input type="text" asp-for="@Model.IdCardIssuedBy" value="@Model.IdCardIssuedBy">
+            Issued Date: <input type="datetime" asp-for="@Model.IdCardIssuedDate" value="@Model.IdCardIssuedDate">
+            Country: <input type="text" asp-for="@Model.Country" value="@Model.Country">
+            Region: <input type="datetime" asp-for="@Model.District" value="@Model.District">
+            City: <input type="datetime" asp-for="@Model.Localty" value="@Model.Localty">
+            Address: <input type="datetime" asp-for="@Model.Address" value="@Model.Address">
+            Civil status: <select asp-for="@Model.CivilStatus">
+                <option hidden disabled selected>--select option--</option>
+                <option value="C">Married</option>
+                <option value="N">Single</option>
+            </select>
+            <input type="submit" value="UPDATE">
+        </form>
+    </div>
+</div>

@@ -22,6 +22,7 @@ namespace Licenta.Controllers
         [HttpGet]
         public IActionResult HomePageAdmin()
         {
+            ViewBag.ErrorMessage = TempData["error"];
             return View(_repository.GetAllDorms());
         }
 
