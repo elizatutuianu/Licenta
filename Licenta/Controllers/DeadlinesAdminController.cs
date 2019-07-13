@@ -11,7 +11,7 @@ namespace Licenta.Controllers
     public class DeadlinesAdminController : Controller
     {
         private readonly Repository _repository;
-        public static Administrator administrator;
+        public Administrator administrator = new Administrator();
 
         public DeadlinesAdminController(Repository repository)
         {
@@ -29,7 +29,8 @@ namespace Licenta.Controllers
         {
             if (ModelState.IsValid)
             {
-                administrator = admin;
+                administrator.DdlRegistration = admin.DdlRegistration;
+                administrator.DdlFinishProcess = admin.DdlFinishProcess;
                 return RedirectToAction("HomePageAdmin", "Admin");
             }
             return View();

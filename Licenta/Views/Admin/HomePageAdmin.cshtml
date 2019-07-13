@@ -22,15 +22,16 @@
         text-wrap: normal;
     }
 </style>
-<div id="formContent">
-    <p>@ViewBag.ErrorMessage</p>
-    <button type="button" id="btnStart" onclick="showHideForm(this.id)">Start</button>
-    <button type="button" id="btnStop" disabled onclick="showHideForm(this.id)">Stop</button>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <p>@ViewBag.ErrorMessage</p>
+        <button type="button" id="btnStart" onclick="showHideForm(this.id)">Start</button>
+        <button type="button" id="btnStop" disabled onclick="showHideForm(this.id)">Stop</button>
         <div id="forStartingProcess" style="display:none">
             <input type="button" value="Add dorm" onclick="@("window.location.href='" + @Url.Action("AddDorm", "AddDorm") + "'");" />
             <input type="button" value="Add deadlines" onclick="@("window.location.href='" + @Url.Action("DeadlinesAdmin", "DeadlinesAdmin") + "'");" />
             <input type="button" value="Upload files for database" onclick="@("window.location.href='" + @Url.Action("UploadFiles", "UploadFiles") + "'");" />
-            <input type="submit" value="SUBMIT" onclick="@("window.location.href='" + @Url.Action("Allocation", "Allocation") + "'");"/>
+            <input type="submit" value="SUBMIT" onclick="@("window.location.href='" + @Url.Action("Allocation", "Allocation") + "'");" />
         </div>
 
         <table>
@@ -54,6 +55,7 @@
                 }
             </tbody>
         </table>
+    </div>
 </div>
 <form align="right" method="post" asp-action="Logout" asp-controller="App">
     <input type="submit" class="logoutPosition" id="btnLogOut" value="EXIT" />

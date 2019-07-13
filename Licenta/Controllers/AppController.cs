@@ -65,7 +65,6 @@ namespace Licenta.Controllers
             // MailMessage class is present is System.Net.Mail namespace
             MailMessage mailMessage = new MailMessage("tutuianueliza@gmail.com", ToEmail);
 
-
             // StringBuilder class is present in System.Text namespace
             StringBuilder sbEmailBody = new StringBuilder();
             sbEmailBody.Append("Dear " + UserName + ",<br/><br/>");

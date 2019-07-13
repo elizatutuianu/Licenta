@@ -191,5 +191,78 @@ namespace Licenta.Data
             }
             return bedsInTotal;
         }
+
+        public int GetStudentsFromProvinciePerFaculty(string facultyName)
+        {
+            return db.Students.Where(stud => stud.IdCardStudent.District != "Bucuresti" && stud.Faculty.Name == facultyName).ToList().Count;
+        }
+
+        public int GetStudentsFromProvinciePerSpecializationInFirstYear(string specializationName)
+        {
+            return db.Students.Where(stud => stud.IdCardStudent.District != "Bucuresti" && stud.Specialization.SpecName == specializationName && stud.Year == 1).ToList().Count;
+        }
+
+        public int GetStudentsFromProvinciePerSpecializationInFirstYearSpecial(string specializationName)
+        {
+            return db.Students.Where(stud => stud.IdCardStudent.District != "Bucuresti" && stud.Specialization.SpecName == specializationName && stud.Year == 1 && (stud.IsMedicalCase == true || stud.IsSocialCase == true)).ToList().Count;
+        }
+
+        public int GetStudentsFromProvinciePerSpecializationInSecondYear(string specializationName)
+        {
+            return db.Students.Where(stud => stud.IdCardStudent.District != "Bucuresti" && stud.Specialization.SpecName == specializationName && stud.Year == 2).ToList().Count;
+        }
+
+        public int GetStudentsFromProvinciePerSpecializationInSecondYearSpecial(string specializationName)
+        {
+            return db.Students.Where(stud => stud.IdCardStudent.District != "Bucuresti" && stud.Specialization.SpecName == specializationName && stud.Year == 2 && (stud.IsMedicalCase == true || stud.IsSocialCase == true)).ToList().Count;
+        }
+
+        public int GetStudentsFromProvinciePerSpecializationInThirdYear(string specializationName)
+        {
+            return db.Students.Where(stud => stud.IdCardStudent.District != "Bucuresti" && stud.Specialization.SpecName == specializationName && stud.Year == 3).ToList().Count;
+        }
+
+        public int GetStudentsFromProvinciePerSpecializationInThirdYearSpecial(string specializationName)
+        {
+            return db.Students.Where(stud => stud.IdCardStudent.District != "Bucuresti" && stud.Specialization.SpecName == specializationName && stud.Year == 3 && (stud.IsMedicalCase == true || stud.IsSocialCase == true)).ToList().Count;
+        }
+
+        public int GetStudentsFromProvincie()
+        {
+            return db.Students.Where(stud => stud.IdCardStudent.District != "Bucuresti").ToList().Count;
+        }
+
+        public int GetStudentsInFirstYearStudentPerFaculty(string facultyName)
+        {
+            return db.Students.Where(stud => stud.IdCardStudent.District != "Bucuresti" && stud.Faculty.Name == facultyName && stud.Year == 1).ToList().Count;
+        }
+
+        public int GetStudentsInSecondYearStudentPerFaculty(string facultyName)
+        {
+            return db.Students.Where(stud => stud.IdCardStudent.District != "Bucuresti" && stud.Faculty.Name == facultyName && stud.Year == 2).ToList().Count;
+        }
+
+        public int GetStudentsInThirdYearStudentPerFaculty(string facultyName)
+        {
+            return db.Students.Where(stud => stud.IdCardStudent.District != "Bucuresti" && stud.Faculty.Name == facultyName && stud.Year == 3).ToList().Count;
+        }
+
+        public int GetStudentsFromFirstYear()
+        {
+            return db.Students.Where(stud => stud.IdCardStudent.District != "Bucuresti" && stud.Year.Equals(1)).ToList().Count();
+        }
+        public int GetStudentsFromSecondYear()
+        {
+            return db.Students.Where(stud => stud.IdCardStudent.District != "Bucuresti" && stud.Year == 2).ToList().Count();
+        }
+        public int GetStudentsFromThirdYear()
+        {
+            return db.Students.Where(stud => stud.IdCardStudent.District != "Bucuresti" && stud.Year == 3).ToList().Count();
+        }
+
+        public int GetStudentsFromProv()
+        {
+            return db.Students.Where(stud => stud.IdCardStudent.District != "Bucuresti").Count();
+        }
     }
 }

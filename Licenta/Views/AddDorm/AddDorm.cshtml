@@ -11,7 +11,7 @@
     <div class="grid-container">
         <div class="grid-item"><input asp-for="@Model.DormName" placeholder="Name of dorm"></div>
         <div class="grid-item"><input asp-for="@Model.DormComfort" min="1" max="5" placeholder="Comfort"></div>
-        <div class="grid-item"><input asp-for="@Model.DormNoRooms" min="10" placeholder="Room's number"></div>
+        <div class="grid-item"><input asp-for="@Model.DormNoRooms" min="5" placeholder="Number of rooms"></div>
         <div class="grid-item"><input asp-for="@Model.DormBedsInRoom" min="1" max="5" placeholder="Beds per room"></div>
         <div class="grid-item">
             <select asp-for="@Model.DormGender">
