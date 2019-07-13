@@ -21,19 +21,35 @@
         /*padding: 5px;*/
         text-wrap: normal;
     }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
 </style>
 <div class="wrapper fadeInDown">
     <div id="formContent">
         <p>@ViewBag.ErrorMessage</p>
         <button type="button" id="btnStart" onclick="showHideForm(this.id)">Start</button>
         <button type="button" id="btnStop" disabled onclick="showHideForm(this.id)">Stop</button>
+        <input type="submit" value="SUBMIT" onclick="@("window.location.href='" + @Url.Action("Allocation", "Allocation") + "'");" />
         <div id="forStartingProcess" style="display:none">
             <input type="button" value="Add dorm" onclick="@("window.location.href='" + @Url.Action("AddDorm", "AddDorm") + "'");" />
             <input type="button" value="Add deadlines" onclick="@("window.location.href='" + @Url.Action("DeadlinesAdmin", "DeadlinesAdmin") + "'");" />
             <input type="button" value="Upload files for database" onclick="@("window.location.href='" + @Url.Action("UploadFiles", "UploadFiles") + "'");" />
-            <input type="submit" value="SUBMIT" onclick="@("window.location.href='" + @Url.Action("Allocation", "Allocation") + "'");" />
         </div>
-
+        <br>
+        <h2>Dorms available</h2>
         <table class="table">
             <thead>
                 <tr>
@@ -46,11 +62,14 @@
             <tbody>
                 @foreach (var dorm in Model)
                 {
+
                     <tr>
                         <td>@dorm.DormName</td>
                         <td>@dorm.DormComfort</td>
                         <td>@dorm.DormNoRooms</td>
                         <td>@dorm.DormBedsInRoom</td>
+                        <td>
+                        <a asp-action="Delete" asp-controller="Admin" asp-route-id="@dorm.Id" onclick="return confirm('Are you sure?')">Delete</a></td>
                     </tr>
                 }
             </tbody>

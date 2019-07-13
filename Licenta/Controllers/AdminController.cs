@@ -26,5 +26,17 @@ namespace Licenta.Controllers
             return View(_repository.GetAllDorms());
         }
 
+        [HttpGet]
+        [Route("Delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                _repository.DeleteDorm(id);
+                _repository.SaveAll();
+            }
+            return RedirectToAction("HomePageAdmin", "Admin");
+        }
+
     }
 }

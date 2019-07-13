@@ -58,129 +58,130 @@
 </script>
 <h4>AccomodationRequest</h4>
 <hr />
-<div class="row" id="formContent">
-    <form method="post" asp-action="Preferences" asp-controller="Preferences">
-        <div class="col-md-4">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <h2>Your preferences:</h2>
+<div class="wrapper fadeInDown">
+    <div class="row" id="formContent">
+        <form method="post" asp-action="Preferences" asp-controller="Preferences">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <h2>Your preferences:</h2>
 
-            <input type="button" id="btnShowDormPref" onclick="showElement(this.id)" value="Add dorms preferred" />
-            <div id="dorms" style="display:none">
-                <h3>
-                    *Optional: Add dorms with/without rooms preferred:
-                </h3>
-                <p>You are allowed to add up to 5 dorms of your choice in the wanted order. If you want, you can also add rooms preferred.</p>
-                <p>
-                    Example: Moxa (Comfort 1), Belvedere nou (Comfort 2), Tei (Comfort 3), Belvedere vechi (Comfort 4), Agronomie (Comfort 5)
-                </p>
+                <input type="button" id="btnShowDormPref" onclick="showElement(this.id)" value="Add dorms preferred" />
+                <div id="dorms" style="display:none">
+                    <h3>
+                        *Optional: Add dorms with/without rooms preferred:
+                    </h3>
+                    <p>You are allowed to add up to 5 dorms of your choice in the wanted order. If you want, you can also add rooms preferred.</p>
+                    <p>
+                        Example: Moxa (Comfort 1), Belvedere nou (Comfort 2), Tei (Comfort 3), Belvedere vechi (Comfort 4), Agronomie (Comfort 5)
+                    </p>
 
-                @for (int i = 0; i < 5; i++)
-                {
-                    <input type="text" asp-for="@Model.ArDorm[i].DormName" autocomplete="off" placeholder="Dorm @(i+1)">
-                }
-                <input type="button" id="btnAddPrefRoom" onclick="showElement(this.id)" value="Add room preferred" />
-                <div id="rooms" style="display:none">
                     @for (int i = 0; i < 5; i++)
                     {
-                        <input type="number" asp-for="@Model.ArRoom[i].RoomNo" min="1" autocomplete="off" placeholder="Room in dorm @(i+1)">
+                        <input type="text" asp-for="@Model.ArDorm[i].DormName" autocomplete="off" placeholder="Dorm @(i+1)">
                     }
+                    <input type="button" id="btnAddPrefRoom" onclick="showElement(this.id)" value="Add room preferred" />
+                    <div id="rooms" style="display:none">
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            <input type="number" asp-for="@Model.ArRoom[i].RoomNo" min="1" autocomplete="off" placeholder="Room in dorm @(i+1)">
+                        }
+                    </div>
                 </div>
+                <br />
+            </div>
+
+            <input type="button" id="btnShowRoommatePref" onclick="showElement(this.id)" value="Add roommate preferred" />
+            <div id="roommatesPref" style="display:none">
+                <h3>
+                    *Optional: Add roommate/s:
+                </h3>
+                <p>
+                    You are allowed to add up to 4 roommates of your choice.
+                </p>
+                <p>
+                    <i>
+                        Example: Set comfort 2. You are allocated in a dorm of comfort 1, one of your
+                        roommates of choice is allocated in a dorm of comfort 3, and the rest of them
+                        are allocated to a dorm of comfort 2. You will stay with the others in a dorm
+                        of comfort 2, and he will be allocated in a different dorm (of comfort 3).
+                    </i>
+                </p>
+
+                <br />
+                @for (int i = 0; i < 5; i++)
+                {
+
+                    <label asp-for="@Model.ArRoommates[i].FirstName"><b>First name</b></label>
+                    <input asp-for="@Model.ArRoommates[i].FirstName" placeholder="Enter first name">
+                    <span asp-validation-for="@Model.ArRoommates[i].Student.FirstName" class="text-danger"></span>
+                    <br />
+                    <br />
+                    <label asp-for="@Model.ArRoommates[i].LastName"><b>Last name</b></label>
+                    <input asp-for="@Model.ArRoommates[i].LastName" placeholder="Enter last name">
+                    <span asp-validation-for="@Model.ArRoommates[i].LastName" class="text-danger"></span>
+                    <br />
+                    <br />
+                    <label asp-for="@Model.ArRoommates[i].Initial"><b>Father's initial</b></label>
+                    <input asp-for="@Model.ArRoommates[i].Initial" placeholder="Enter father's initial">
+                    <span asp-validation-for="@Model.ArRoommates[i].Initial" class="text-danger"></span>
+                    @*<br />
+                        <br />
+                        <label asp-for="@Model.ArRoommates[i].Student.StudyProgram"><b>Study program</b></label>
+                        <select asp-for="@Model.ArRoommates[i].Student.StudyProgram" id="study_program" onchange="populateYear(this.id, 'year')">
+                            <option hidden disabled selected>--select option--</option>
+                            <option value="licenta_zi">License</option>
+                            <option value="master_zi">Master</option>
+                        </select>
+                        <span asp-validation-for="@Model.ArRoommates[i].Student.StudyProgram" class="text-danger"></span>
+                        <br />
+                        <br />
+                        <label asp-for="@Model.ArRoommates[i].Student.Year"><b>Next year of study</b></label>
+                        <select asp-for="@Model.ArRoommates[i].Student.Year" id="year"></select>
+                        <span asp-validation-for="@Model.ArRoommates[i].Student.Year" class="text-danger"></span>
+                        <br />
+                        <br />
+                        <label asp-for="@Model.ArRoommates[i].Student.Faculty.Name"><b>Faculty</b></label>
+                        <br />
+                        <select asp-for="@Model.ArRoommates[i].Student.Faculty.Name" id="faculty" onchange="populateSpecialization('study_program', this.id, 'specialization')">
+                            <option hidden disabled selected>--select option--</option>
+                            <option value="FABIZ">Faculty of Business Administration in foreign languages</option>
+                            <option value="FAMP">Faculty of Administration and Public Management</option>
+                            <option value="BBS">Bucharest Business School</option>
+                            <option value="BT">Faculty of Business and Tourism</option>
+                            <option value="CSIE">Facultaty of Cybernetics, Statistics and Economic Informatics</option>
+                            <option value="CIG">Faculty of Accounting and Management Information Systems</option>
+                            <option value="ETA">Faculty of Economics, Theoretical and Applied</option>
+                            <option value="EAM">Faculty of Agrifood and Environmental Economics</option>
+                            <option value="FABBV">Faculty of Finance and Banking</option>
+                            <option value="Management">Faculty of Management</option>
+                            <option value="Marketing">Faculty of Marketing</option>
+                            <option value="REI">Faculty of International Business and Economics</option>
+                        </select>
+                        <span asp-validation-for="@Model.ArRoommates[i].Student.Faculty.Name" class="text-danger"></span>
+                        <br />
+                        <br />
+                        <label asp-for="@Model.ArRoommates[i].Student.Specialization.SpecName"><b>Specialization</b></label>
+                        <select asp-for="@Model.ArRoommates[i].Student.Specialization.SpecName" id="specialization"></select>
+                        <span asp-validation-for="@Model.ArRoommates[i].Student.Specialization.SpecName" class="text-danger"></span>*@
+                    <br />
+                    <br />
+                    <input type="button" id="btnAddRoommate" @*onclick="addRoommate(@Model.ArRoommates[i])" *@ value="Add roommate" />
+                    <br />
+                }
+                <p>
+                    You need to
+                    specify the last included comfort (from 1 to 5) that you are willing to give up on
+                    in order to be accommodated with your roommates of choice.
+                </p>
+                <input type="number" asp-for="@Model.LastComfortAccepted" placeholder="Last comfort accepted" min="1" max="5">
             </div>
             <br />
-        </div>
-
-        <input type="button" id="btnShowRoommatePref" onclick="showElement(this.id)" value="Add roommate preferred" />
-        <div id="roommatesPref" style="display:none">
-            <h3>
-                *Optional: Add roommate/s:
-            </h3>
-            <p>
-                You are allowed to add up to 4 roommates of your choice.
-            </p>
-            <p>
-                <i>
-                    Example: Set comfort 2. You are allocated in a dorm of comfort 1, one of your
-                    roommates of choice is allocated in a dorm of comfort 3, and the rest of them
-                    are allocated to a dorm of comfort 2. You will stay with the others in a dorm
-                    of comfort 2, and he will be allocated in a different dorm (of comfort 3).
-                </i>
-            </p>
-
             <br />
-            @for (int i = 0; i < 5; i++)
-            {
-
-                <label asp-for="@Model.ArRoommates[i].FirstName"><b>First name</b></label>
-                <input asp-for="@Model.ArRoommates[i].FirstName" placeholder="Enter first name">
-                <span asp-validation-for="@Model.ArRoommates[i].Student.FirstName" class="text-danger"></span>
-                <br />
-                <br />
-                <label asp-for="@Model.ArRoommates[i].LastName"><b>Last name</b></label>
-                <input asp-for="@Model.ArRoommates[i].LastName" placeholder="Enter last name">
-                <span asp-validation-for="@Model.ArRoommates[i].LastName" class="text-danger"></span>
-                <br />
-                <br />
-                <label asp-for="@Model.ArRoommates[i].Initial"><b>Father's initial</b></label>
-                <input asp-for="@Model.ArRoommates[i].Initial" placeholder="Enter father's initial">
-                <span asp-validation-for="@Model.ArRoommates[i].Initial" class="text-danger"></span>
-                @*<br />
-                    <br />
-                    <label asp-for="@Model.ArRoommates[i].Student.StudyProgram"><b>Study program</b></label>
-                    <select asp-for="@Model.ArRoommates[i].Student.StudyProgram" id="study_program" onchange="populateYear(this.id, 'year')">
-                        <option hidden disabled selected>--select option--</option>
-                        <option value="licenta_zi">License</option>
-                        <option value="master_zi">Master</option>
-                    </select>
-                    <span asp-validation-for="@Model.ArRoommates[i].Student.StudyProgram" class="text-danger"></span>
-                    <br />
-                    <br />
-                    <label asp-for="@Model.ArRoommates[i].Student.Year"><b>Next year of study</b></label>
-                    <select asp-for="@Model.ArRoommates[i].Student.Year" id="year"></select>
-                    <span asp-validation-for="@Model.ArRoommates[i].Student.Year" class="text-danger"></span>
-                    <br />
-                    <br />
-                    <label asp-for="@Model.ArRoommates[i].Student.Faculty.Name"><b>Faculty</b></label>
-                    <br />
-                    <select asp-for="@Model.ArRoommates[i].Student.Faculty.Name" id="faculty" onchange="populateSpecialization('study_program', this.id, 'specialization')">
-                        <option hidden disabled selected>--select option--</option>
-                        <option value="FABIZ">Faculty of Business Administration in foreign languages</option>
-                        <option value="FAMP">Faculty of Administration and Public Management</option>
-                        <option value="BBS">Bucharest Business School</option>
-                        <option value="BT">Faculty of Business and Tourism</option>
-                        <option value="CSIE">Facultaty of Cybernetics, Statistics and Economic Informatics</option>
-                        <option value="CIG">Faculty of Accounting and Management Information Systems</option>
-                        <option value="ETA">Faculty of Economics, Theoretical and Applied</option>
-                        <option value="EAM">Faculty of Agrifood and Environmental Economics</option>
-                        <option value="FABBV">Faculty of Finance and Banking</option>
-                        <option value="Management">Faculty of Management</option>
-                        <option value="Marketing">Faculty of Marketing</option>
-                        <option value="REI">Faculty of International Business and Economics</option>
-                    </select>
-                    <span asp-validation-for="@Model.ArRoommates[i].Student.Faculty.Name" class="text-danger"></span>
-                    <br />
-                    <br />
-                    <label asp-for="@Model.ArRoommates[i].Student.Specialization.SpecName"><b>Specialization</b></label>
-                    <select asp-for="@Model.ArRoommates[i].Student.Specialization.SpecName" id="specialization"></select>
-                    <span asp-validation-for="@Model.ArRoommates[i].Student.Specialization.SpecName" class="text-danger"></span>*@
-                <br />
-                <br />
-                <input type="button" id="btnAddRoommate" @*onclick="addRoommate(@Model.ArRoommates[i])" *@ value="Add roommate" />
-                <br />
-            }
-            <p>
-                You need to
-                specify the last included comfort (from 1 to 5) that you are willing to give up on
-                in order to be accommodated with your roommates of choice.
-            </p>
-            <input type="number" asp-for="@Model.LastComfortAccepted" placeholder="Last comfort accepted" min="1" max="5">
-        </div>
-        <br />
-        <br />
-        <br />
-        <input id="submitAcc" type="submit" value="Send Accomodation Request" />
-    </form>
-    <div>@ViewBag.PrefMessage</div>
-    <div>@Html.ValidationSummary(true)</div>
+            <br />
+            <input id="submitAcc" type="submit" value="Send Accomodation Request" />
+        </form>
+        <div>@ViewBag.PrefMessage</div>
+        <div>@Html.ValidationSummary(true)</div>
+    </div>
 </div>
-
 

@@ -283,5 +283,13 @@ namespace Licenta.Data
             idCardOld.CivilStatus = idCardNew.CivilStatus;
             db.IdCardStudents.Update(idCardOld);
         }
+
+        public void DeleteDorm(int id)
+        {
+            IEnumerable<Room> rooms = db.Rooms.Where(item => item.DormId == id);
+            foreach (Room room in rooms)
+                db.Remove(room);
+            db.Remove(db.Dorms.Find(id));
+        }
     }
 }

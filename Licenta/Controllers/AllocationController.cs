@@ -87,7 +87,7 @@ namespace Licenta.Controllers
                 TempData["error"] = "Process started successfully!";
             }
             else
-                TempData["error"] = "You must follow the previous steps before start!";
+                TempData["error"] = "You must follow all the previous steps from start before submit!";
             return RedirectToAction("HomePageAdmin", "Admin");
         }
 
