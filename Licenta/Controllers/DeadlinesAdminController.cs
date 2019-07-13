@@ -33,6 +33,7 @@ namespace Licenta.Controllers
                 administrator.DdlFinishProcess = admin.DdlFinishProcess;
                 return RedirectToAction("HomePageAdmin", "Admin");
             }
+            ViewBag.DeadlinesMessgage = "Wrong input. See format type!";
             return View();
         }
     }

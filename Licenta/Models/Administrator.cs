@@ -11,12 +11,12 @@ namespace Licenta.Models
         private DateTime ddlRegistration;
         private DateTime ddlFinishProcess;
 
-        [DisplayFormat(ApplyFormatInEditMode =true, DataFormatString ="{0:dd-MM-yyyy HH:mm}")]
-        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode =true, DataFormatString = @"{MM-dd-yyyy HH:mm}")]
+        [DataType(DataType.Date)]
         public DateTime DdlRegistration { get => ddlRegistration; set => ddlRegistration = value; }
 
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy HH:mm}")]
-        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{MM-dd-yyyy HH:mm}")]
+        [DataType(DataType.Date)]
         public DateTime DdlFinishProcess { get => ddlFinishProcess; set => ddlFinishProcess = value; }
     }
 }
