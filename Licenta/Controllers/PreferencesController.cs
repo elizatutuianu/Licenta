@@ -21,6 +21,11 @@ namespace Licenta.Controllers
 
         public IActionResult Preferences()
         {
+            if (AppController.student.AccomodationRequestId.HasValue)
+            {
+                TempData["mess"] = "Accomodation request already sent!";
+                return RedirectToAction("HomePageStudent", "HomePageStudent");
+            }
             return View();
         }
 
@@ -31,14 +36,13 @@ namespace Licenta.Controllers
             {
                 _repository.AddAccomodationRequest(accomodationRequest, AppController.student);
                 _repository.SaveAll();
-                ViewBag.PrefMessage = "Accomodation request sent!";
+                TempData["mess"] = "Accomodation request sent!";
             }
             else
             {
                 TempData["mess"] = "Accomodation request already sent!";
-                return RedirectToAction("HomePageStudent", "HomePageStudent");
             }
-            return View();
+            return RedirectToAction("HomePageStudent", "HomePageStudent");
         }
 
 

@@ -122,17 +122,48 @@ namespace Licenta.Data
             Student stud = db.Students.FirstOrDefault(item => item.Id == student.Id);
             if (stud.AccomodationRequestId == null)
             {
+                AccomodationRequest accReq = new AccomodationRequest();
                 foreach (Roommate roommate in model.ArRoommates)
                 {
-                    Student studentRoommate = db.Students.FirstOrDefault(item => item.FirstName == roommate.FirstName && item.LastName == roommate.LastName && item.Initial == roommate.Initial);
-                    if (studentRoommate != null)
+                    if (roommate.FirstName != null)
                     {
-                        roommate.Student = studentRoommate;
-                        roommate.StudentId = studentRoommate.Id;
+                        Student studentRoommate = db.Students.FirstOrDefault(item => item.FirstName == roommate.FirstName && item.LastName == roommate.LastName && item.Initial == roommate.Initial);
+                        if (studentRoommate != null)
+                        {
+                            roommate.Student = studentRoommate;
+                            roommate.StudentId = studentRoommate.Id;
+                            accReq.ArRoommates.Add(roommate);
+                        }
                     }
                 }
-                stud.AccomodationRequest = model;
-                db.AccomodationRequests.Add(model);
+                foreach (DormsPreferred dorm in model.ArDorm)
+                {
+                    if (dorm.DormName != null)
+                    {
+                        Dorm d = db.Dorms.FirstOrDefault(item => item.DormName == dorm.DormName);
+                        if (d != null)
+                        {
+                            dorm.Dorm = d;
+                            dorm.DormId = d.Id;
+                            accReq.ArDorm.Add(dorm);
+                        }
+                    }
+                }
+                foreach (RoomPreferred room in model.ArRoom)
+                {
+                    if (room.RoomNo != null)
+                    {
+                        Room d = db.Rooms.FirstOrDefault(item => item.RoomNo.ToString() == room.RoomNo);
+                        if (d != null)
+                        {
+                            room.Room = d;
+                            room.RoomId = d.Id;
+                            accReq.ArRoom.Add(room);
+                        }
+                    }
+                }
+                stud.AccomodationRequest = accReq;
+                db.AccomodationRequests.Add(accReq);
                 db.Students.Update(stud);
             }
         }
@@ -290,6 +321,25 @@ namespace Licenta.Data
             foreach (Room room in rooms)
                 db.Remove(room);
             db.Remove(db.Dorms.Find(id));
+        }
+
+        public AccomodationRequest GetAccomodationRequestById(int id)
+        {
+            AccomodationRequest accomodation = db.AccomodationRequests.FirstOrDefault(item => item.Id == id);
+            List<RoomPreferred> rooms = db.RoomPreferreds.Where(item => item.AccomodationRequestId == id).ToList();
+            var dorms = db.DormsPreferreds.Where(item => item.AccomodationRequestId == id).ToList();
+            var roommates = db.Roommates.Where(item => item.AccomodationRequestId == id).ToList();
+            accomodation.ArRoom = rooms;
+            accomodation.ArDorm = dorms;
+            accomodation.ArRoommates = roommates;
+            if (accomodation == null)
+                return null;
+            return accomodation;
+        }
+
+        public Student GetStudentById(int id)
+        {
+            return db.Students.FirstOrDefault(item => item.Id == id);
         }
     }
 }

@@ -1,0 +1,40 @@
+﻿@model AccomodationRequest
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <h2>Your requested preferences:</h2>
+        <br>
+        @if (Model.ArDorm.Any() && Model.ArRoom.Any() && Model.ArRoommates.Any())
+        {
+            <h3>Dorms</h3>
+            @foreach (DormsPreferred dorm in Model.ArDorm)
+            {
+                if (dorm.DormName.Length > 0)
+                {
+                    <input type="text" value="@dorm.DormName" readonly>
+                }
+            }
+            <h3>Rooms</h3>
+            @foreach (RoomPreferred room in Model.ArRoom)
+            {
+                if (room.RoomNo.Length > 0)
+                {
+                    <input type="text" value="@room.RoomNo" readonly>
+                }
+            }
+            <h3>Roommates</h3>
+            @foreach (Roommate roommate in Model.ArRoommates)
+            {
+                if (roommate.FirstName.Length > 0)
+                {
+                    <input type="text" value="@roommate.FirstName @roommate.LastName" readonly>
+                }
+            }
+            <h3>Last confort accepted</h3>
+            <input type="text" value="@Model.LastComfortAccepted" name="email" readonly>
+        }
+        else
+        {
+            <h3>You do not have preferences :)</h3>
+        }
+    </div>
+</div>
