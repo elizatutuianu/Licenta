@@ -13,5 +13,7 @@ namespace Licenta.ViewModels
         public IFormFile FileFaculties { get; set; }
         public IFormFile FileSpecializations { get; set; }
 
+        public IFormFile FileAccomodationRequests { get; set; }
+
     }
 }

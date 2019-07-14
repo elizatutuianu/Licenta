@@ -117,6 +117,52 @@ namespace Licenta.Data
             db.Dorms.Add(dorm);
         }
 
+        public void AddAccomodationRequestToDatabase(AccomodationRequest model)
+        {
+            AccomodationRequest accReq = new AccomodationRequest();
+            foreach (Roommate roommate in model.ArRoommates)
+            {
+                if (roommate.FirstName != null)
+                {
+                    Student studentRoommate = db.Students.FirstOrDefault(item => item.FirstName == roommate.FirstName && item.LastName == roommate.LastName && item.Initial == roommate.Initial);
+                    if (studentRoommate != null)
+                    {
+                        roommate.Student = studentRoommate;
+                        roommate.StudentId = studentRoommate.Id;
+                        accReq.ArRoommates.Add(roommate);
+                    }
+                }
+            }
+            foreach (DormsPreferred dorm in model.ArDorm)
+            {
+                if (dorm.DormName != null)
+                {
+                    Dorm d = db.Dorms.FirstOrDefault(item => item.DormName == dorm.DormName);
+                    if (d != null)
+                    {
+                        dorm.Dorm = d;
+                        dorm.DormId = d.Id;
+                        accReq.ArDorm.Add(dorm);
+                    }
+                }
+            }
+            foreach (RoomPreferred room in model.ArRoom)
+            {
+                if (room.RoomNo != null)
+                {
+                    Room d = db.Rooms.FirstOrDefault(item => item.RoomNo.ToString() == room.RoomNo);
+                    if (d != null)
+                    {
+                        room.Room = d;
+                        room.RoomId = d.Id;
+                        accReq.ArRoom.Add(room);
+                    }
+                }
+            }
+            accReq.LastComfortAccepted = model.LastComfortAccepted;
+            db.AccomodationRequests.Add(accReq);
+        }
+
         public void AddAccomodationRequest(AccomodationRequest model, Student student)
         {
             Student stud = db.Students.FirstOrDefault(item => item.Id == student.Id);
@@ -162,10 +208,21 @@ namespace Licenta.Data
                         }
                     }
                 }
+                accReq.LastComfortAccepted = model.LastComfortAccepted;
                 stud.AccomodationRequest = accReq;
                 db.AccomodationRequests.Add(accReq);
                 db.Students.Update(stud);
             }
+        }
+
+        public IEnumerable<AccomodationRequest> GetAccomodationRequestOrderdById()
+        {
+            return db.AccomodationRequests.OrderBy(s => s.Id).ToList();
+        }
+
+        public IEnumerable<Student> GetStudentsOrderdById()
+        {
+            return db.Students.OrderBy(s => s.Id).ToList();
         }
 
         public IEnumerable<Faculty> GetAllFaculties()
@@ -315,6 +372,11 @@ namespace Licenta.Data
             db.IdCardStudents.Update(idCardOld);
         }
 
+        public void UpdateStudent(Student student)
+        {
+            db.Students.Update(student);
+        }
+
         public void DeleteDorm(int id)
         {
             IEnumerable<Room> rooms = db.Rooms.Where(item => item.DormId == id);
@@ -340,6 +402,11 @@ namespace Licenta.Data
         public Student GetStudentById(int id)
         {
             return db.Students.FirstOrDefault(item => item.Id == id);
+        }
+
+        public Student GetStudentByAccomodationId(int id)
+        {
+            return db.Students.FirstOrDefault(item => item.AccomodationRequestId == id);
         }
     }
 }

@@ -87,6 +87,7 @@ namespace Licenta.Controllers
                         stud.Group = Int32.Parse(row.GetCell(14).ToString());
                         stud.Credits = Int32.Parse(row.GetCell(15).ToString());
                         stud.PhoneNo = row.GetCell(16).ToString();
+                        //stud.AccomodationRequestId = Int32.Parse(row.GetCell(17).ToString());
                         _repository.InsertStudent(stud);
                     }
                 }
@@ -237,6 +238,94 @@ namespace Licenta.Controllers
             }
         }
 
+        public void UploadAccomodationRequests(ExcelFile fileUpload)
+        {
+            var accomodations = new List<AccomodationRequest>();
+            var file = fileUpload.FileAccomodationRequests;
+            string folderName = "UploadAccomodationRequests";
+            string webRootPath = _hostingEnvironment.WebRootPath;
+            string newPath = Path.Combine(webRootPath, folderName);
+            if (!Directory.Exists(newPath))
+            {
+                Directory.CreateDirectory(newPath);
+            }
+            if (file.Length > 0)
+            {
+                string sFileExtension = Path.GetExtension(file.FileName).ToLower();
+                ISheet sheet;
+                string fullPath = Path.Combine(newPath, file.FileName);
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                    stream.Position = 0;
+                    if (sFileExtension == ".xls")
+                    {
+                        HSSFWorkbook hssfwb = new HSSFWorkbook(stream); //This will read the Excel 97-2000 formats  
+                        sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook  
+                    }
+                    else
+                    {
+                        XSSFWorkbook hssfwb = new XSSFWorkbook(stream); //This will read 2007 Excel format  
+                        sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook   
+                    }
+                    IRow headerRow = sheet.GetRow(0); //Get Header Row
+                    int cellCount = headerRow.LastCellNum;
+                    for (int i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++) //Read Excel File
+                    {
+                        IRow row = sheet.GetRow(i);
+                        if (row == null) continue;
+                        AccomodationRequest accomodationRequest = new AccomodationRequest();
+                        for (int j = 0; j < 5; j++)
+                        {
+                            DormsPreferred dorm = new DormsPreferred();
+                            if (row.GetCell(j + 1).ToString().Length > 0 && row.GetCell(j + 1).ToString() != "e")
+                            {
+                                dorm.DormName = row.GetCell(j + 1).ToString();
+                                accomodationRequest.ArDorm.Add(dorm);
+                            }
+                            else
+                                break;
+
+                        }
+                        for (int k = 0; k < 5; k++)
+                        {
+                            if (row.GetCell(k + 6).ToString() != "e")
+                            {
+                                RoomPreferred room = new RoomPreferred();
+                                room.RoomNo = row.GetCell(k + 6).ToString();
+                                accomodationRequest.ArRoom.Add(room);
+                            }
+                            else
+                                break;
+                        }
+                        for (int l = 0; l < 2; l++)
+                        {
+                            if (row.GetCell(l + 11).ToString() != "e" && row.GetCell(l + 12).ToString() != "e" && row.GetCell(l + 13).ToString() != "e")
+                            {
+                                Roommate roommate = new Roommate();
+                                roommate.FirstName = row.GetCell(l + 11).ToString();
+                                roommate.LastName = row.GetCell(l + 12).ToString();
+                                roommate.Initial = row.GetCell(l + 13).ToString();
+                                accomodationRequest.ArRoommates.Add(roommate);
+                            }
+                            else
+                                break;
+                        }
+                        if (row.GetCell(17).ToString() != "e")
+                            accomodationRequest.LastComfortAccepted = row.GetCell(17).ToString();
+                        _repository.AddAccomodationRequestToDatabase(accomodationRequest);
+                        accomodations.Add(accomodationRequest);
+                    }
+                    var students = _repository.GetStudentsOrderdById().ToList();
+                    for (int i = 0; i < accomodations.Count; i++)
+                    {
+                        students[i].AccomodationRequest = accomodations[i];
+                        students[i].AccomodationRequestId = accomodations[i].Id;
+                    }
+                }
+            }
+        }
+
         [HttpPost]
         public IActionResult UploadFiles(ExcelFile fileUpload)
         {
@@ -249,6 +338,8 @@ namespace Licenta.Controllers
                 UploadIdCards(fileUpload);
                 _repository.SaveAll();
                 UploadStudents(fileUpload);
+                _repository.SaveAll();
+                UploadAccomodationRequests(fileUpload);
                 _repository.SaveAll();
                 ViewBag.UploadMessage = "Upload successful.";
             }
