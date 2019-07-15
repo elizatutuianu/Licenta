@@ -94,6 +94,11 @@ namespace Licenta.Data
             return "Already have an account!";
         }
 
+        public Student GetStudentByCNP(string cnp)
+        {
+            return db.Students.FirstOrDefault(item => item.Cnp == cnp);
+        }
+
         public void CreateDorm(Dorm model)
         {
             Dorm dorm = new Dorm();
@@ -210,6 +215,7 @@ namespace Licenta.Data
                 }
                 accReq.LastComfortAccepted = model.LastComfortAccepted;
                 stud.AccomodationRequest = accReq;
+                stud.AccomodationRequestId = accReq.Id;
                 db.AccomodationRequests.Add(accReq);
                 db.Students.Update(stud);
             }

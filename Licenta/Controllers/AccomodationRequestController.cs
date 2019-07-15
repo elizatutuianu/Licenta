@@ -22,7 +22,8 @@ namespace Licenta.Controllers
         [HttpGet]
         public IActionResult AccomodationRequest()
         {
-            if (!AppController.student.AccomodationRequestId.HasValue)
+            Student student = _repository.GetStudentByCNP(AppController.student.Cnp);
+            if (!student.AccomodationRequestId.HasValue)
             {
                 AccomodationRequest accomodation = new AccomodationRequest();
                 _repository.AddAccomodationRequest(accomodation, AppController.student);

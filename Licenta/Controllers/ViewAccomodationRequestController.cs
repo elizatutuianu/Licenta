@@ -20,7 +20,7 @@ namespace Licenta.Controllers
         public IActionResult ViewAccomodationRequest()
         {
             Student student = _repository.GetStudentById(AppController.student.Id);
-            if (student.AccomodationRequestId != null)
+            if (student.AccomodationRequestId.HasValue)
             {
                 AccomodationRequest accomodationRequest = _repository.GetAccomodationRequestById((int)student.AccomodationRequestId);
                 return View(accomodationRequest);

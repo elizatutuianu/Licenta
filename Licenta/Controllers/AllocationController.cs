@@ -83,7 +83,7 @@ namespace Licenta.Controllers
             {
                 double dateTime = (DeadlinesAdminController.administrator.DdlFinishProcess - DateTime.Now).Value.TotalMinutes;
                 BackgroundJob.Schedule(() => SendEmailWhenDone(), TimeSpan.FromMinutes(dateTime));
-                AvailableBeds();
+                //AvailableBeds();
                 TempData["error"] = "Process started successfully!";
             }
             else
@@ -111,7 +111,7 @@ namespace Licenta.Controllers
 
                     mailMessage1.Body = sbEmailBody1.ToString();
                     mailMessage1.Subject = "Allocation results";
-                    Attachment data1 = new Attachment("Students.xlsx", MediaTypeNames.Application.Octet);
+                    Attachment data1 = new Attachment("Allocations.xlsx", MediaTypeNames.Application.Octet);
                     mailMessage1.Attachments.Add(data1);
                     SmtpClient smtpClient1 = new SmtpClient("smtp.gmail.com", 587);
 
@@ -139,7 +139,7 @@ namespace Licenta.Controllers
 
             mailMessage.Body = sbEmailBody.ToString();
             mailMessage.Subject = "Allocation results";
-            Attachment data = new Attachment("Students.xlsx", MediaTypeNames.Application.Octet);
+            Attachment data = new Attachment("Allocations.xlsx", MediaTypeNames.Application.Octet);
             mailMessage.Attachments.Add(data);
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
 

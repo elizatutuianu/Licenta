@@ -21,7 +21,8 @@ namespace Licenta.Controllers
 
         public IActionResult Preferences()
         {
-            if (AppController.student.AccomodationRequestId.HasValue)
+            Student stud= _repository.GetStudentByCNP(AppController.student.Cnp);
+            if (stud.AccomodationRequestId.HasValue)
             {
                 TempData["mess"] = "Accomodation request already sent!";
                 return RedirectToAction("HomePageStudent", "HomePageStudent");
@@ -32,7 +33,8 @@ namespace Licenta.Controllers
         [HttpPost]
         public IActionResult Preferences(AccomodationRequest accomodationRequest)
         {
-            if (!AppController.student.AccomodationRequestId.HasValue)
+            Student stud = _repository.GetStudentByCNP(AppController.student.Cnp);
+            if (!stud.AccomodationRequestId.HasValue)
             {
                 _repository.AddAccomodationRequest(accomodationRequest, AppController.student);
                 _repository.SaveAll();

@@ -240,7 +240,7 @@ namespace Licenta.Controllers
 
         public void UploadAccomodationRequests(ExcelFile fileUpload)
         {
-            var accomodations = new List<AccomodationRequest>();
+            var accomodations = new AccomodationRequest[_repository.GetAllStudents().Count()];
             var file = fileUpload.FileAccomodationRequests;
             string folderName = "UploadAccomodationRequests";
             string webRootPath = _hostingEnvironment.WebRootPath;
@@ -274,6 +274,7 @@ namespace Licenta.Controllers
                     {
                         IRow row = sheet.GetRow(i);
                         if (row == null) continue;
+                        if (row.Cells.All(d => d.CellType == CellType.Blank)) continue;
                         AccomodationRequest accomodationRequest = new AccomodationRequest();
                         for (int j = 0; j < 5; j++)
                         {
@@ -313,15 +314,19 @@ namespace Licenta.Controllers
                         }
                         if (row.GetCell(17).ToString() != "e")
                             accomodationRequest.LastComfortAccepted = row.GetCell(17).ToString();
-                        _repository.AddAccomodationRequestToDatabase(accomodationRequest);
-                        accomodations.Add(accomodationRequest);
+                        //_repository.AddAccomodationRequestToDatabase(accomodationRequest);
+                        string cnp = row.GetCell(18).ToString();
+                        Student student = _repository.GetStudentByCNP(cnp);
+                        student.AccomodationRequest = accomodationRequest;
+                        student.AccomodationRequestId = accomodationRequest.Id;
+                        _repository.UpdateStudent(student);
                     }
-                    var students = _repository.GetStudentsOrderdById().ToList();
-                    for (int i = 0; i < accomodations.Count; i++)
-                    {
-                        students[i].AccomodationRequest = accomodations[i];
-                        students[i].AccomodationRequestId = accomodations[i].Id;
-                    }
+                    //var students = _repository.GetStudentsOrderdById().ToList();
+                    //for (int i = 0; i < accomodations.Count; i++)
+                    //{
+                    //    students[i].AccomodationRequest = accomodations[i];
+                    //    students[i].AccomodationRequestId = accomodations[i].Id;
+                    //}
                 }
             }
         }
@@ -341,6 +346,15 @@ namespace Licenta.Controllers
                 _repository.SaveAll();
                 UploadAccomodationRequests(fileUpload);
                 _repository.SaveAll();
+                //var studentsOrdered = _repository.GetStudentsOrderdById();
+                //var accomodationsOrdered = _repository.GetAccomodationRequestOrderdById();
+                //for (int i = 0; i < accomodationsOrdered.Count; i++)
+                //{
+                //    studentsOrdered[i].AccomodationRequest = accomodationsOrdered[i];
+                //    studentsOrdered[i].AccomodationRequestId = accomodationsOrdered[i].Id;
+                //}
+                //_repository.SaveAll();
+
                 ViewBag.UploadMessage = "Upload successful.";
             }
             else
